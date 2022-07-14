@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-md-editor v-model="value" height="400px"></v-md-editor>
+      <v-md-editor v-model="value" height="600px"></v-md-editor>
     </div>
 </template>
  
@@ -24,7 +24,7 @@ export default{
     name: "WriteArticle",
   data () {
     return {
-        value: '公众号:霸道的程序猿',
+        value: '## 西游记',
         formInline:{
             user:'',
             regin:''

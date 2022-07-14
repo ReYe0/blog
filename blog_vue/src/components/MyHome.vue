@@ -18,5 +18,10 @@ export default {
   name: "MyHome"
 }
 </script>
-<style>
+<style scoped>
+div{
+    overflow-x: hidden;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
 </style>

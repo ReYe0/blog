@@ -31,9 +31,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
-  margin:auto 0;
+  /* margin:auto 0; */
   /* width:100%; */
   /* overflow-x: auto; */
   padding:0;
@@ -41,13 +41,13 @@ export default {
   /* background-color: red; */
   /* margin-top: 60px; */
 }
-#app > div{
+/* #app > div{ */
     /* //这个样式添加到el-row的父级中 */
     /* margin: auto 0; */
-  overflow-x: hidden;
+  /* overflow-x: hidden;
   padding: 0 30px;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 
   /* margin:auto 0; */
-}
+/* } */
 </style>
