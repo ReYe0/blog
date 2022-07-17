@@ -3,47 +3,21 @@ import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-import VueMarkdownEditor from '@kangc/v-md-editor';
-import '@kangc/v-md-editor/lib/style/base-editor.css';
-// 引入你所使用的主题 此处以 github 主题为例
-import githubTheme from '@kangc/v-md-editor/lib/theme/github';
-import '@kangc/v-md-editor/lib/theme/style/github.css';
+import VueMarkdownEditor from './utils/vueMarkdownEditor' // md 引入
 
-// codemirror 编辑器的相关资源
-import Codemirror from 'codemirror';
-// mode
-import 'codemirror/mode/markdown/markdown';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/css/css';
-import 'codemirror/mode/htmlmixed/htmlmixed';
-import 'codemirror/mode/vue/vue';
-// edit
-import 'codemirror/addon/edit/closebrackets';
-import 'codemirror/addon/edit/closetag';
-import 'codemirror/addon/edit/matchbrackets';
-// placeholder
-import 'codemirror/addon/display/placeholder';
-// active-line
-import 'codemirror/addon/selection/active-line';
-// scrollbar
-import 'codemirror/addon/scroll/simplescrollbars';
-import 'codemirror/addon/scroll/simplescrollbars.css';
-// style
-import 'codemirror/lib/codemirror.css';
+// import axios from '@/utils/axiosInstance' // 引入 axios 请求方法
 
+import router from './router/index' // 引入路由
 
-// highlightjs
-import hljs from 'highlight.js';
-VueMarkdownEditor.Codemirror = Codemirror;
-VueMarkdownEditor.use(githubTheme,{
-  Hljs: hljs,
-});
+import request from './utils/request' // 引入封装的 axios
 
-import axios from '@/utils/axiosInstance'
 
 const app = createApp(App)
-app.config.globalProperties.$axios=axios;  //配置axios的全局引用
+// ue.prototype.request = request 
+// app.config.globalProperties.$axios=axios;  //配置axios的全局引用
 // use
+app.config.globalProperties.$http= request //vue 注册http
+app.use(router)
 app.use(VueMarkdownEditor)
 app.use(ElementPlus)
 app.mount('#app')

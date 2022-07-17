@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-            @select="handleSelect">
+            @select="handleSelect" router>
             <el-menu-item index="0">BLOG</el-menu-item>
             <div class="flex-grow" />
             <el-menu-item index="1">write blog</el-menu-item>
@@ -17,6 +17,7 @@
                     <el-menu-item index="2-4-3">item three</el-menu-item>
                 </el-sub-menu>
             </el-sub-menu>
+            <el-menu-item index="/writeArticle">admin</el-menu-item>
         </el-menu>
     </div>
 </template>

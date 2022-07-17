@@ -37,6 +37,7 @@ export default{
     method:{
         onSubmit(){
             console.log('submit!');
+            // this.request.get('')
         },
         // change(value, render){
         //     //实时获取转成html的数据
@@ -61,9 +62,9 @@ export default{
 
 </script>
 <style>
-    #editor {
-        margin: auto;
-        width: 80%;
-        height: 580px;
-    }
+    /*#editor {*/
+    /*    margin: auto;*/
+    /*    width: 80%;*/
+    /*    height: 580px;*/
+    /*}*/
 </style>

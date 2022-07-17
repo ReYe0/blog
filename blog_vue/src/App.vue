@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <MyNavigation/>
-    <MyHome/>
-    <WriteArticle/>
+  <div id="app">
+    <!-- <HomePage/> -->
+    <router-view></router-view>
   </div>
   
   <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
@@ -10,18 +9,12 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-import MyHome from './components/MyHome.vue'
-import MyNavigation from './components/MyNavigation.vue'
-import WriteArticle from './pages/WriteArticle.vue'
+// import HomePage from '@/pages/HomePage.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
-    MyHome,
-    MyNavigation,
-    WriteArticle
+    // HomePage
   }
 }
 </script>

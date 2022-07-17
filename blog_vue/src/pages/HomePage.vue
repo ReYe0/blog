@@ -1,8 +1,9 @@
 <template>
   <div>
+    <MyNavigationVue/>
     <el-row :gutter="24">
       <el-col :span="6">
-        1<el-button type="primary">sdfsdf</el-button>
+        1<el-button type="primary" @click="test">sdfsdf</el-button>
       </el-col>
       <el-col :span="12">
         2
@@ -13,12 +14,22 @@
     </el-row>
   </div>
 </template>
-<script >
+
+<script>
+
+import MyNavigationVue from '@/components/MyNavigation.vue';
+
 export default {
-  name: "MyHome",
-  methods:{
+  name: 'HomePage',
+  props: {
+    msg: String
+  },
+  components:{
+    MyNavigationVue
+  },
+   methods:{
     test(){
-      console.log(this);
+      this.$http.get("/sdfsdf")
     }
   }
 }
