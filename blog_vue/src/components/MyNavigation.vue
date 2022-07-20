@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-            @select="handleSelect" router>
+            @select="handleSelect" router style="padding:0;">
             <el-menu-item index="0">BLOG</el-menu-item>
             <div class="flex-grow" />
             <el-menu-item index="1">write blog</el-menu-item>
