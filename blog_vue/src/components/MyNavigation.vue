@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :ellipsis="false"
-            @select="handleSelect" router>
+    <div id="bar">
+        <!-- <el-header> -->
+              <el-menu :default-active="activeIndex"  mode="horizontal"  router >
             <el-menu-item index="0">BLOG</el-menu-item>
             <div class="flex-grow" />
-            <el-menu-item index="1">write blog</el-menu-item>
+            <el-menu-item index="1">首页</el-menu-item>
             <el-sub-menu index="2">
                 <template #title>Workspace</template>
                 <el-menu-item index="2-1">item one</el-menu-item>
@@ -19,6 +19,9 @@
             </el-sub-menu>
             <el-menu-item index="/writeArticle">admin</el-menu-item>
         </el-menu>
+
+        <!-- </el-header> -->
+      
     </div>
 </template>
 <script>
@@ -34,8 +37,21 @@ export default{
 
 </script>
 
-<style>
-.flex-grow {
+<style >
+/* .flex-grow {
     flex-grow: 1;
+} */
+
+#bar {
+box-sizing: border-box;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 6%);
 }
+#bar > .el-menu {
+    height:50px;
+    border-bottom-style: none;
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
 </style>

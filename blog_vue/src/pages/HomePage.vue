@@ -35,9 +35,9 @@ export default {
 }
 </script>
 <style scoped>
-div{
+/* div{
     overflow-x: hidden;
     padding: 0 30px;
     box-sizing: border-box;
-}
+} */
 </style>

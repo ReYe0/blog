@@ -11,12 +11,15 @@ import router from './router/index' // 引入路由
 
 import request from './utils/request' // 引入封装的 axios
 
+import global from './style/global.css'
+
 
 const app = createApp(App)
 // ue.prototype.request = request 
 // app.config.globalProperties.$axios=axios;  //配置axios的全局引用
 // use
 app.config.globalProperties.$http= request //vue 注册http
+app.use(global)
 app.use(router)
 app.use(VueMarkdownEditor)
 app.use(ElementPlus)
