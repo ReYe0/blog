@@ -26,7 +26,7 @@ jar 转镜像
 运行镜像：① docker run -d --name 名字 -p 80:80 名字
     ② docker run -it -p 80:80 名字
 
-
+电饭锅
 参考的链接：
 https://blog.csdn.net/weixin_45526437/article/details/125139901
 https://blog.csdn.net/elizabethxxy/article/details/110124105
