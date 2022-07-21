@@ -1,7 +1,7 @@
 <template>
-    <div  style="background-color: rebeccapurple;height: 20px;">
-      <!-- <v-md-editor v-model="value" height="600px"></v-md-editor> -->
-    </div>
+    <!-- <div  style="background-color: rebeccapurple;height: 20px;"> -->
+      <v-md-editor v-model="value" height="600px"></v-md-editor>
+    <!-- </div> -->
 </template>
  
 <script>

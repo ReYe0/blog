@@ -1,7 +1,7 @@
 <template>
   <div>
     <MyNavigationVue/>
-    <el-row :gutter="24">
+    <!-- <el-row :gutter="24">
       <el-col :span="6">
         1<el-button type="primary" @click="test">sdfsdf</el-button>
       </el-col>
@@ -11,7 +11,7 @@
       <el-col :span="6">
         3
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 
