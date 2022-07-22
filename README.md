@@ -31,3 +31,11 @@ jar 转镜像
 https://blog.csdn.net/weixin_45526437/article/details/125139901
 https://blog.csdn.net/elizabethxxy/article/details/110124105
 http://t.zoukankan.com/jacksonxiao-p-11217295.html
+
+
+# git
+编写 .gitignore 文件 如果已经提交过，那么为了让它生效，需要进行如下操作
+
+    git rm -r --cached .
+    git add .
+    git commit -m '.gitignore'
