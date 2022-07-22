@@ -1,7 +1,7 @@
 <template>
     <div id="bar">
         <el-menu :default-active="activeIndex" mode="horizontal" router>
-            <el-menu-item index="0">BLOG</el-menu-item>
+            <el-menu-item index="0">{{ $t("home.name") }} BLOG</el-menu-item>
             <el-input placeholder="Type something" style="width:16%;height:80%;margin-top:5px;margin-left: 50%;">
                 <template #prefix>
                     <el-icon class="el-input__icon">
