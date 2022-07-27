@@ -17,7 +17,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'  // 给全局组�
 
 // import zhCn from 'element-plus/es/locale/lang/zh-cn' // 引入国际化
 // i18n
-import i18n from "@/i18n/index";
+import i18n from "@/i18n/i18n";
 
 // const app = createApp(App)
 

@@ -18,12 +18,14 @@
   </div>
 </template>
  
-<script lang="ts" setup name="MyHeader">
+<script>
 import { computed } from "@vue/runtime-core";
 import { useStore } from "vuex";
-import { langType } from "@/enum/options";
+import { langType } from "@/enum/langType";
 import { useI18n } from "vue-i18n";
- 
+export default {
+    name: "MyHeader",
+}
 const store = useStore();
 // 改变语言
 const language = computed(() => store.state.language);

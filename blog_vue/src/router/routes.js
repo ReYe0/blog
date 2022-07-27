@@ -9,11 +9,11 @@ const routes = [
         path: '/writeArticle',
         component: () => import('@/admin/pages/WriteArticle')
     },
-    {
-        name: 'myHeader',
-        path: '/myHeader',
-        component: () => import('@/components/Myheader')
-    },
+    // {
+    //     name: 'myHeader',
+    //     path: '/myHeader',
+    //     component: () => import('@/components/myHeader')
+    // },
     
     
 ];
