@@ -1,6 +1,5 @@
 <template>
   <div>
-    <MyNavigationVue/>
     <!-- <el-row :gutter="24">
       <el-col :span="6">
         1<el-button type="primary" @click="test">sdfsdf</el-button>
@@ -17,7 +16,6 @@
 
 <script>
 
-import MyNavigationVue from '@/components/MyNavigation.vue';
 
 export default {
   name: 'HomePage',
@@ -25,7 +23,6 @@ export default {
     msg: String
   },
   components:{
-    MyNavigationVue
   },
    methods:{
     test(){
