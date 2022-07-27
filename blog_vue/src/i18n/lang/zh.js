@@ -1,6 +1,9 @@
 // 中文语言包：\src\i18n\lang\zh-cn.ts
 export default {
     home: {
-      name: "国际化 成功！",
+      homepage: "首页",
     },
+    nav:{
+      logo:"博客"
+    }
   };

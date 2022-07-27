@@ -1,7 +1,7 @@
 // \src\i18n\index.ts
 // import { createI18n } from "vue-i18n";
 // 语言包
-import zhCn from "./lang/zh-cn";
+import zh from "./lang/zh";
 import en from "./lang/en";
  
 
@@ -19,5 +19,5 @@ import en from "./lang/en";
 // export default i18n;
 export default {
   en,
-  zhCn,
+  zh,
 }

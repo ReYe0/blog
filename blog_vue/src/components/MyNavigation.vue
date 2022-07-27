@@ -1,10 +1,7 @@
 <template>
   <div id="bar">
-    <el-menu :default-active="activeIndex" mode="horizontal" router>
-      <el-menu-item index="0">{{ $t("home.name") }} BLOG </el-menu-item>
-      <!-- <div @click="change('zhCn')">中文</div>
-      <div @click="change('en')">English</div> -->
-      <!-- <el-button type="primary" @click="changeLnag('en')">语言切换</el-button> -->
+    <el-menu  mode="horizontal"  :default-active="activeIndex" router>
+      <el-menu-item index="0">{{ $t("nav.logo") }}</el-menu-item>
       <el-input
         placeholder="Type something"
         style="width: 16%; height: 80%; margin-top: 5px; margin-left: 50%"
@@ -16,7 +13,7 @@
         </template>
       </el-input>
       <div class="flex-grow" />
-      <el-menu-item index="1">首页</el-menu-item>
+      <el-menu-item index="1">{{$t('home.homepage')}}</el-menu-item>
       <el-sub-menu index="2">
         <template #title>Workspace</template>
         <el-menu-item index="2-1">item one</el-menu-item>
@@ -30,7 +27,7 @@
         </el-sub-menu>
       </el-sub-menu>
       <el-menu-item index="/writeArticle">admin</el-menu-item>
-      <el-select v-model="value" class="m-2"  size="large" :change="test(value)">
+      <el-select v-model="value" class="m-2"  size="large" :change="changeLang(value)">
         <el-option
           v-for="item in options"
           :key="item.value"
@@ -42,13 +39,6 @@
   </div>
 </template>
 <script>
-// import { useI18n } from 'vue-i18n'
-// import {  ref } from "vue";
-// import { getCurrentInstance } from "@vue/runtime-core";
-
-// import { useStore } from "vuex";
-// const store = useStore();
-// const { locale } = useI18n();
 import { getCurrentInstance } from "vue";
 import { useI18n } from "vue-i18n"; //要在js中使用国际化
 import { ref } from "vue";
@@ -57,7 +47,12 @@ export default {
   setup() {
     const { proxy } = getCurrentInstance();
     function change(type) {
-      proxy.$i18n.locale = type;
+      console.log("type:",type)
+      // proxy.$i18n.locale = type;
+      if(type != ''){
+        localStorage.setItem('lang',type);
+      }
+      proxy.$i18n.locale = localStorage.getItem('lang');
     }
     const { t } = useI18n();
     console.log(t("home.name"));
@@ -68,7 +63,7 @@ export default {
       value: ref(""),
       options: [
         {
-          value: "zhCn",
+          value: "zh",
           label: "中文",
         },
         {
@@ -79,57 +74,10 @@ export default {
     };
   },
   methods:{
-    test(value){
+    changeLang(value){
         this.change(value)
-    }
-  }
-  // setup(){
-  //     const { t } = useI18n();
-  //     let { ctx } = getCurrentInstance();
-
-  // const lang_menu = ref([
-  //   { name: "中文", id: "zh" },
-  //   { name: "英文", id: "en" },
-  // ]);
-  // const curren_lang = ref("英文");
-
-  // // const tran_txt = computed(() => {
-  // //   return {
-  // //     hello: t("index.hello"),
-  // //   };
-  // // });
-
-  // // 切换语言
-  // const changeLang = (item) => {
-  //   curren_lang.value = item.name;
-  //   ctx.$i18n.locale = item.id;
-  // };
-
-  // return {
-  //   t,
-  // //   tran_txt,
-  //   curren_lang,
-  //   lang_menu,
-  //   changeLang,
-  // };
-  // }
-  // compoent: {
-  //     // Search
-  // },
-  // data() {
-  //     // store:userStore()
-  //     // locale:I18n
-  //     // Search
-  // },
-  // methods:{
-  //     changeLnag(lang){
-  //         locale.value = lang;
-  //         store.commit("CHANGE_LANGUAGE",lang);
-  //     }
-  // },
-  // setup(){
-
-  // }
+    },
+  },
 };
 </script>
 
