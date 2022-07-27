@@ -1,6 +1,6 @@
 <template>
   <div id="bar">
-    <el-menu  mode="horizontal"  :default-active="activeIndex" router>
+    <el-menu mode="horizontal" :default-active="activeIndex" router>
       <el-menu-item>{{ $t("nav.logo") }}</el-menu-item>
       <el-input
         placeholder="Type something"
@@ -13,7 +13,7 @@
         </template>
       </el-input>
       <div class="flex-grow" />
-      <el-menu-item index="/">{{$t('home.homepage')}}</el-menu-item>
+      <el-menu-item index="/">{{ $t("home.homepage") }}</el-menu-item>
       <el-sub-menu index="2">
         <template #title>Workspace</template>
         <el-menu-item index="2-1">item one</el-menu-item>
@@ -27,6 +27,7 @@
         </el-sub-menu>
       </el-sub-menu>
       <el-menu-item index="/writeArticle">admin</el-menu-item>
+      <!--
       <el-select v-model="value" class="m-2"  size="large" :change="changeLang(value)">
         <el-option
           v-for="item in options"
@@ -35,6 +36,11 @@
           :value="item.value"
         />
       </el-select>
+      -->
+      <el-button-group >
+        <el-button icon="Moon" />
+        <el-button @click="changeLang('en')">{{lang}}</el-button>
+      </el-button-group>
     </el-menu>
   </div>
 </template>
@@ -47,12 +53,12 @@ export default {
   setup() {
     const { proxy } = getCurrentInstance();
     function change(type) {
-      console.log("type:",type)
+      console.log("type:", type);
       // proxy.$i18n.locale = type;
-      if(type != ''){
-        localStorage.setItem('lang',type);
+      if (type != "") {
+        localStorage.setItem("lang", type);
       }
-      proxy.$i18n.locale = localStorage.getItem('lang');
+      proxy.$i18n.locale = localStorage.getItem("lang");
     }
     const { t } = useI18n();
     console.log(t("home.name"));
@@ -60,7 +66,7 @@ export default {
   },
   data() {
     return {
-      value: ref(""),
+      lang: ref(''),
       options: [
         {
           value: "zh",
@@ -73,9 +79,13 @@ export default {
       ],
     };
   },
-  methods:{
-    changeLang(value){
-        this.change(value)
+  methods: {
+    changeLang(value) {
+      if(value != 'en'){
+        value = 'zh'
+      }
+      this.lang = value;
+      this.change(value);
     },
   },
 };
