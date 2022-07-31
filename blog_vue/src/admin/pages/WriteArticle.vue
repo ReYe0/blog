@@ -1,70 +1,55 @@
 <template>
-    <!-- <div  style="background-color: rebeccapurple;height: 20px;"> -->
-      <v-md-editor v-model="value" height="600px"></v-md-editor>
-    <!-- </div> -->
+  <div>
+    <div>
+      <MdEditor
+        v-model="value"
+        :theme="isDark === false ? 'light' : 'dark'"
+        codeTheme="github"
+      />
+    </div>
+    <!-- <div>{{isDark === false ? 'light' : 'dark'}},{{isDark}},{{test()}}</div> -->
+  </div>
 </template>
- 
 <script>
-// import { reactive } from 'vue'
-// import {mavonEditor} from 'mavon-editor/src'
-// import 'mavon-editor/dist/css/index.css'
-// import API from '../utils/axiosInstance'
-// import { log } from 'console'
- 
-//  const formInline = reactive({
-//   user: '',
-//   region: '',
-// })
-// const onSubmit = () => {
-//   console.log('submit!')
-// }
-
- 
-export default{
-    name: "WriteArticle",
-  data () {
+import MdEditor from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
+export default {
+  name: "WriteArticle",
+  data() {
     return {
-        value: '## 西游记',
-        formInline:{
-            user:'',
-            regin:''
-        }
-    }
+      isDark:  JSON.parse(localStorage.getItem("isDark")),
+      value:"大话西游"
+    };
   },
-    components:{
-        // mavonEditor
-    },
-    method:{
-        onSubmit(){
-            console.log('submit!');
-            // this.request.get('')
-        },
-        // change(value, render){
-        //     //实时获取转成html的数据
-        //     this.html = render
-        //     console.log(this.html)
-        // },
-        // imgAdd(pos, $file){
-        //     let form_data = new FormData()
-        //     form_data.append('pic', $file)
-        //     API({
-        //         url:'',
-        //         method:'post',
-        //         data:form_data
-        //     }).then(res=>{
-        //         // 用后端返回回来的url替换前端的图片url
-        //         this.$refs.md.$img2Url(pos, res.data.url)
-        //         // this.$refs.md[0].$img2Url(pos, res.data.url)  有时候会有这种情况
-        //     })
-        // }
+  components: {
+    MdEditor,
+  },
+  mounted() {
+    //解决this指向问题，在window.addEventListener中this是指向window的。
+    //需要将vue实例赋值给_this,这样在window.addEventListener中通过_this可以为vue实例上data中的变量赋值
+    let _this = this;
+    //根据自己需要来监听对应的key
+    window.addEventListener("setItemEvent", function (e) {
+      //e.key : 是值发生变化的key
+      //例如 e.key==="token";
+      //e.newValue : 是可以对应的新值
+      if (e.key === "isDark") {
+        _this.isDark = e.newValue;
+      }
+    });
+  },
+  methods: {
+    test(){
+        if(this.isDark === false){
+            return 'light';
+        }
+        if(this.isDark === true){
+            return 'dark';
+        }
+        // return this.isDark === false ? 'light' : 'dark';
     }
-}
 
+  },
+};
 </script>
-<style>
-    /*#editor {*/
-    /*    margin: auto;*/
-    /*    width: 80%;*/
-    /*    height: 580px;*/
-    /*}*/
-</style>
+<style></style>

@@ -28,33 +28,58 @@
         </el-sub-menu>
       </el-sub-menu>
       <el-menu-item index="/writeArticle">admin</el-menu-item>
+      <!--
+      <el-select v-model="value" class="m-2"  size="large" :change="changeLang(value)">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+      -->
       <el-button-group style=" margin-top: 10px;" >
-        <el-button v-show="isDark" icon="Sunny" @click="changeTheme()"/>
-        <el-button v-show="!isDark" icon="Moon" @click="changeTheme()"/>
-        <el-button @click="changeLang()">{{lang === 'en' ? 'ZH':'EN'}}</el-button>
+        <span @click.stop="toggleDark()"></span>
+        <el-button v-show="isDark" icon="Sunny" @click="changeTheme"/>
+        <el-button v-show="!isDark" icon="Moon" @click="changeTheme"/>
+        <el-button @click="changeLang(lang)">{{lang.toUpperCase()}}</el-button>
       </el-button-group>
     </el-menu>
   </div>
 </template>
 
-<script setup>
+<script>
 import { getCurrentInstance } from "vue";
+// import { useI18n } from "vue-i18n"; //要在js中使用国际化
 import { ref } from "vue";
 const language = ((navigator.language ? navigator.language : navigator.userLanguage) || "zh").toLowerCase();
 import { useDark, useToggle } from '@vueuse/core'
 
-
-    var isDark = useDark();
-    const toggleDark = useToggle(isDark)
+export default {
+  name: "MyNavigation",
+  setup() {
+    const isDark = useDark()
+    // const toggleDark = useToggle(isDark)
+    function toggleDark(isDark){
+      useToggle(isDark)
+    }
     const { proxy } = getCurrentInstance();
     function change(type) {
+      console.log("type:", type);
+      // proxy.$i18n.locale = type;
       if (type != "") {
         localStorage.setItem("lang", type);
       }
       proxy.$i18n.locale = localStorage.getItem("lang");
     }
-     let lang=ref(localStorage.getItem('lang') || language.split('-')[0] || 'en');
-      const options= [
+    // const { t } = useI18n();
+    // console.log(t("home.name"));
+    return { change ,toggleDark};
+  },
+  data() {
+    return {
+      lang: ref(localStorage.getItem('lang') || language.split('-')[0] || 'en'),
+      options: [
         {
           value: "zh",
           label: "中文",
@@ -63,21 +88,27 @@ import { useDark, useToggle } from '@vueuse/core'
           value: "en",
           label: "英文",
         },
-      ];
-    function changeTheme(){
-      this.toggleDark();
-      localStorage.setItem('isDark',isDark)
-    }
-    function changeLang() {
-      if(this.lang == 'en'){
-        this.lang = 'zh'
+      ],
+      isDark:false,
+    };
+  },
+  methods: {
+    changeTheme(){
+      this.isDark = !this.isDark
+      localStorage.setItem('isDark',this.isDark)
+    },
+    changeLang(value) {
+      if(value == 'en'){
+        value = 'zh'
       }else{
-        this.lang = 'en'
+        value = 'en'
       }
-      change(this.lang);
-    }
-
-
+      // this.useToggle(true);
+      this.lang = value;
+      this.change(value);
+    },
+  },
+};
 </script>
 <style lang="css">
 
