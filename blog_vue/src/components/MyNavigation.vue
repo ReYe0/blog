@@ -29,6 +29,7 @@
       </el-sub-menu>
       <el-menu-item index="/writeArticle">admin</el-menu-item>
       <el-button-group style=" margin-top: 10px;" >
+        <span @click.stop="toggleDark()"></span>
         <el-button v-show="isDark" icon="Sunny" @click="changeTheme()"/>
         <el-button v-show="!isDark" icon="Moon" @click="changeTheme()"/>
         <el-button @click="changeLang()">{{lang === 'en' ? 'ZH':'EN'}}</el-button>
@@ -54,16 +55,6 @@ import { useDark, useToggle } from '@vueuse/core'
       proxy.$i18n.locale = localStorage.getItem("lang");
     }
      let lang=ref(localStorage.getItem('lang') || language.split('-')[0] || 'en');
-      const options= [
-        {
-          value: "zh",
-          label: "中文",
-        },
-        {
-          value: "en",
-          label: "英文",
-        },
-      ];
     function changeTheme(){
       this.toggleDark();
       localStorage.setItem('isDark',isDark)

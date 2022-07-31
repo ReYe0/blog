@@ -17,7 +17,7 @@ export default {
   name: "WriteArticle",
   data() {
     return {
-      isDark:  JSON.parse(localStorage.getItem("isDark")),
+      isDark: localStorage.getItem("isDark"),
       value:"大话西游"
     };
   },

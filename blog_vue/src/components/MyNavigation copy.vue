@@ -59,10 +59,7 @@ export default {
   name: "MyNavigation",
   setup() {
     const isDark = useDark()
-    // const toggleDark = useToggle(isDark)
-    function toggleDark(isDark){
-      useToggle(isDark)
-    }
+    const toggleDark = useToggle(isDark)
     const { proxy } = getCurrentInstance();
     function change(type) {
       console.log("type:", type);
