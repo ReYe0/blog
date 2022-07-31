@@ -3,21 +3,22 @@
     <div>
       <MdEditor
         v-model="value"
-        :theme="isDark === false ? 'light' : 'dark'"
+        :theme="Boolean(isDark) === true ? 'dark' : 'light'"
         codeTheme="github"
       />
     </div>
-    <!-- <div>{{isDark === false ? 'light' : 'dark'}},{{isDark}},{{test()}}</div> -->
+    <div>{{Boolean(isDark) === true ? 'dark' : 'light'}},{{typeof isDark}},{{Boolean(isDark)}},{{isDark.value}}</div>
   </div>
 </template>
 <script>
+import { useDark } from '@vueuse/core'
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 export default {
   name: "WriteArticle",
   data() {
     return {
-      isDark: localStorage.getItem("isDark"),
+      isDark:useDark(),
       value:"大话西游"
     };
   },
@@ -39,15 +40,6 @@ export default {
     });
   },
   methods: {
-    test(){
-        if(this.isDark === false){
-            return 'light';
-        }
-        if(this.isDark === true){
-            return 'dark';
-        }
-        // return this.isDark === false ? 'light' : 'dark';
-    }
 
   },
 };
