@@ -24,7 +24,9 @@ export default {
     return {
       isDark:useDark(),
       lang:localStorage.getItem('lang') || language.split('-')[0] || 'en',
-      value:"大话西游"
+      value:"# 真的难顶！！！！受不了了！！",
+      // files:'',
+      // urls:''
     };
   },
   components: {
@@ -58,22 +60,15 @@ export default {
         return 'zh-CN';
       }
     },
-    
+    onUploadImg(files,urls){
+      console.log(files,11);
+      // console.log(this.files,22);
+      console.log(urls,33);
+      // console.log(this.urls,44);
+      console.log("kewu");
+    }
   },
 };
-
-// alert(document.body.clientHeight)
-// alert(document.body.scrollHeight);
-// alert(window.screenTop); 
-// alert(window.screen.availHeight);
-// document.getElementById("#editor").style.height="600px"
-//  window.onload=function(){
-//   // (window.onresize=function(){
-//       var height=document.documentElement.clientHeight - 80;
-//       document.getElementById('editor').style.height=height+'px';
-//     // document.getElementById('editor').style.color='red';
-//     // })()
-//   }
 </script>
 <style>
 #editor{
