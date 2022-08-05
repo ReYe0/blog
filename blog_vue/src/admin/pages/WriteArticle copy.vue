@@ -24,7 +24,7 @@ export default {
     return {
       isDark:useDark(),
       lang:localStorage.getItem('lang') || language.split('-')[0] || 'en',
-      value:"# 真的难顶！！！！受不了了！！"
+      value:"大话西游"
     };
   },
   components: {

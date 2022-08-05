@@ -6,7 +6,7 @@
 
       <el-input
         placeholder="Type something"
-        style="width: 16%; height: 80%; margin-top: 5px; "
+        style="width: 16%; height: 80%; margin-top: 5px"
       >
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -28,11 +28,13 @@
         </el-sub-menu>
       </el-sub-menu>
       <el-menu-item index="/writeArticle">admin</el-menu-item>
-      <el-button-group style=" margin-top: 10px;" >
+      <el-button-group style="margin-top: 10px">
         <span @click.stop="toggleDark()"></span>
-        <el-button v-show="isDark" icon="Sunny" @click="changeTheme()"/>
-        <el-button v-show="!isDark" icon="Moon" @click="changeTheme()"/>
-        <el-button @click="changeLang()">{{lang === 'en' ? 'ZH':'EN'}}</el-button>
+        <el-button v-show="isDark" icon="Sunny" @click="changeTheme()" />
+        <el-button v-show="!isDark" icon="Moon" @click="changeTheme()" />
+        <el-button @click="changeLang()">{{
+          lang === "en" ? "ZH" : "EN"
+        }}</el-button>
       </el-button-group>
     </el-menu>
   </div>
@@ -41,38 +43,36 @@
 <script setup>
 import { getCurrentInstance } from "vue";
 import { ref } from "vue";
-const language = ((navigator.language ? navigator.language : navigator.userLanguage) || "zh").toLowerCase();
-import { useDark, useToggle } from '@vueuse/core'
+const language = (
+  (navigator.language ? navigator.language : navigator.userLanguage) || "zh"
+).toLowerCase();
+import { useDark, useToggle } from "@vueuse/core";
 
-
-    var isDark = useDark();
-    const toggleDark = useToggle(isDark)
-    const { proxy } = getCurrentInstance();
-    function change(type) {
-      if (type != "") {
-        localStorage.setItem("lang", type);
-      }
-      proxy.$i18n.locale = localStorage.getItem("lang");
-    }
-     let lang=ref(localStorage.getItem('lang') || language.split('-')[0] || 'en');
-    function changeTheme(){
-      this.toggleDark();
-      localStorage.setItem('isDark',isDark)
-    }
-    function changeLang() {
-      if(this.lang == 'en'){
-        this.lang = 'zh'
-      }else{
-        this.lang = 'en'
-      }
-      change(this.lang);
-    }
-
+var isDark = useDark();
+const toggleDark = useToggle(isDark);
+const { proxy } = getCurrentInstance();
+function change(type) {
+  if (type != "") {
+    localStorage.setItem("lang", type);
+  }
+  proxy.$i18n.locale = localStorage.getItem("lang");
+}
+let lang = ref(localStorage.getItem("lang") || language.split("-")[0] || "en");
+function changeTheme() {
+  this.toggleDark();
+  localStorage.setItem("isDark", isDark);
+}
+function changeLang() {
+  if (this.lang == "en") {
+    this.lang = "zh";
+  } else {
+    this.lang = "en";
+  }
+  change(this.lang);
+}
 
 </script>
 <style lang="css">
-
-
 .flex-grow {
   flex-grow: 0.9;
 }
