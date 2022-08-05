@@ -5,7 +5,7 @@
         v-model="value"
         :theme="Boolean(isDark) === true ? 'dark' : 'light'"
         :language="getLang()"
-        codeTheme="github"
+        codeTheme="a11y"
         id="editor"
         @onUploadImg="onUploadImg"
       />
