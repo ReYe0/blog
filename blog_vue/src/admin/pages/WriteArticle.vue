@@ -30,6 +30,8 @@ export default {
     MdEditor,
   },
   mounted() {
+    var height=document.documentElement.clientHeight - 80;
+      document.getElementById('editor').style.height=height+'px';
     //解决this指向问题，在window.addEventListener中this是指向window的。
     //需要将vue实例赋值给_this,这样在window.addEventListener中通过_this可以为vue实例上data中的变量赋值
     let _this = this;
@@ -63,12 +65,13 @@ export default {
 // alert(window.screenTop); 
 // alert(window.screen.availHeight);
 // document.getElementById("#editor").style.height="600px"
- window.onload=function(){(window.onresize=function(){
-      var height=document.documentElement.clientHeight - 80;
-      document.getElementById('editor').style.height=height+'px';
-    // document.getElementById('editor').style.color='red';
-    })()
-  }
+//  window.onload=function(){
+//   // (window.onresize=function(){
+//       var height=document.documentElement.clientHeight - 80;
+//       document.getElementById('editor').style.height=height+'px';
+//     // document.getElementById('editor').style.color='red';
+//     // })()
+//   }
 </script>
 <style>
 #editor{
