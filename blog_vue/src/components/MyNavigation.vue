@@ -1,5 +1,5 @@
 <template>
-  <div id="DarkModelPage" class="bar dark">
+  <div class="bar">
     <el-menu mode="horizontal" :default-active="activeIndex" router>
       <el-menu-item>{{ $t("nav.logo") }}</el-menu-item>
       <div class="flex-grow" />
