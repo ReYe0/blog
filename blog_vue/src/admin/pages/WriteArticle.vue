@@ -10,14 +10,49 @@
         @onUploadImg="onUploadImg"
       />
     </div>
-    <!-- <div>{{Boolean(isDark) === true ? 'dark' : 'light'}},{{typeof isDark}},{{Boolean(isDark)}},{{isDark.value}},{{getLang()}}</div> -->
   </div>
 </template>
-<script>
+<script setup>
 import { useDark } from '@vueuse/core'
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
+import axios from 'axios'
+//判断图片类型是否支持上传，支持true,不支持false
+function Chacktypefun(name){return /\.(gif|jpg|jpeg|png)$/i.test(name)} // 判断图片类型
+const onUploadImg = async (files, callback) => {
+  let urls;
+  const res = await Promise.all(
+    files.map((file) => {
+      if (Chacktypefun(file)) {
+        alert("图片格式不支持")
+          return false
+        }
+      if(file.size > 2*1024*1024){
+        alert("图片超过2MB")
+        return false
+      }
+      return new Promise((rev, rej) => {
+        const form = new FormData();
+        form.append('file', file);
+
+        axios
+          .post('http://localhost:8090/file/upload', form, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((res) => rev(res))
+          .catch((error) => rej(error));
+      });
+    })
+  );
+
+  callback(urls  = res.map((item) => item.data.data.url));
+};
+</script>
+<script>
 const language = ((navigator.language ? navigator.language : navigator.userLanguage) || "zh").toLowerCase();
+
 export default {
   name: "WriteArticle",
   data() {
@@ -25,12 +60,7 @@ export default {
       isDark:useDark(),
       lang:localStorage.getItem('lang') || language.split('-')[0] || 'en',
       value:"# 真的难顶！！！！受不了了！！",
-      // files:'',
-      // urls:''
     };
-  },
-  components: {
-    MdEditor,
   },
   mounted() {
     var height=document.documentElement.clientHeight - 80;
@@ -60,13 +90,6 @@ export default {
         return 'zh-CN';
       }
     },
-    onUploadImg(files,urls){
-      console.log(files,11);
-      // console.log(this.files,22);
-      console.log(urls,33);
-      // console.log(this.urls,44);
-      console.log("kewu");
-    }
   },
 };
 </script>
@@ -74,4 +97,5 @@ export default {
 #editor{
   height: 100%;
 }
+
 </style>

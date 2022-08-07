@@ -3,12 +3,24 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.108.90.61:3306/db_blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+#    url: jdbc:mysql://47.108.90.61:3306/db_blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+#    username: root
+#    password: 123456
+    url: jdbc:mysql://localhost:3306/db_blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 123456
+    password: root
+  servlet:
+    multipart: #设置springboot上传文件的大小
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 #  redis:
 #    host: localhost
 #    timeout: 5000
+files:
+  upload:
+    path: D:/blog/files/
+

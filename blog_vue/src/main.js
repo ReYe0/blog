@@ -30,7 +30,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
   }
 
-app.config.globalProperties.$http= request //vue 注册http
+app.config.globalProperties.$http= request //vue 注册http ，这样请求 this.$http.post
 app.config.warnHandler = () => null;
 app.config.errorHandler = () => null;
 app.config.productionTip = false 
