@@ -8,6 +8,7 @@
         codeTheme="a11y"
         id="editor"
         @onUploadImg="onUploadImg"
+        :toolbarsExclude="toolbarsExclude"
       />
     </div>
   </div>
@@ -71,6 +72,7 @@ export default {
       isDark: useDark(),
       lang: localStorage.getItem("lang") || language.split("-")[0] || "en",
       value: "# 真的难顶！！！！受不了了！！",
+      toolbarsExclude: ["github"],
     };
   },
   mounted() {
