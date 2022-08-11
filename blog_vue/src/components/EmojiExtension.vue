@@ -1,4 +1,3 @@
-/* eslint-disable */
 <template>
   <dropdown-toolbar
     title="emoji"
@@ -27,7 +26,7 @@
 
 <script lang="ts" setup>
 import { reactive } from "vue";
-import type { PropType } from "vue";
+import type  { PropType } from "vue";
 import { emojis } from "./data";
 const props = defineProps({
   editorId: {

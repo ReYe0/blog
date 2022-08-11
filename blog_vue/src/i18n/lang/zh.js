@@ -4,6 +4,11 @@ export default {
       homepage: "首页",
     },
     nav:{
-      logo:"博客"
+      logo:"二爷的博客",
+      backstage:"后台"
+    },
+    md:{
+      saveDraft:"保存草稿",
+      publishArticle:"发布文章"
     }
   };

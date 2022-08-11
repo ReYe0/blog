@@ -28,7 +28,12 @@ public class BlogController {
         blog.setViews(1);
         blog.setWords(12);
         blog.setTypeId(1l);
-        return CommonResult.success(blogMapper.insert(blog));
+        if(blog.getId() != null){
+            blogMapper.updateById(blog);
+        }else{
+            blogMapper.insert(blog);
+        }
+        return CommonResult.success(blog);
     }
 }
 

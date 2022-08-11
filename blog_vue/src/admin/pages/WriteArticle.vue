@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <el-input v-model="blog.title" placeholder="Please input the title" style="width:87.5%;margin-top:10px;margin-bottom:10px;margin-right:10px;"/>
-      <el-button type="primary" plain @click="saveOrUpdate">保存为草稿</el-button>
-    <el-button type="success" plain style="margin-right:0;">发布</el-button>
+      <el-input v-model="blog.title" placeholder="Please input the title" style="width:86%;margin:10px;"/>
+      <el-button type="primary" plain style="margin-top:-5px;" @click="saveOrUpdate">{{$t("md.saveDraft")}}</el-button>
+    <el-button type="success" plain style="margin-right:0;margin-top:-5px;">{{$t("md.publishArticle")}}</el-button>
     </div>
     <div>
       <MdEditor
@@ -110,14 +110,23 @@ export default {
   },
   methods: {
     onSave(){
+      if(this.blog.content === '' && this.blog.title === ''){
+        return false
+      }
       this.saveOrUpdate();
     },
     onChange(){
+      if(this.blog.content === '' && this.blog.title === ''){
+        return false
+      }
       this.saveOrUpdate();
     },
     saveOrUpdate(){
+      console.log(this.blog);
       this.$http.post("blog/saveOrUpdate",this.blog).then(res => {
         console.log(res);
+        this.blog = res.data.data
+        console.log(this.blog);
       })
     },
     // 获取本地语言修改md

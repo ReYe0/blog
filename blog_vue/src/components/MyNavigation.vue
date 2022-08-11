@@ -27,7 +27,7 @@
           <el-menu-item index="2-4-3">item three</el-menu-item>
         </el-sub-menu>
       </el-sub-menu>
-      <el-menu-item index="/writeArticle">admin</el-menu-item>
+      <el-menu-item index="/writeArticle">{{$t("nav.backstage")}}</el-menu-item>
       <el-button-group style="margin-top: 10px">
         <span @click.stop="toggleDark()"></span>
         <el-button v-show="isDark" icon="Sunny" @click="changeTheme()" />

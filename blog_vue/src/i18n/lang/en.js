@@ -4,6 +4,11 @@ export default {
       homepage: "homepage",
     },
     nav:{
-      logo:"Blog"
+      logo:"ErYe-Blog",
+      backstage:"backstage"
+    },
+    md:{
+      saveDraft:"save",
+      publishArticle:"publish"
     }
   };
