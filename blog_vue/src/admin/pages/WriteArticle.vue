@@ -1,13 +1,21 @@
 <template>
   <div>
     <div>
+      <el-input v-model="blog.title" placeholder="Please input the title" style="width:87.5%;margin-top:10px;margin-bottom:10px;margin-right:10px;"/>
+      <el-button type="primary" plain @click="saveOrUpdate">保存为草稿</el-button>
+    <el-button type="success" plain style="margin-right:0;">发布</el-button>
+    </div>
+    <div>
       <MdEditor
-        v-model="value"
+        v-model="blog.content"
         :theme="Boolean(isDark) === true ? 'dark' : 'light'"
         :language="getLang()"
         codeTheme="a11y"
+        no-iconfont="true"
         id="editor"
         @onUploadImg="onUploadImg"
+        @onChange="onChange"
+        @onSave="onSave"
         :toolbarsExclude="toolbarsExclude"
       />
     </div>
@@ -17,6 +25,7 @@
 import { useDark } from "@vueuse/core";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
+import '@/assets/iconfont';
 import axios from "axios";
 import { ElMessage } from "element-plus";
 //判断图片类型是否支持上传，支持true,不支持false
@@ -69,14 +78,19 @@ export default {
   name: "WriteArticle",
   data() {
     return {
+      blog:{
+        title:'西游记',
+        content:"一天，孙悟空骑着白龙马去拯救了唐三藏……",
+      },
+      // title:'',
       isDark: useDark(),
       lang: localStorage.getItem("lang") || language.split("-")[0] || "en",
-      value: "# 真的难顶！！！！受不了了！！",
+      // value: "# 西游记",
       toolbarsExclude: ["github"],
     };
   },
   mounted() {
-    var height = document.documentElement.clientHeight - 80;
+    var height = document.documentElement.clientHeight - 120;
     document.getElementById("editor").style.height = height + "px";
     //解决this指向问题，在window.addEventListener中this是指向window的。
     //需要将vue实例赋值给_this,这样在window.addEventListener中通过_this可以为vue实例上data中的变量赋值
@@ -95,6 +109,18 @@ export default {
     });
   },
   methods: {
+    onSave(){
+      this.saveOrUpdate();
+    },
+    onChange(){
+      this.saveOrUpdate();
+    },
+    saveOrUpdate(){
+      this.$http.post("blog/saveOrUpdate",this.blog).then(res => {
+        console.log(res);
+      })
+    },
+    // 获取本地语言修改md
     getLang() {
       this.lang =
         localStorage.getItem("lang") || language.split("-")[0] || "en";

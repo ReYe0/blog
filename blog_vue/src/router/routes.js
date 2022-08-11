@@ -9,11 +9,11 @@ const routes = [
         path: '/writeArticle',
         component: () => import('@/admin/pages/WriteArticle')
     },
-    {
-        name: 'helloWorld',
-        path: '/a',
-        component: () => import('@/components/HelloWorld')
-    },
+    // {
+    //     name: 'EmojiExtension',
+    //     path: '/a',
+    //     component: () => import('@/components/EmojiExtension')
+    // },
     
     
 ];
