@@ -25,6 +25,9 @@ public class BlogController {
     @PostMapping("/saveOrUpdate")
     public CommonResult saveOrUpdate(@RequestBody Blog blog){
         blog.setDescription("hhhh");
+        blog.setViews(1);
+        blog.setWords(12);
+        blog.setTypeId(1l);
         return CommonResult.success(blogMapper.insert(blog));
     }
 }
