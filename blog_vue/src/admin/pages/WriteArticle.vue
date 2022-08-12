@@ -119,14 +119,18 @@ export default {
       if(this.blog.content === '' && this.blog.title === ''){
         return false
       }
-      this.saveOrUpdate();
+      this.$http.post("blog/saveOrUpdate",this.blog).then(res => {
+        if(res.data.code === '200'){
+          this.blog = res.data.data
+        }
+      })
     },
     saveOrUpdate(){
-      console.log(this.blog);
       this.$http.post("blog/saveOrUpdate",this.blog).then(res => {
-        console.log(res);
-        this.blog = res.data.data
-        console.log(this.blog);
+        if(res.data.code === '200'){
+          this.blog = res.data.data
+          this.$message.success("保存成功")
+        }
       })
     },
     // 获取本地语言修改md

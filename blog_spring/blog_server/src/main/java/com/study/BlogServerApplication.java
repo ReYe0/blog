@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.study.mapper")
-public class BlogSpringbootApplication {
+public class BlogServerApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(BlogSpringbootApplication.class, args);
+		SpringApplication.run(BlogServerApplication.class, args);
 	}
 
 }

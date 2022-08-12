@@ -2,12 +2,13 @@ package com.study.controller;
 
 import com.study.common.CommonResult;
 import com.study.entity.Blog;
-import com.study.mapper.BlogMapper;
+import com.study.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
  * @Description: blog
  * 博客curd
@@ -19,21 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/blog")
 public class BlogController {
     @Autowired
-    private BlogMapper blogMapper;
+    private BlogService blogService;
 
 
     @PostMapping("/saveOrUpdate")
     public CommonResult saveOrUpdate(@RequestBody Blog blog){
-        blog.setDescription("hhhh");
-        blog.setViews(1);
-        blog.setWords(12);
-        blog.setTypeId(1l);
-        if(blog.getId() != null){
-            blogMapper.updateById(blog);
-        }else{
-            blogMapper.insert(blog);
-        }
-        return CommonResult.success(blog);
+        return CommonResult.success(blogService.saveOrUpdate(blog));
     }
 }
 
