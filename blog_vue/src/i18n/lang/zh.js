@@ -2,6 +2,8 @@
 export default {
     home: {
       homepage: "首页",
+      total:"共 ",
+      page:" 篇"
     },
     nav:{
       logo:"二爷的博客",

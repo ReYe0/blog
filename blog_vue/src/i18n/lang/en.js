@@ -2,6 +2,8 @@
 export default {
     home: {
       homepage: "homepage",
+      total:"total",
+      page:"articles"
     },
     nav:{
       logo:"ErYe-Blog",
