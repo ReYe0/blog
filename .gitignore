@@ -2,3 +2,4 @@
 blog_vue/node_modules/
 blog_vue/.vscode
 target/
+./blog_spring/blog_server/target/
