@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description: blog
  * @Author: 二爷
@@ -14,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @TableName("tb_files")
-public class Files {
+public class Files implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     @TableField("name")

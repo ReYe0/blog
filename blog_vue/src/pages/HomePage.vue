@@ -60,7 +60,8 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
+
 .top1{
       -webkit-text-size-adjust: 100%;
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;

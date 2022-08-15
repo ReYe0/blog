@@ -6,11 +6,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.*;
 import java.time.LocalDateTime;
 
 @Data
 @TableName("tb_blog")
-public class Blog {
+public class Blog implements Serializable, Cloneable {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
     @TableField("title")
@@ -36,4 +37,17 @@ public class Blog {
     @TableField("status")
     private Integer status;
 
+    Files files;
+    public Blog  deepClone() throws IOException, ClassNotFoundException, OptionalDataException
+    {
+        //将对象写入流中
+        ByteArrayOutputStream bao=new  ByteArrayOutputStream();
+        ObjectOutputStream oos=new  ObjectOutputStream(bao);
+        oos.writeObject(this);
+
+        //将对象从流中取出
+        ByteArrayInputStream bis=new  ByteArrayInputStream(bao.toByteArray());
+        ObjectInputStream ois=new  ObjectInputStream(bis);
+        return (Blog) ois.readObject();
+    }
 }

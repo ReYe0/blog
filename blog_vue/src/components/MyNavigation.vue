@@ -89,4 +89,9 @@ function changeLang() {
   margin: 0;
   padding: 0;
 }
+@media screen and (max-width: 800px) {
+    .flex-grow {
+      flex-grow: 1;
+}
+}
 </style>
