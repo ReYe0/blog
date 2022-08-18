@@ -1,7 +1,8 @@
 <template>
-  <div style="margin:auto 5%;">
-    <el-row :gutter="0">
-      <el-col :span="15" >
+  <div id="container">
+    <el-row  :gutter="rowGutter">
+      
+      <el-col :span="18" >
         <el-card shadow="never">
           <template #header>
             <div>
@@ -34,7 +35,7 @@
             </div>
         </el-card>
       </el-col>
-      <el-col :span="8" :offset="1" >
+      <el-col :span="6" >
         <el-card shadow="never" class="side-content">
           <MyCard/>
         </el-card>
@@ -42,7 +43,6 @@
     </el-row>
   </div>
 </template>
-
 <script>
 import MyCard from '@/components/MyCard'
 export default {
@@ -53,6 +53,23 @@ export default {
   components: {
     MyCard
   },
+  data(){
+    return{
+      rowGutter:20
+    }
+  },
+  mounted(){
+    let _this = this;
+window.addEventListener("resize", function () {
+  let scale = window.devicePixelRatio;
+  let width = document.documentElement.clientWidth * scale;
+  if (width > 900 * scale) {
+    _this.rowGutter = 20;
+  }else{
+    _this.rowGutter = 0;
+  }
+});
+  },
   methods: {
     test() {
       this.$http.get("/sdfsdf");
@@ -61,6 +78,7 @@ export default {
 };
 </script>
 <style>
+
 .erye-blog{
   margin-left:72%;font-size:14px;
 }
@@ -131,7 +149,7 @@ export default {
         display: none;
     }
 
-    .el-col-15{
+    .el-col-18{
       max-width: 100%;
       flex: none;
   }

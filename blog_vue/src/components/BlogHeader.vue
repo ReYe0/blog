@@ -101,7 +101,7 @@ function changeLang() {
 </script>
 
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=Kanit:900);
+/* @import url(https://fonts.googleapis.com/css?family=Kanit:900); */
 
 header {
   position: absolute;
