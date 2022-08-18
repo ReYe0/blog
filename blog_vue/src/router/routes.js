@@ -15,11 +15,16 @@ const routes = [
     //     path: '/a',
     //     component: () => import('@/components/EmojiExtension')
     // },
-    // {
-    //     name: 'Test',
-    //     path: '/b',
-    //     component: () => import('@/pages/Test')
-    // },
+    {
+        name: 'BlogHeader',
+        path: '/b',
+        component: () => import('@/components/BlogHeader')
+    },
+    {
+        name: 'MyNavigation',
+        path: '/c',
+        component: () => import('@/components/MyNavigation')
+    },
     
     
 ];
