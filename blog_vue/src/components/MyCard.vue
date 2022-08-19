@@ -92,10 +92,10 @@ export default {
 </script>
 
 <style scoped>
-@import url(../assets/css/material-icons.css);
+/* @import url(../assets/css/material-icons.css); */
 
 .admin-card {
-    background: white;
+    /* background: white; */
     border-radius: 8px;
     box-shadow: var(--card-box-shadow);
     text-align: center;

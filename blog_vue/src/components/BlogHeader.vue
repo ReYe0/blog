@@ -101,8 +101,6 @@ function changeLang() {
 </script>
 
 <style scoped>
-/* @import url(https://fonts.googleapis.com/css?family=Kanit:900); */
-
 header {
   position: absolute;
   top: 0;
@@ -115,24 +113,18 @@ header {
   padding: 0 3%;
   box-sizing: border-box;
   box-shadow: 0 2px 5px rgb(0 0 0 / 6%);
-  /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); */
-  --text-color: #eeeeee;
-  --text-hover-color: white;
   animation: fadeUpIn 1s;
 }
 
 .header-title {
-  /* color: var(--text-color); */
-  color: #303133;
   font-size: 23px;
-  font-family: "Kanit";
   text-decoration: none;
   transition: all 0.2s;
+  color: var(--el-menu-text-color);
 }
 
 .header-title:hover {
   color: #80c8f8;
-  /* color: var(--text-hover-color); */
 }
 
 .header-icon {
@@ -145,21 +137,17 @@ header {
 }
 
 .header-menu-item {
-  /* color: var(--text-color); */
-  color: #303133;
   text-decoration: none;
   font-size: 14px;
   margin-left: 25px;
   position: relative;
   top:5px;
-  /* padding-bottom: 5px; */
-  /* margin-top: 20px; */
   transition: color 0.4s ease-in-out;
+  color: var(--el-menu-text-color)
 }
 
 .header-menu-item:hover {
-  /* color: var(--text-hover-color); */
-  color: #80c8f8;
+  color: var(--el-menu-hover-text-color);
 }
 
 .header-menu-item:after {
