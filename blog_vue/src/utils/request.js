@@ -1,54 +1,74 @@
 import axios from 'axios'
-// import ElementUI from 'element-plus';
+import { getToken } from '../utils/storage'
+import { ElMessageBox, ElMessage } from 'element-plus'
+import router from '../router/index'
+import errorCode from '../utils/error-code'
 
-const request = axios.create({
-	baseURL: 'http://localhost:8090',  // 注意！！ 这里是全局统一加上了 '/api' 前缀，也就是说所有接口都会加上'/api'前缀在，页面里面写接口的时候就不要加 '/api'了，否则会出现2个'/api'，类似 '/api/api/user'这样的报错，切记！！！
-    timeout: 5000
+
+axios.defaults.headers['Content-Type'] = "application/json;charset=utf-8"
+
+const service = axios.create({
+    baseURL: "http://localhost:8081/"
 })
 
-// // request 拦截器
-// 可以自请求发送前对请求做一些处理
-// 比如统一加token，对请求参数统一加密
-// request.interceptors.request.use(config => {
-//     config.headers['Content-Type'] = 'application/json;charset=utf-8';
-//     let user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null;
-//     if(user){
-//         config.headers['token'] = user.token;  // 设置请求头
-//     }
-//     return config
-// }, error => {
-//     return Promise.reject(error)
-// });
 
-// // response 拦截器
-// // 可以在接口响应后统一处理结果
-// request.interceptors.response.use(
-//     response => {
-//         let res = response.data;
-//         // 如果是返回的文件
-//         if (response.config.responseType === 'blob') {
-//             return res
-//         }
-//         // 兼容服务端返回的字符串数据
-//         if (typeof res === 'string') {
-//             res = res ? JSON.parse(res) : res
-//         }
-// // 当权限验证不通过的时候给提示
-//         if(res.code === '401'){
-//             ElementUI.Message({
-//                 message:res.message,
-//                 type:'error'
-//             })
-//         }
+// 请求拦截
+service.interceptors.request.use(config => {
+    let needAuthentication = config.needAuthentication
 
-//         return res;
-//     },
-//     error => {
-//         console.log('err' + error) // for debug
-//         return Promise.reject(error)
-//     }
-// )
+    // 设置令牌
+    if (needAuthentication && getToken()) {
+        config.headers['token'] = getToken()
+    }
+
+    return config
+}, error => {
+    console.error(error)
+    Promise.reject(error);
+})
 
 
-export default request
+// 响应拦截
+service.interceptors.response.use(response => {
+    // 服务器响应的数据中的状态码
+    const code = response.data.code || 200
+    if (code === 200) return response.data.data;
+    console.log(response.data);
+    const msg = errorCode.get(code)
+    if (code === 401) {
+        ElMessageBox.confirm(
+            '前辈需要登录之后才能继续该操作哦，是否立马登录？',
+            '一条友善的提示',
+            {
+                confirmButtonText: '来啦老弟',
+                cancelButtonText: '拒绝',
+                type: 'warning',
+            }
 
+        ).then(() => {
+            router.replace('/login')
+        })
+    } else if (msg) {
+        ElMessage.error(msg)
+    } else {
+        ElMessage.warning(response.data.msg || '啊哦，发生了未知错误')
+    }
+
+    return Promise.reject('error')
+}, error => {
+    const { status } = error.response
+    if (status === 401) {
+        ElMessage.warning('前辈需要登录后才能继续当前操作哦')
+    } else if (status === 403) {
+        ElMessage.warning('前辈权限不足，无法执行当前操作')
+    } else if (status === 404) {
+        ElMessage.warning('请求的资源不存在哦')
+    } else if (status >= 500) {
+        ElMessage.warning('服务器出现异常啦')
+    }
+
+    return Promise.reject(error);
+})
+
+
+export default service

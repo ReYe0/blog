@@ -1,8 +1,8 @@
 const routes = [
     {
-        name: 'homePage',
+        name: 'blogHOme',
         path: '/',
-        component: () => import('@/pages/HomePage'),
+        component: () => import('@/pages/BlogHome'),
         meta: { title:'sdf' }
     },
     {
@@ -24,6 +24,11 @@ const routes = [
         name: 'MyNavigation',
         path: '/c',
         component: () => import('@/components/MyNavigation')
+    },
+    {
+        name: 'BlogFooter',
+        path: '/d',
+        component: () => import('@/components/BlogFooter')
     },
     
     

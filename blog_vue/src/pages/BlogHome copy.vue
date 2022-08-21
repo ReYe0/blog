@@ -38,21 +38,21 @@
       </el-col>
       <el-col :span="6" >
         <el-card shadow="never" class="side-content">
-          <MyCard/>
+          <AuthorCard/>
         </el-card>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-import MyCard from '@/components/MyCard'
+import AuthorCard from '@/components/AuthorCard.vue'
 export default {
-  name: "HomePage",
+  name: "BlogHome",
   props: {
     msg: String,
   },
   components: {
-    MyCard
+    AuthorCard
   },
   data(){
     return{

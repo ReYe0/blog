@@ -22,9 +22,7 @@
     </div>
 
     <div id="header-menu-button" @click="drawer = !drawer">
-      <!-- <el-icon><Expand /></el-icon> -->
       <el-icon><Fold /></el-icon>
-      <!-- <font-awesome-icon :icon="['fas', 'bars']" /> -->
     </div>
 
     <el-drawer
@@ -34,7 +32,6 @@
       :with-header="false"
       size="40%"
     >
-      <kila-kila-admin-menu />
     </el-drawer>
   </header>
 </template>
@@ -42,7 +39,6 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { getCurrentInstance } from "vue";
-// import store from "../store";
 let drawer = ref(false);
 let menuItems = reactive([
   { name: "home.homepage", icon: ["fab", "fort-awesome"], href: "/" },
