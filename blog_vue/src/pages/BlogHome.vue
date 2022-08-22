@@ -17,8 +17,8 @@
   
   </div>
     <!-- 页脚 -->
-        <BlogFooter 
-        :adminName="$store.state.adminAbout.adminInfo.nickName"/>
+        <!-- <BlogFooter 
+        :adminName="$store.state.adminAbout.adminInfo.nickName"/> -->
      <!-- 滚动到顶部按钮 -->
         <BackToTop />
   </div>
@@ -27,7 +27,7 @@
 import AuthorCard from "@/components/AuthorCard.vue";
 import BlogCard from "@/components/BlogCard";
 import BackToTop from '@/components/BackToTop';
-import BlogFooter from '@/components/BlogFooter'
+// import BlogFooter from '@/components/BlogFooter'
 import { defaultThumbnail } from "../utils/thumbnail";
 import { reactive, ref } from "vue";
 import { getPostArticleList } from "../api/article";
@@ -38,7 +38,7 @@ export default {
     AuthorCard,
     BlogCard,
     BackToTop,
-    BlogFooter
+    // BlogFooter
   },
   setup() {
     let pageSize = 10;
@@ -56,7 +56,6 @@ export default {
                 });
 
                 postArticles.splice(0, postArticles.length, ...data.rows);
-                console.log(postArticles,123);
             });
         }
 
