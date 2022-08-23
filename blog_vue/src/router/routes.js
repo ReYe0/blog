@@ -30,7 +30,12 @@ const routes = [
         path: '/d',
         component: () => import('@/components/BlogFooter')
     },
-    
+    {
+        name: 'BlogDetail',
+        path: '/article/:id',
+        props: true,
+        component: () => import('@/pages/BlogDetail')
+    },
     
 ];
 

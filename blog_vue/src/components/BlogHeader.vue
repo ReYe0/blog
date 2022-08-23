@@ -11,7 +11,7 @@
           }}
         </router-link>
       </div>
-      <el-button-group style="margin-left:20px;">
+      <el-button-group style="margin-left:20px;border-radius:8%;">
         <span @click.stop="toggleDark()"></span>
         <el-button v-show="isDark" icon="Sunny" @click="changeTheme()" />
         <el-button v-show="!isDark" icon="Moon" @click="changeTheme()" />
@@ -98,7 +98,7 @@ function changeLang() {
 
 <style scoped>
 header {
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 60px;
   width: 100%;
@@ -111,7 +111,10 @@ header {
   box-shadow: 0 2px 5px rgb(0 0 0 / 6%);
   animation: fadeUpIn 1s;
 }
-
+.el-button-group>.el-button:not(:first-child):not(:last-child) {
+  border-top-left-radius: 8%;
+    border-bottom-left-radius: 8%;
+}
 .header-title {
   font-size: 23px;
   text-decoration: none;

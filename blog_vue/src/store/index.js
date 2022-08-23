@@ -59,7 +59,7 @@ let adminAbout = {
 let websiteAbout = {
 	namespaced: true,
 	state: {
-		startDate: "2022-01-01"
+		startDate: "2022-08-01"
 	},
 	actions: {},
 	mutations: {},

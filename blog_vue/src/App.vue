@@ -3,15 +3,18 @@
     <BlogHeader />
     <div style="opacity:0;margin-top:80px;"></div>
     <router-view></router-view>
+    <BlogFooter :adminName="$store.state.adminAbout.adminInfo.nickName"/>
   </div>
 </template>
 
 <script>
 import BlogHeader from "@/components/BlogHeader.vue";
+import BlogFooter from '@/components/BlogFooter'
 export default {
   name: "App",
   components: {
     BlogHeader,
+    BlogFooter
   },
 };
 </script>
