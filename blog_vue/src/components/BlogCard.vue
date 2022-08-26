@@ -80,6 +80,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: row;
+    /* background-color: var(--el-bg-color); */
   /* background: white; */
   border-radius: 8px;
   /* border-color: var(--el-menu-border-color); */

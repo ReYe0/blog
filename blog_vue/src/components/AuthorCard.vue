@@ -96,6 +96,7 @@ export default {
 
 .admin-card {
     /* background: white; */
+    /* background-color: var(--el-bg-color); */
     border-radius: 8px;
     box-shadow: var(--card-box-shadow);
     text-align: center;

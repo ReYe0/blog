@@ -6,7 +6,8 @@
     <div class="header-menu">
       <div v-for="item in menuItems" :key="item.name">
         <router-link :to="item.href" class="header-menu-item">
-          <font-awesome-icon :icon="item.icon" class="header-icon" />{{
+          <!-- <font-awesome-icon :icon="item.icon" class="header-icon" /> -->
+          {{
             $t(item.name)
           }}
         </router-link>
@@ -42,6 +43,7 @@ import { getCurrentInstance } from "vue";
 let drawer = ref(false);
 let menuItems = reactive([
   { name: "home.homepage", icon: ["fab", "fort-awesome"], href: "/" },
+  { name: "归档", icon: ["fas", "box-archive"], href: "/archive" },
   {
     name: "nav.backstage",
     icon: ["fas", "box-archive"],
@@ -98,6 +100,7 @@ function changeLang() {
 
 <style scoped>
 header {
+  background-color: var(--el-bg-color);
   position: fixed;
   top: 0;
   height: 60px;
@@ -111,6 +114,7 @@ header {
   box-shadow: 0 2px 5px rgb(0 0 0 / 6%);
   animation: fadeUpIn 1s;
 }
+
 .el-button-group>.el-button:not(:first-child):not(:last-child) {
   border-top-left-radius: 8%;
     border-bottom-left-radius: 8%;

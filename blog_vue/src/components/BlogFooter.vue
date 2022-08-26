@@ -36,11 +36,7 @@ import { ref, computed, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { getRunTime } from "../utils/date";
 export default {
-<<<<<<< HEAD
-    name: "KilaKilaFooter",
-=======
     name: "BlogFooter",
->>>>>>> origin/master
     setup() {
         let year = ref(new Date().getFullYear());
         let currentTime = ref(new Date().getTime());
@@ -107,11 +103,7 @@ export default {
 }
 
 .footer-text-icon {
-<<<<<<< HEAD
-    color: red;
-=======
     color: yellow;
->>>>>>> origin/master
     font-size: 16px;
     animation: heartAni 1.4s infinite;
 }

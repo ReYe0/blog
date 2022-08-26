@@ -40,11 +40,12 @@
         <AuthorCard />
         <!-- <kila-kila-admin-card /> -->
         <div class="sticky-layout">
-                    <!-- <kila-kila-catalog-card v-if="articleLoaded" />
+          <!-- <kila-kila-catalog-card v-if="articleLoaded" />
                     <kila-kila-hot-article-card /> -->
-                    <!-- sdf -->
-                    <BlogCatalogCard/>
-                </div>
+          <!-- sdf -->
+          <BlogCatalogCard v-if="articleLoaded"/>
+          <HotBlogCard/>
+        </div>
       </div>
 
       <!-- 文章内容 -->
@@ -55,6 +56,7 @@
                 ></div> -->
         <!-- {{Boolean(isDark) === true ? 'dark' : 'light'}},{{isDark}} -->
         <MdEditor
+        class="article-content"
           :theme="Boolean(isDark) === true ? 'dark' : 'light'"
           :language="getLang()"
           codeTheme="a11y"
@@ -63,39 +65,38 @@
         />
 
         <!-- 版权声明 -->
-        <!-- <div class="article-signature">
-                    <img :src="adminInfo.avatar" alt="头像" />
-                    <div class="copyright">
-                        <div class="copyright-item">
-                            <span class="copyright-title">文章作者：</span>
-                            <span class="copyright-content">
-                                <router-link to="/">
-                                    {{ adminInfo.nickName }}</router-link
-                                ></span
-                            >
-                        </div>
-                        <div class="copyright-item">
-                            <span class="copyright-title">文章链接：</span>
-                            <span class="copyright-content">
-                                <a :href="articleUrl">{{ articleUrl }}</a>
-                            </span>
-                        </div>
-                        <div class="copyright-item">
-                            <span class="copyright-title">版权声明：</span>
-                            <span class="copyright-content">
-                                本博客所有文章除特别声明外，均采用
-                                <a
-                                    href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-                                    >BY-NC-SA</a
-                                >
-                                许可协议。转载请注明出处！
-                            </span>
-                        </div>
-                    </div>
-                </div> -->
+        <div class="article-signature">
+          <img :src="adminInfo.avatar" alt="头像" />
+          <div class="copyright">
+            <div class="copyright-item">
+              <span class="copyright-title">文章作者：</span>
+              <span class="copyright-content">
+                <router-link to="/">
+                  {{ adminInfo.nickName }}</router-link
+                ></span
+              >
+            </div>
+            <div class="copyright-item">
+              <span class="copyright-title">文章链接：</span>
+              <span class="copyright-content">
+                <a :href="articleUrl">{{ articleUrl }}</a>
+              </span>
+            </div>
+            <div class="copyright-item">
+              <span class="copyright-title">版权声明：</span>
+              <span class="copyright-content">
+                本博客所有文章除特别声明外，均采用
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+                  >BY-NC-SA</a
+                >
+                许可协议。转载请注明出处！
+              </span>
+            </div>
+          </div>
+        </div>
 
         <!-- 标签 -->
-        <!-- <div class="article-tags" v-if="articleDetails.tags">
+        <div class="article-tags" v-if="articleDetails.tags">
                     <span>
                         <font-awesome-icon :icon="['fas', 'tags']" />
                         标签：
@@ -107,10 +108,10 @@
                         class="tag-link"
                         >{{ tag.name }}</router-link
                     >
-                </div> -->
+                </div>
 
         <!-- 上一篇和下一篇 -->
-        <!-- <div class="previous-next-article">
+        <div class="previous-next-article">
                     <div
                         class="previous-article"
                         v-if="previousArticle.id"
@@ -150,26 +151,32 @@
                             </div>
                         </router-link>
                     </div>
-                </div> -->
+                </div>
       </div>
     </div>
 
     <!-- 回到顶部 -->
     <!-- <kila-kila-back-to-top /> -->
+    <BackToTop/>
 
     <!-- 图片查看器 -->
     <!-- <kila-kila-light-box ref="lightBoxRef" v-if="articleLoaded" /> -->
-
+      <ImgLightBox ref="lightBoxRef" v-if="articleLoaded"/>
     <!-- 页脚 -->
     <!-- <kila-kila-footer /> -->
   </div>
 </template>
 <script>
+import HotBlogCard from '@/components/HotBlogCard'
+import ImgLightBox from '@/components/ImgLightBox';
+import BackToTop from '@/components/BackToTop';
 import { useDark } from "@vueuse/core";
 import MdEditor from "md-editor-v3";
 import AuthorCard from "@/components/AuthorCard";
-import BlogCatalogCard from '@/components/BlogCatalogCard'
-import { getArticleDetails } from "./../api/article";
+import BlogCatalogCard from "@/components/BlogCatalogCard";
+import { getArticleDetails,getPreviousNextArticle } from "./../api/article";
+import {useDefaultThumbnail, defaultThumbnail} from "@/utils/thumbnail";
+import { mapState } from "../store/map";
 import { reactive, nextTick, ref } from "vue";
 const language = (
   (navigator.language ? navigator.language : navigator.userLanguage) || "zh"
@@ -179,41 +186,54 @@ export default {
   setup(props) {
     window.scrollTo({ top: 0 });
 
-    // let { adminInfo, isAdmin } = mapState("adminAbout");
-    // let articleLoaded = ref(false);
-    // let articleUrl = ref(window.location.href);
-    // let previousArticle = reactive({});
-    // let nextArticle = reactive({});
-    // let lightBoxRef = ref();
+    let { adminInfo,isAdmin} = mapState("adminAbout");
+    let articleLoaded = ref(false);
+    let articleUrl = ref(window.location.href);
+    let previousArticle = reactive({});
+    let nextArticle = reactive({});
+    let lightBoxRef = ref();
 
     let articleDetails = reactive({});
     getArticleDetails(props.id).then((data) => {
       Object.assign(articleDetails, data); // 将data中的数据赋值到 articleDetails
       // articleDetails.content = markdownIt.render(data.content);
 
-      // nextTick(() => {
+      nextTick(() => {
       //     initMathJax({}, () => {
       //         renderByMathjax(".article-content");
       //     });
       //     buildCodeBlock(".article-content");
-      //     articleLoaded.value = true;
-      // }).then(() => {
-      //     lightBoxRef.value.addImageClickedListener();
-      // });
+          articleLoaded.value = true;
+      }).then(() => {
+          lightBoxRef.value.addImageClickedListener();
+      });
     });
 
     // updateViewCount(props.id);
-
+getPreviousNextArticle(props.id).then((data) => {
+            if (data.previous) {
+                Object.assign(previousArticle, data.previous);
+                if (!previousArticle.thumbnail) {
+                    previousArticle.thumbnail = defaultThumbnail;
+                }
+            }
+            if (data.next) {
+                Object.assign(nextArticle, data.next);
+                if (!nextArticle.thumbnail) {
+                    nextArticle.thumbnail = defaultThumbnail;
+                }
+            }
+        });
     return {
-      // isAdmin,
+      isAdmin,
       articleDetails,
-      // articleLoaded,
-      // adminInfo,
-      // articleUrl,
-      // useDefaultThumbnail,
-      // previousArticle,
-      // nextArticle,
-      // lightBoxRef,
+      articleLoaded,
+      adminInfo,
+      articleUrl,
+      useDefaultThumbnail,
+      previousArticle,
+      nextArticle,
+      lightBoxRef,
       // editArticle,
     };
   },
@@ -221,7 +241,10 @@ export default {
   components: {
     AuthorCard,
     MdEditor,
-    BlogCatalogCard
+    BlogCatalogCard,
+    BackToTop,
+    ImgLightBox,
+    HotBlogCard
   },
   data() {
     return {
@@ -721,7 +744,7 @@ export default {
 
 .sticky-layout {
   position: sticky;
-  top: 20px;
+  top: 70px;
 }
 
 @media screen and (max-width: 900px) {

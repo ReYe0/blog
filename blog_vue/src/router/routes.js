@@ -6,6 +6,10 @@ const routes = [
         meta: { title:'sdf' }
     },
     {
+        path: '/:pathMatch(.*)*',
+        component: () => import('@/pages/PageNotFound'),
+    },
+    {
         name: 'writeArticle',
         path: '/writeArticle',
         component: () => import('@/admin/pages/WriteArticle')
@@ -35,6 +39,40 @@ const routes = [
         path: '/article/:id',
         props: true,
         component: () => import('@/pages/BlogDetail')
+    },
+    {
+        name: 'ArchiveDetails',
+        path: '/archive/:year/:month',
+        props: true,
+        component: () => import('@/pages/archive/ArchiveDetails')
+    },
+    {
+        name: 'ArchiveList',
+        path: '/archive',
+        props: true,
+        component: () => import('@/pages/archive/ArchiveList')
+    },
+    {
+        name: 'CategoryList',
+        path: '/category',
+        component: () => import('@/pages/category/CategoryList')
+    },
+    {
+        name: 'CategoryDetails',
+        path: '/category/:id',
+        props: true,
+        component: () => import('@/pages/category/CategoryDetails')
+    },
+    {
+        name: 'TagList',
+        path: '/tag',
+        component: () => import('@/pages/tag/TagList')
+    },
+    {
+        name: 'TagDetails',
+        path: '/tag/:id',
+        props: true,
+        component: () => import('@/pages/tag/TagDetails')
     },
     
 ];

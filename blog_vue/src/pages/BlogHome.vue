@@ -4,6 +4,10 @@
     <!-- 侧边栏 -->
     <div class="side-content">
       <AuthorCard />
+      <HotBlogCard/>
+      <CategoryCard/>
+      <TagCard/>
+      <ArchiveCard/>
     </div>
     <!-- 发表的文章 -->
     <div class="post-article-list">
@@ -13,8 +17,18 @@
         :article="article"
         :reverse="index % 2 == 1"
       />
+      <!-- 分页  background 设置 在里面 可以设置背景 -->
+        <el-pagination
+            layout="prev, pager, next"
+            :total="articleCount"
+            :page-size="pageSize"
+            id="pagination"
+            @current-change="onCurrentPageChanged"
+            v-if="articleCount > 0"
+        >
+        </el-pagination>
     </div>
-  
+    
   </div>
     <!-- 页脚 -->
         <!-- <BlogFooter 
@@ -24,6 +38,10 @@
   </div>
 </template>
 <script>
+import ArchiveCard from '@/components/ArchiveCard'
+import TagCard from '@/components/TagCard'
+import CategoryCard from '@/components/CategoryCard'
+import HotBlogCard from "@/components/HotBlogCard.vue"
 import AuthorCard from "@/components/AuthorCard.vue";
 import BlogCard from "@/components/BlogCard";
 import BackToTop from '@/components/BackToTop';
@@ -38,10 +56,14 @@ export default {
     AuthorCard,
     BlogCard,
     BackToTop,
+    HotBlogCard,
+    CategoryCard,
+    TagCard,
+    ArchiveCard
     // BlogFooter
   },
   setup() {
-    let pageSize = 10;
+        let pageSize = 5;
         let postArticles = reactive([]);
         let articleCount = ref(0);
 
@@ -64,7 +86,6 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-
 .container {
     padding: 40px 15px;
     padding-top: 0;
@@ -97,7 +118,7 @@ export default {
 
     & > button {
         box-shadow: var(--card-box-shadow);
-        background: white;
+        // background: white;
         border-radius: 8px;
         height: 35px;
         width: 35px;
@@ -105,7 +126,7 @@ export default {
 
     li {
         box-shadow: var(--card-box-shadow);
-        background-color: white;
+        background-color: var(--el-pagination-bg-color);
         border-radius: 8px;
         margin: 0 6px;
         height: 35px;
@@ -114,7 +135,7 @@ export default {
 
     li.active {
         color: white;
-        background: var(--theme-color);
+        background: var(--el-color-primary);
         font-weight: normal;
     }
 }

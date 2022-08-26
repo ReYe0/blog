@@ -1,17 +1,19 @@
 <template>
     <div class="catalog-card" v-if="Object.keys(titles).length > 0">
+    <!-- <div class="catalog-card" > -->
         <div class="catalog-card-header">
             <div>
-                <span
+                <!-- <span
                     ><font-awesome-icon
                         :icon="['fas', 'bars-staggered']"
                         class="catalog-icon"
-                /></span>
+                /></span> -->
+                <el-icon color="dodgerblue" style="font-size: 20px;position: relative;top:5px;margin-right:10px;"><List /></el-icon>
                 <span>目录</span>
             </div>
             <span class="progress">{{ progress }}</span>
         </div>
-
+       
         <div class="catalog-content">
             <div
                 v-for="title in titles"
@@ -36,23 +38,79 @@ import { reactive, ref } from "vue";
 
 export default {
     name: "BlogCatalogCard",
-    setup(props) {
-        let titles = reactive(getTitles());
-        let currentTitle = reactive({});
-        let progress = ref(0);
+    data(){
+        return{
+            titles:'',
+            progress:0,
+            currentTitle:{
+                id:''
+            },
+        }
+    },
+    mounted(){
+        
+ // 监听滚动事件并更新样式
+ var _this = this;
+ _this.getTitles();
+//  let titles = _this.titles;
+        window.addEventListener("scroll", function () {
+            _this.progress =
+                parseInt(
+                    (window.scrollY / document.documentElement.scrollHeight) *
+                        100
+                ) + "%";
+            let visibleTitles = [];
+            for (let i = _this.titles.length - 1; i >= 0; i--) {
+                const title = _this.titles[i];
+                if (title.scrollTop <= window.scrollY) {
+                    if (_this.currentTitle.id === title.id) return;
 
+                    Object.assign(_this.currentTitle, title);
+
+                    // 展开节点
+                    _this.setChildrenVisible(title, true);
+                    visibleTitles.push(title);
+
+                    // 展开父节点
+                    let parent = title.parent;
+                    while (parent) {
+                        _this.setChildrenVisible(parent, true);
+                        visibleTitles.push(parent);
+                        parent = parent.parent;
+                    }
+
+                    // 折叠其余节点
+                    for (const t of _this.titles) {
+                        if (!visibleTitles.includes(t)) {
+                            _this.setChildrenVisible(t, false);
+                        }
+                    }
+
+                    return;
+                }
+            }
+        });
+    },
+    methods:{
         // 获取目录的标题
-        function getTitles() {
+         getTitles() {
             let titles = [];
             let levels = ["h1", "h2", "h3"];
 
-            let articleElement = document.querySelector(props.container);
+            let articleElement = document.querySelector(this.container);
+            console.log(articleElement,123);
             if (!articleElement) {
-                return titles;
+                console.log("zhixingl");
+                return false;
             }
-
-            let elements = Array.from(articleElement.querySelectorAll("*"));
-
+            let elements ;
+            setTimeout(() => {
+                elements = Array.from(document.querySelector(this.container).querySelectorAll("*"));
+            // }, 100);
+            
+            
+            // setTimeout(() => {
+                console.log(elements,456);
             // 调整标签等级
             let tagNames = new Set(
                 elements.map((el) => el.tagName.toLowerCase())
@@ -77,7 +135,7 @@ export default {
                     parent: null,
                     children: [],
                     rawName: element.innerText,
-                    scrollTop: element.offsetTop,
+                    scrollTop: element.offsetTop + 100,
                 };
 
                 if (titles.length > 0) {
@@ -115,69 +173,28 @@ export default {
                 node.name = serialNumber + ". " + element.innerText;
                 titles.push(node);
             }
-
-            return titles;
-        }
-
-        // 监听滚动事件并更新样式
-        window.addEventListener("scroll", function () {
-            progress.value =
-                parseInt(
-                    (window.scrollY / document.documentElement.scrollHeight) *
-                        100
-                ) + "%";
-
-            let visibleTitles = [];
-
-            for (let i = titles.length - 1; i >= 0; i--) {
-                const title = titles[i];
-                if (title.scrollTop <= window.scrollY) {
-                    if (currentTitle.id === title.id) return;
-
-                    Object.assign(currentTitle, title);
-
-                    // 展开节点
-                    setChildrenVisible(title, true);
-                    visibleTitles.push(title);
-
-                    // 展开父节点
-                    let parent = title.parent;
-                    while (parent) {
-                        setChildrenVisible(parent, true);
-                        visibleTitles.push(parent);
-                        parent = parent.parent;
-                    }
-
-                    // 折叠其余节点
-                    for (const t of titles) {
-                        if (!visibleTitles.includes(t)) {
-                            setChildrenVisible(t, false);
-                        }
-                    }
-
-                    return;
-                }
-            }
-        });
-
+            this.titles= titles;
+            // console.log(titles);
+            // console.log(this.titles);
+            }, 100);
+                
+        },
         // 设置子节点的可见性
-        function setChildrenVisible(title, isVisible) {
+         setChildrenVisible(title, isVisible) {
             for (const child of title.children) {
                 child.isVisible = isVisible;
             }
-        }
-
-        // 滚动到指定的位置
-        function scrollToView(scrollTop) {
+        },
+         // 滚动到指定的位置
+        scrollToView(scrollTop) {
+            console.log(scrollTop,77);
             window.scrollTo({ top: scrollTop, behavior: "smooth" });
         }
-
-        return { titles, currentTitle, progress, scrollToView };
     },
     props: {
         container: {
             type: String,
-            default: ".post-body .article-content",
+            default: ".md-preview-wrapper .md-preview ",
         },
     },
 };
@@ -185,7 +202,7 @@ export default {
 
 <style lang="less" scoped>
 .catalog-card {
-    background: white;
+    // background: white;
     border-radius: 8px;
     box-shadow: var(--card-box-shadow);
     padding: 20px 24px;
@@ -246,7 +263,7 @@ export default {
 }
 
 .active {
-    background-color: var(--theme-color);
+    background-color: var(--el-color-primary);
     color: white;
 
     &:hover {

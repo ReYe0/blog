@@ -4,7 +4,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import '@/assets/style/element-variarbles.scss'
-
+// 设置icon
+import FontAwesomeIcon from "./utils/fontawesome-icons";
 
 import router from './router/index' // 引入路由
 
@@ -41,4 +42,5 @@ app.use(MdEditorV3)
 app.use(store)
 app.use(router)
 app.use(ElementPlus)
+app.component("font-awesome-icon", FontAwesomeIcon)
 app.mount('#app')
