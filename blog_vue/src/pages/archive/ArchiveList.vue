@@ -1,8 +1,8 @@
 <template>
     <div id="archive-list">
         <!-- 页头 -->
-        <!-- <kila-kila-header /> -->
-
+        <BlogHeader />
+<div style="opacity:0;margin-top:80px;"></div>
         <!-- 二次元封面 -->
         <!-- <kila-kila-wife-cover>
             <h1>归档</h1>
@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import BlogHeader from "@/components/BlogHeader.vue";
 import TagCard from '@/components/TagCard.vue'
 import CategoryCard from '@/components/CategoryCard'
 import HotBlogCard from "@/components/HotBlogCard.vue"
@@ -148,6 +149,7 @@ export default {
         };
     },
        components: {
+        BlogHeader,
     AuthorCard,
     BlogCard,
     BackToTop,

@@ -1,8 +1,8 @@
 <template>
     <div id="tag-list">
         <!-- 页头 -->
-        <!-- <kila-kila-header /> -->
-
+        <BlogHeader />
+<div style="opacity:0;margin-top:80px;"></div>
         <!-- 二次元封面 -->
         <!-- <kila-kila-wife-cover>
             <h1>标签</h1>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import BlogHeader from "@/components/BlogHeader.vue";
 import WordCloudCard from '@/components/WordCloudCard'
 import BackToTop from '@/components/BackToTop'
 import AuthorCard from '@/components/AuthorCard';
@@ -42,6 +43,7 @@ import { mapState } from "../../store/map";
 export default {
     name: "TagList",
     components:{
+        BlogHeader,
         AuthorCard,
         HotBlogCard,
         CategoryCard,

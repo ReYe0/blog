@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <BlogHeader />
-    <div style="opacity:0;margin-top:80px;"></div>
+    <!-- <BlogHeader /> -->
+    <!-- <div style="opacity:0;margin-top:80px;"></div> -->
     <router-view :key="$route.fullPath"></router-view>
     <BlogFooter :adminName="$store.state.adminAbout.adminInfo.nickName"/>
   </div>

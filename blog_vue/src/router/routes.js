@@ -9,11 +9,11 @@ const routes = [
         path: '/:pathMatch(.*)*',
         component: () => import('@/pages/PageNotFound'),
     },
-    {
-        name: 'writeArticle',
-        path: '/writeArticle',
-        component: () => import('@/admin/pages/WriteArticle')
-    },
+    // {
+    //     name: 'writeArticle',
+    //     path: '/writeArticle',
+    //     component: () => import('@/admin/pages/WriteArticle')
+    // },
     // { // 表情扩展，以后在弄
     //     name: 'EmojiExtension',
     //     path: '/a',
@@ -73,6 +73,22 @@ const routes = [
         path: '/tag/:id',
         props: true,
         component: () => import('@/pages/tag/TagDetails')
+    },
+
+    // 后台
+    {
+        name: '主页',
+        path: '/blogbackhome',
+        // props: true,
+        component: () => import('@/admin/pages/BlogBackHome'),
+        children:[
+            {
+                name: '编写博客',
+                path: '/writeBlog',
+                props: true,
+                component: () => import('@/admin/pages/WriteBlog')
+            },
+        ]
     },
     
 ];

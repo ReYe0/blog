@@ -4,7 +4,7 @@ import { getArticleCount } from '../api/article'
 import { getCategoryCountList } from '../api/category'
 import { getTagCountList } from '../api/tag'
 import { getUserInfo } from "../utils/storage"
-
+import tagsView from '@/store/tagsView'
 
 // 管理员
 let adminAbout = {
@@ -111,7 +111,27 @@ let tagAbout = {
 		}
 	}
 }
+// 路由显示
+let currentPathName = {
+	namespaced:true,
+	state: {
+        currentPathName: ''
+    },
+    mutations: {
+        setPath (state) {
+            state.currentPathName = localStorage.getItem("currentPathName")
+        },
+        logout() {
+            // 清空缓存
+            localStorage.removeItem("staff")
+            localStorage.removeItem("menus")
+            router.push("/login")
 
+            // 重置路由
+            resetRouter()
+        }
+    }
+}
 export default createStore({
-	modules: { adminAbout, websiteAbout,categoryAbout,tagAbout },
+	modules: { adminAbout, websiteAbout,categoryAbout,tagAbout,currentPathName,tagsView },
 });

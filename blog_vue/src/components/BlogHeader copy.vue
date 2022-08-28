@@ -43,16 +43,10 @@ import { getCurrentInstance } from "vue";
 let drawer = ref(false);
 let menuItems = reactive([
   { name: "home.homepage", icon: ["fab", "fort-awesome"], href: "/" },
-  { name: "归档", icon: ["fas", "box-archive"], href: "/archive" },
   {
     name: "nav.backstage",
     icon: ["fas", "box-archive"],
     href: "/writeArticle",
-  },
-   {
-    name: "后台test",
-    icon: ["fas", "box-archive"],
-    href: "/blogbackhome",
   },
   { name: "分类", icon: ["fas", "folder"], href: "/category" },
   { name: "标签", icon: ["fas", "tags"], href: "/tag" },
@@ -105,7 +99,6 @@ function changeLang() {
 
 <style scoped>
 header {
-  background-color: var(--el-bg-color);
   position: fixed;
   top: 0;
   height: 60px;

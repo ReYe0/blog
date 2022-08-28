@@ -1,8 +1,8 @@
 <template>
     <div id="tag-details">
         <!-- 页头 -->
-        <!-- <kila-kila-header /> -->
-
+        <BlogHeader />
+<div style="opacity:0;margin-top:80px;"></div>
         <!-- 二次元封面 -->
         <!-- <kila-kila-wife-cover>
             <div class="tag-info">
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import BlogHeader from "@/components/BlogHeader.vue";
 import BlogCard from '@/components/BlogCard'
 import BackToTop from '@/components/BackToTop'
 import AuthorCard from '@/components/AuthorCard';
@@ -64,6 +65,7 @@ import { mapState } from "../../store/map";
 export default {
     name: "TagDetails",
      components:{
+        BlogHeader,
         AuthorCard,
         HotBlogCard,
         CategoryCard,

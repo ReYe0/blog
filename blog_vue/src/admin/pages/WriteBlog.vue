@@ -75,7 +75,7 @@ const language = (
 ).toLowerCase();
 
 export default {
-  name: "WriteArticle",
+  name: "WriteBlog",
   data() {
     return {
       blog:{

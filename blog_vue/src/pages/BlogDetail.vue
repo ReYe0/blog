@@ -1,6 +1,8 @@
 <template>
   <div id="article-details">
     <!-- 页头 -->
+    <BlogHeader/>
+    <div style="opacity:0;margin-top:80px;"></div>
     <!-- <kila-kila-header /> -->
     <!-- 二次元封面 -->
     <WifeCover>
@@ -167,6 +169,7 @@
   </div>
 </template>
 <script>
+import BlogHeader from '@/components/BlogHeader'
 import HotBlogCard from '@/components/HotBlogCard'
 import ImgLightBox from '@/components/ImgLightBox';
 import BackToTop from '@/components/BackToTop';
@@ -244,7 +247,8 @@ getPreviousNextArticle(props.id).then((data) => {
     BlogCatalogCard,
     BackToTop,
     ImgLightBox,
-    HotBlogCard
+    HotBlogCard,
+    BlogHeader
   },
   data() {
     return {

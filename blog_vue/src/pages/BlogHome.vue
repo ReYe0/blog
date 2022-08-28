@@ -1,5 +1,7 @@
 <template>
 <div>
+    <BlogHeader/>
+    <div style="opacity:0;margin-top:80px;"></div>
   <div class="container">
     <!-- 侧边栏 -->
     <div class="side-content">
@@ -38,6 +40,7 @@
   </div>
 </template>
 <script>
+import BlogHeader from "@/components/BlogHeader.vue";
 import ArchiveCard from '@/components/ArchiveCard'
 import TagCard from '@/components/TagCard'
 import CategoryCard from '@/components/CategoryCard'
@@ -53,6 +56,7 @@ import { getPostArticleList } from "../api/article";
 export default {
   name: "BlogHome",
   components: {
+    BlogHeader,
     AuthorCard,
     BlogCard,
     BackToTop,
