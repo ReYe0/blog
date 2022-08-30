@@ -31,7 +31,7 @@ function getPostArticleList(pageNum, pageSize, categoryId, tagId, date) {
 
     return request({
         url: '/blog/blogList',
-        params
+        params,
     })
 }
 

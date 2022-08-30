@@ -1,5 +1,6 @@
 package com.study.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.study.entity.Blog;
 import com.study.entity.dto.BlogQueryDTO;
@@ -17,9 +18,9 @@ public interface BlogService {
     public Blog saveOrUpdate(Blog blog);
 
     /**
-     * 获取首页文章信息列表
+     * 获取首页文章信息分页
      * @param blogQueryDTO
      * @return
      */
-    public List<BlogListVo> getBlogList(BlogQueryDTO blogQueryDTO);
+    public IPage<BlogListVo> getBlogList(BlogQueryDTO blogQueryDTO);
 }

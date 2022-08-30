@@ -1,8 +1,14 @@
 package com.study.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.study.common.SystemConstants;
 import com.study.entity.Blog;
 import com.study.entity.dto.BlogQueryDTO;
+import com.study.entity.dto.BlogResponseDTO;
 import com.study.entity.vo.BlogListVo;
 import com.study.mapper.BlogMapper;
 import com.study.service.BlogService;
@@ -10,7 +16,9 @@ import com.study.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -37,8 +45,9 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogListVo> getBlogList(BlogQueryDTO blogQueryDTO) {
-        Page<BlogListVo> Page = new Page<BlogListVo>(blogQueryDTO.getPageNum(), blogQueryDTO.getPageSize());
-        return blogMapper.getBlogListVo(Page).getRecords();
+    public IPage<BlogListVo> getBlogList(BlogQueryDTO blogQueryDTO) {
+//        LambdaQueryWrapper<BlogListVo> wrapper = Wrappers.lambdaQuery();
+        Page<BlogListVo> mapPage = new Page<>(blogQueryDTO.getPageNum(), blogQueryDTO.getPageSize() );
+        return blogMapper.getBlogListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL);
     }
 }

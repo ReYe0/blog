@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { getToken } from '../utils/storage'
-import { ElMessageBox, ElMessage } from 'element-plus'
-import router from '../router/index'
-import errorCode from '../utils/error-code'
+// import { getToken } from '../utils/storage'
+// import { ElMessageBox, ElMessage } from 'element-plus'
+// import router from '../router/index'
+// import errorCode from '../utils/error-code'
 
 
-axios.defaults.headers['Content-Type'] = "application/json;charset=utf-8"
+// axios.defaults.headers['Content-Type'] = "application/json;charset=utf-8"
 
 const service = axios.create({
     baseURL: "http://localhost:8090/"

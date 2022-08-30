@@ -10,7 +10,6 @@
       <CategoryCard/>
       <TagCard/>
       <ArchiveCard/> -->
-      {{postArticles}}
     </div>
     <!-- 发表的文章 -->
     <div class="post-article-list">
@@ -49,11 +48,9 @@ import HotBlogCard from "@/components/HotBlogCard.vue"
 import AuthorCard from "@/components/AuthorCard.vue";
 import BlogCard from "@/components/BlogCard";
 import BackToTop from '@/components/BackToTop';
-// import BlogFooter from '@/components/BlogFooter'
 import { defaultThumbnail } from "../utils/thumbnail";
 import { reactive, ref } from "vue";
 import { getPostArticleList } from "../api/article";
-
 export default {
   name: "BlogHome",
   components: {
@@ -65,29 +62,23 @@ export default {
     CategoryCard,
     TagCard,
     ArchiveCard
-    // BlogFooter
   },
   setup() {
         let pageSize = 5;
         let postArticles = reactive([]);
         let articleCount = ref(0);
-
-        onCurrentPageChanged(1);
+            onCurrentPageChanged(1);
+        
 
         function onCurrentPageChanged(pageNum) {
-            getPostArticleList(pageNum, pageSize).then((res) => {
-                // articleCount.value = parseInt(data.total);
-                // res.data.data.forEach((article) => {
-                //     article.createTime = article.createTime.split(" ")[0];
-                //     article.thumbnail = article.thumbnail || defaultThumbnail;
-                // });
-                console.log(res.data.data,123123);
-                postArticles = res.data.data;
-                console.log(postArticles,456456);
-
-                // console.log(postArticles,123123);
-                // postArticles.splice(0, postArticles.length, res.data.data);
-            });
+            getPostArticleList(pageNum, pageSize).then(res =>{
+                articleCount.value = parseInt(res.data.data.total);
+                 res.data.data.blogList.forEach((article) => {
+                    article.createTime = article.createTime.split("T")[0];
+                    article.thumbnail = article.thumbnail || defaultThumbnail;
+                });
+                postArticles.splice(0, postArticles.length, ...res.data.data.blogList);
+            })
         }
 
         return { postArticles, articleCount, pageSize, onCurrentPageChanged };
