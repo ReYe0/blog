@@ -15,13 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Description: blog
- * 博客curd
- * @Author: 二爷
- * @E-mail: 1299461580@qq.com
- * @Date: 2022/8/11 10:30
- */
 @RestController
 @RequestMapping("/blog")
 public class BlogControllerImpl implements com.study.controller.BlogController {

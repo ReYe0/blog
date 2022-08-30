@@ -22,13 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Description: blog
- * 文件上传相关接口
- * @Author: 二爷
- * @E-mail: 1299461580@qq.com
- * @Date: 2022/8/7 20:00
- */
+
 @RestController
 @RequestMapping("/file")
 public class FilesControllerImpl implements FilesController {
