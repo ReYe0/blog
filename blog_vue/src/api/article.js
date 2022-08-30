@@ -30,7 +30,7 @@ function getPostArticleList(pageNum, pageSize, categoryId, tagId, date) {
     let params = { pageNum, pageSize, categoryId, tagId, date }
 
     return request({
-        url: '/article/articleList',
+        url: '/blog/blogList',
         params
     })
 }

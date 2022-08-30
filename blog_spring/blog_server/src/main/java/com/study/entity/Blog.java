@@ -16,26 +16,30 @@ public class Blog implements Serializable, Cloneable {
     private Long id;
     @TableField("title")
     private String title;
-    @TableField("first_picture")
-    private String firstPicture;
-    @TableField("description")
-    private String description;
+    @TableField("thumbnail")
+    private String thumbnail;
+    @TableField("summary")
+    private String summary;
     @TableField("content")
     private String content;
     @TableField("create_time")
     private LocalDateTime createTime;
     @TableField("update_time")
     private LocalDateTime updateTime;
-    @TableField("views")
-    private Integer views;
+    @TableField("view_count")
+    private Long viewCount;
     @TableField("words")
     private Integer words;
-    @TableField("type_id")
-    private Long typeId;
+    @TableField("category_id")
+    private Long categoryId;
     @TableField("user_id")
     private Long userId;
     @TableField("status")
     private Integer status;
+    @TableField("is_top")
+    private String isTop;
+    @TableField("del_flag")
+    private Integer delFlag;
 
     Files files;
     public Blog  deepClone() throws IOException, ClassNotFoundException, OptionalDataException

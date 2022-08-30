@@ -5,11 +5,12 @@
   <div class="container">
     <!-- 侧边栏 -->
     <div class="side-content">
-      <AuthorCard />
+      <!-- <AuthorCard />
       <HotBlogCard/>
       <CategoryCard/>
       <TagCard/>
-      <ArchiveCard/>
+      <ArchiveCard/> -->
+      {{postArticles}}
     </div>
     <!-- 发表的文章 -->
     <div class="post-article-list">
@@ -74,14 +75,18 @@ export default {
         onCurrentPageChanged(1);
 
         function onCurrentPageChanged(pageNum) {
-            getPostArticleList(pageNum, pageSize).then((data) => {
-                articleCount.value = parseInt(data.total);
-                data.rows.forEach((article) => {
-                    article.createTime = article.createTime.split(" ")[0];
-                    article.thumbnail = article.thumbnail || defaultThumbnail;
-                });
+            getPostArticleList(pageNum, pageSize).then((res) => {
+                // articleCount.value = parseInt(data.total);
+                // res.data.data.forEach((article) => {
+                //     article.createTime = article.createTime.split(" ")[0];
+                //     article.thumbnail = article.thumbnail || defaultThumbnail;
+                // });
+                console.log(res.data.data,123123);
+                postArticles = res.data.data;
+                console.log(postArticles,456456);
 
-                postArticles.splice(0, postArticles.length, ...data.rows);
+                // console.log(postArticles,123123);
+                // postArticles.splice(0, postArticles.length, res.data.data);
             });
         }
 

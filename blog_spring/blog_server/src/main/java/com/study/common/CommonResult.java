@@ -26,7 +26,7 @@ public class CommonResult<T> {
         return new CommonResult(Constants.CODE_200, "", null);
     }
     public static CommonResult success(Object data){
-        return new CommonResult(Constants.CODE_200,"" , data);
+        return new CommonResult(Constants.CODE_200,"ok" , data);
     }
     public static CommonResult error(String code,String msg){
         return new CommonResult(code, msg, null);

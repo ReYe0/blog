@@ -19,9 +19,9 @@ export default {
     BlogFooter
   },
     setup() {
-        store.dispatch("adminAbout/getAdminInfo");
-        updateArticleInfo();
-        bus.on("articlePosted", updateArticleInfo);
+        // store.dispatch("adminAbout/getAdminInfo");
+        // updateArticleInfo();
+        // bus.on("articlePosted", updateArticleInfo);
 
         function updateArticleInfo() {
             store.dispatch("adminAbout/getArticleCount");
