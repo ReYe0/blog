@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.common.SystemConstants;
 import com.study.entity.Blog;
 import com.study.entity.dto.BlogQueryDTO;
@@ -21,28 +22,28 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class BlogServiceImpl implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements BlogService {
 
     @Autowired
     private BlogMapper blogMapper;
 
-    @Override
-    public Blog saveOrUpdate(Blog blog) {
-        blog.setSummary("hhhh");
-        blog.setViewCount(1l);
-        blog.setWords(12);
-        blog.setCategoryId(1l);
-        List<String> urls = StringUtils.getUrls(blog.getContent());
-        if (urls.size() != 0){
-            blog.setThumbnail(urls.get(0));
-        }
-        if(blog.getId() != null){
-            blogMapper.updateById(blog);
-        }else{
-            blogMapper.insert(blog);
-        }
-        return blog;
-    }
+//    @Override
+//    public Blog saveOrUpdate(Blog blog) {
+//        blog.setSummary("hhhh");
+//        blog.setViewCount(1l);
+//        blog.setWords(12);
+//        blog.setCategoryId(1l);
+//        List<String> urls = StringUtils.getUrls(blog.getContent());
+//        if (urls.size() != 0){
+//            blog.setThumbnail(urls.get(0));
+//        }
+//        if(blog.getId() != null){
+//            blogMapper.updateById(blog);
+//        }else{
+//            blogMapper.insert(blog);
+//        }
+//        return blog;
+//    }
 
     @Override
     public IPage<BlogListVo> getBlogList(BlogQueryDTO blogQueryDTO) {

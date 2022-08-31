@@ -18,6 +18,6 @@ public interface BlogController {
     @PostMapping(value = "/saveOrUpdate",name = "blog保存和修改接口")
     public CommonResult saveOrUpdate(@RequestBody Blog blog);
 
-    @GetMapping(value = "/blogList",name = "blog分页查询接口")
+    @GetMapping(value = "/blogList",name = "blog分页查询接口",produces="application/json")
     public CommonResult<BlogResponseDTO> getBlogList(@Valid BlogQueryDTO blogQueryDTO);
 }

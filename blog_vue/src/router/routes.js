@@ -1,6 +1,6 @@
 const routes = [
     {
-        name: 'blogHOme',
+        name: 'blogHome',
         path: '/',
         component: () => import('@/pages/BlogHome'),
         meta: { title:'sdf' }
@@ -81,7 +81,14 @@ const routes = [
         path: '/blogbackhome',
         // props: true,
         component: () => import('@/admin/pages/BlogBackHome'),
+        redirect: "/homepage",
         children:[
+            {
+                name: '主页',
+                path: '/homepage',
+                // props: true,
+                component: () => import('@/admin/components/HomePage')
+            },
             {
                 name: '编写博客',
                 path: '/writeBlog',

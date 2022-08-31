@@ -124,6 +124,7 @@ export default {
       })
     }
     function closeSelectedTag(view) {
+    if(view.path === '/homepage') return;
       store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
         if (isActive(view)) {
           toLastView(visitedViews, view)

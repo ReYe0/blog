@@ -6,6 +6,7 @@
     :collapse="isCollapse"
     @open="handleOpen"
     @close="handleClose"
+    style="height:100%;"
   >
   <div style="height: 60px; line-height: 60px; text-align: center">
       <img
@@ -15,7 +16,7 @@
       />
       <b style="color: #999" v-if="logoTextShow">后台管理系统</b>
     </div>
-    <el-menu-item index="/blogbackhome">
+    <el-menu-item index="/homepage">
       <el-icon><document /></el-icon>
       <template #title>主页</template>
     </el-menu-item>
