@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("tb_blog_tag")
 public class BlogTag {
-    @TableId(value = "id",type = IdType.AUTO)
-    private Long id;
+//    @TableId(value = "id",type = IdType.AUTO)
+//    private Long id;
     @TableField("blog_id")
     private Long blogId;
     @TableField("tag_id")

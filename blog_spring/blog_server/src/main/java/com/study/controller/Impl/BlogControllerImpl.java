@@ -40,9 +40,10 @@ public class BlogControllerImpl implements com.study.controller.BlogController {
             wrapper.eq("blog_id",blog.getId());
             List<BlogTag> blogTags = blogTagMapper.selectList(wrapper);
             for (int i = 0; i < tags.size(); i++) {
-//                if(tags.contains()){
-                    blogTagMapper.insert(new BlogTag(null,blog.getId(), tags.get(i).longValue()));
-//                }
+                for (int j = 0; j < blogTags.size(); j++) {
+
+                }
+                    blogTagMapper.insert(new BlogTag(blog.getId(), tags.get(i).longValue()));
             }
             blogEditResDTO.setTags(tags);
             return CommonResult.success(blogEditResDTO);
