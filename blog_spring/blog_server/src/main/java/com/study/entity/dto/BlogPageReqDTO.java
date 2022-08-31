@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BlogQueryDTO {
+public class BlogPageReqDTO {
     private Integer pageNum = 1;
 
     @Range(min = 1, max = 40, message = "每页条目数只能在 1-40 之间")

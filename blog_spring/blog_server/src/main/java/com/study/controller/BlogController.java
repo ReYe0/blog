@@ -1,9 +1,9 @@
 package com.study.controller;
 
 import com.study.common.CommonResult;
-import com.study.entity.Blog;
-import com.study.entity.dto.BlogQueryDTO;
-import com.study.entity.dto.BlogResponseDTO;
+import com.study.entity.dto.BlogEditReqDTO;
+import com.study.entity.dto.BlogPageReqDTO;
+import com.study.entity.dto.BlogPageResDTO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,9 +15,9 @@ import javax.validation.Valid;
  * @Date: 2022/8/11 10:30
  */
 public interface BlogController {
-    @PostMapping(value = "/saveOrUpdate",name = "blog保存和修改接口")
-    public CommonResult saveOrUpdate(@RequestBody Blog blog);
+    @PostMapping(value = "/saveOrUpdate",name = "blog保存和修改接口",produces="application/json")
+    public CommonResult saveOrUpdate(@RequestBody BlogEditReqDTO blogEditReqDTO);
 
     @GetMapping(value = "/blogList",name = "blog分页查询接口",produces="application/json")
-    public CommonResult<BlogResponseDTO> getBlogList(@Valid BlogQueryDTO blogQueryDTO);
+    public CommonResult<BlogPageResDTO> getBlogList(@Valid BlogPageReqDTO blogPageReqDTO);
 }

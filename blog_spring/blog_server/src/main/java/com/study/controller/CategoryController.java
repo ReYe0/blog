@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 public interface CategoryController {
 
-    @GetMapping(value = "/categoryCountList",name = "获取分类list接口")
-    public CommonResult getCategoryCountList();
+    @GetMapping(value = "/categoryList",name = "获取分类list接口")
+    public CommonResult getCategoryList();
 }

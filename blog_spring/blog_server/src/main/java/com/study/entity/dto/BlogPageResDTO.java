@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class BlogResponseDTO {
+public class BlogPageResDTO {
     private List<BlogListVo> blogList;
     private Long total;
 }
