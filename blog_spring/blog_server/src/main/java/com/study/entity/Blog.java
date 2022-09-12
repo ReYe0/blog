@@ -36,11 +36,13 @@ public class Blog {
     @TableField("user_id")
     private Long userId;
     @TableField("status")
-    private Integer status;
+    private Boolean status;
     @TableField("is_top")
-    private String isTop;
+    private Boolean isTop;
     @TableField("del_flag")
     private Integer delFlag;
+    @TableField("blog_type_id")
+    private Long blogTypeId;
 
 //    Files files;
 //    public Blog  deepClone() throws IOException, ClassNotFoundException, OptionalDataException

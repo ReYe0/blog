@@ -1,7 +1,7 @@
 <template>
   <div :class="cardClass">
     <!-- 缩略图 -->
-    <router-link :to="`/article/${article.id}`" :class="thumbailLinkClass"
+    <router-link :to="`/blog/${article.id}`" :class="thumbailLinkClass"
       ><img
         :src="article.thumbnail"
         @error.once="useDefaultThumbnail"
@@ -9,12 +9,12 @@
         class="post-article-thumbnail"
       />
     </router-link>
-
     <!-- 文章信息 -->
     <div class="post-article-info">
+      
       <!-- 文章标题 -->
       <router-link :to="`/article/${article.id}`" class="post-article-title"
-        >{{ article.title }}
+        ><span style="color:#00BFFF;font-size:18px;" v-show="article.isTop"><el-icon><Flag /></el-icon></span>{{ article.title }}
       </router-link>
 
       <!-- 其他元数据 -->

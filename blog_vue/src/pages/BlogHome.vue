@@ -5,11 +5,11 @@
   <div class="container">
     <!-- 侧边栏 -->
     <div class="side-content">
-      <!-- <AuthorCard />
-      <HotBlogCard/> -->
+      <AuthorCard />
+      <HotBlogCard/>
       <CategoryCard/>
       <TagCard/>
-      <!-- <ArchiveCard/> -->
+      <ArchiveCard/>
     </div>
     <!-- 发表的文章 -->
     <div class="post-article-list">
@@ -68,8 +68,6 @@ export default {
         let postArticles = reactive([]);
         let articleCount = ref(0);
             onCurrentPageChanged(1);
-        
-
         function onCurrentPageChanged(pageNum) {
             getPostArticleList(pageNum, pageSize).then(res =>{
                 articleCount.value = parseInt(res.data.data.total);

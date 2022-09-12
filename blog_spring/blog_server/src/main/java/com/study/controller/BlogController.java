@@ -1,9 +1,7 @@
 package com.study.controller;
 
 import com.study.common.CommonResult;
-import com.study.entity.dto.BlogEditReqDTO;
-import com.study.entity.dto.BlogPageReqDTO;
-import com.study.entity.dto.BlogPageResDTO;
+import com.study.entity.dto.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,4 +18,16 @@ public interface BlogController {
 
     @GetMapping(value = "/blogList",name = "blog分页查询接口",produces="application/json")
     public CommonResult<BlogPageResDTO> getBlogList(@Valid BlogPageReqDTO blogPageReqDTO);
+
+    @PostMapping(value = "/blogBackList",name = "blog后台分页查询接口",produces="application/json")
+    public CommonResult<BlogPageBackResDTO> getBlogBackList(@RequestBody BlogPageBackReqDTO blogPageBackReqDTO);
+
+    @GetMapping(value = "/{id}",name = "获取博客详情",produces ="application/json" )
+    public CommonResult<BlogDetailDTO> getBlogDetail(@PathVariable("id") Long id);
+
+    @GetMapping(value = "/changeStatus/{id}",name = "改变文章发布状态",produces ="application/json" )
+    public CommonResult changeStatus(@PathVariable("id") Long id);
+
+    @GetMapping(value = "/changeIsTop/{id}",name = "改变文章顶置状态",produces ="application/json" )
+    public CommonResult changeIsTop(@PathVariable("id") Long id);
 }

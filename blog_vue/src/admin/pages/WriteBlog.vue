@@ -40,8 +40,8 @@
           </el-form-item>
           <el-form-item label="分类" required >
             <el-col :span="6">
-              <el-form-item prop="date1">
-                {{categoryList}}
+              <el-form-item >
+                <!-- {{categoryList}} -->
                 <el-select v-model="blog.categoryId" placeholder="代码领域种类之多，你的领域是！"  style="width:100%;">
                   <el-option
                     v-for="item in categoryList"
@@ -55,8 +55,7 @@
             </el-col>
             <el-col :span="1"></el-col>
             <el-col :span="17">
-              <el-form-item prop="date2" label="标签">
-                <!-- <el-input v-model="blog.description" /> -->
+              <el-form-item label="标签" prop="tags" required >
                 <el-select
                   v-model="blog.tags"
                   multiple
@@ -72,11 +71,23 @@
                 </el-select>
 
               </el-form-item>
+              
             </el-col>
           </el-form-item>
+          <el-form-item label="类型" prop="blogTypeId" required>
+                <el-select v-model="blog.blogTypeId" placeholder="请选择文章类型！"  style="width:25%;" >
+                  <el-option
+                    v-for="item in blogTypeList"
+                    :key="item.id"
+                    :label="item.blogType"
+                    :value="item.id"
+                   
+                  />
+                </el-select>
+              </el-form-item>
            <el-form-item>
-            <el-button type="primary" @click="onSubmit">立即发布</el-button>
-            <el-button>保存草稿</el-button>
+            <el-button type="primary" @click="saveBlog">立即发布</el-button>
+            <el-button type="default" @click="saveDraft">保存草稿</el-button>
           </el-form-item>
         </el-form>
 
@@ -155,7 +166,10 @@ export default {
         summary:"",
         categoryId:"",
         tags:[],
+        status:1,
+        blogTypeId:""
       },
+      blogTypeList:[],
       // title:'',
       isDark: useDark(),
       lang: localStorage.getItem("lang") || language.split("-")[0] || "en",
@@ -166,6 +180,7 @@ export default {
     };
   },
   mounted() {
+    this.getBlogTypeList();//加载类型
     this.getTagList();//加载标签
     this.getCategoryList();//加载分类列表
     var height = document.documentElement.clientHeight - 120 - 250;
@@ -190,6 +205,40 @@ export default {
     });
   },
   methods: {
+    getBlogTypeList(){
+      this.$http.get("blogType/getBlogTypeList").then(res =>{
+          this.blogTypeList = res.data.data;
+      })
+    },
+    saveDraft(){
+      this.blog.status = 0;
+      this.saveOrUpdate();
+    },
+    saveBlog(){
+      if(this.blog.title === ""){
+        this.$message.warning("请输入标题！")
+        return false
+      }
+       if(this.blog.summary === ""){
+        this.$message.warning("请输入描述内容！")
+        return false
+      }
+       if(this.blog.categoryId === ""){
+        this.$message.warning("请选择分类！")
+        return false
+      }
+      if(this.blog.tags.length === 0){
+        this.$message.warning("请选择标签！")
+        return false
+      }
+      if(this.blog.blogTypeId === ""){
+        this.$message.warning("请选择类型！")
+        return false
+      }
+      this.blog.status = 1;
+      this.saveOrUpdate();
+      // this.$router.push("/blogList")
+    },
     getTagList(){
       this.$http.get("tag/tagList").then(res=>{
         this.tagList = res.data.data;

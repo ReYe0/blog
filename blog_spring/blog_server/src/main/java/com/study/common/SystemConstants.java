@@ -4,7 +4,7 @@ public class SystemConstants {
     /**
      * 文章是正常发布状态
      */
-    public static final Boolean BLOG_STATUS_NORMAL = false;
+    public static final Boolean BLOG_STATUS_NORMAL = true;
 
     /**
      * 文章是草稿状态

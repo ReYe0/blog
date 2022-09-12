@@ -28,11 +28,12 @@ jar 转镜像
 文件写法：
 ```html
 FROM openjdk: 8u191
-MAINTAINER the2@amarsoft. com
 ADD . /eureka-config-server-4. 1. 0. RELEASE. jar /app. jar
 ENV server. port 6001
-CMD exec java -server -jar app. jar
+CMD exec java -server -Xms128m -Xmx128m -jar app. jar
 ```
+# docker 挂载目录
+docker run -d --name cms-server -v /tmp/cms4/template/export/:/tmp/cms4/template/export/ -p 6010:6010 cms-server
 
 参考的链接：
 https://blog.csdn.net/weixin_45526437/article/details/125139901
@@ -46,3 +47,20 @@ http://t.zoukankan.com/jacksonxiao-p-11217295.html
     git rm -r --cached .
     git add .
     git commit -m '.gitignore'
+
+
+# gitlab 拉去远程代码合并命令
+git remote -v
+git remote add 匿名 链接
+git fetch 匿名
+git merge 匿名/分支
+
+# 阿里云 docker  mysql
+进入容器：docker exec -it mysql名字 bash
+登陆：mysql -uroot -p
+查看用户信息：select host,user,plugin,authentication_string from mysql.user;
+新增用户：CREATE USER 'hmf'@'%' IDENTIFIED BY '123456';
+查看数据库：show databases;
+创建数据库：create database 名字 character set utf8;
+
+

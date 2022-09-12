@@ -198,7 +198,7 @@ export default {
 
     let articleDetails = reactive({});
     getArticleDetails(props.id).then((data) => {
-      Object.assign(articleDetails, data); // 将data中的数据赋值到 articleDetails
+      Object.assign(articleDetails, data.data.data); // 将data中的数据赋值到 articleDetails
       // articleDetails.content = markdownIt.render(data.content);
 
       nextTick(() => {

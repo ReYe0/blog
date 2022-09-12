@@ -5,7 +5,7 @@
 var defaultThumbnail = require("@/assets/image/article-thumbnail.jpg");
 
 function useDefaultThumbnail(event) {
-    console.log(event);
+    // console.log(event);
     event.target.src = defaultThumbnail;
 }
 

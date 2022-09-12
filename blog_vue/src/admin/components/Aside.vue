@@ -1,6 +1,6 @@
 <template>
   <el-menu
-  router
+    router
     default-active="2"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"
@@ -26,9 +26,9 @@
         <span>博客管理</span>
       </template>
       <el-menu-item-group>
-        <template #title><span>Group One</span></template>
-        <el-menu-item index="/writeBlog">编写博客</el-menu-item>
-        <el-menu-item index="1-2" >item two</el-menu-item>
+        <!-- <template #title><span>Group One</span></template> -->
+        <el-menu-item index="/writeBlog">发布博客</el-menu-item>
+        <el-menu-item index="/blogList" >博客列表</el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group title="Group Two">
         <el-menu-item index="1-3">item three</el-menu-item>

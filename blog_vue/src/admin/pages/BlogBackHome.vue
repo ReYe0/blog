@@ -2,13 +2,12 @@
   <el-container style="height: 100vh;width:99%;">
     <el-aside
       :width="sideWidth"
-      height="100%"
     >
     <Aside/>
 
     </el-aside>
   <!-- {{isCollapse}} -->
-    <el-container >
+    <el-container>
       <el-header
         style="
           margin-bottom:50px;
@@ -22,7 +21,7 @@
       <!-- 表示当前页面的子路由 会在 <router-view/> 里面展示 -->
       
       <el-main>
-        <router-view @refreshStaff="getStaff"/>
+        <router-view />
           <!-- <HomePage/> -->
       </el-main>
       <!-- <el-footer><BlogFooter :adminName="$store.state.adminAbout.adminInfo.nickName"/></el-footer> -->
@@ -31,7 +30,7 @@
 </template>
 
 <script>
-import HomePage from '@/admin/components/HomePage'
+import HomePage from '@/admin/pages/HomePage'
 import TagsView from "../components/TagsView/index.vue"
 // import BlogFooter from '@/components/BlogFooter'
 // import { ref } from 'vue'

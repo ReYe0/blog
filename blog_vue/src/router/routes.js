@@ -36,7 +36,7 @@ const routes = [
     },
     {
         name: 'BlogDetail',
-        path: '/article/:id',
+        path: '/blog/:id',
         props: true,
         component: () => import('@/pages/BlogDetail')
     },
@@ -77,23 +77,28 @@ const routes = [
 
     // 后台
     {
-        name: '主页',
+        name: '后台',
         path: '/blogbackhome',
         // props: true,
         component: () => import('@/admin/pages/BlogBackHome'),
-        redirect: "/homepage",
         children:[
-            {
-                name: '主页',
-                path: '/homepage',
-                // props: true,
-                component: () => import('@/admin/components/HomePage')
-            },
             {
                 name: '编写博客',
                 path: '/writeBlog',
                 props: true,
                 component: () => import('@/admin/pages/WriteBlog')
+            },
+            {
+                name: '博客列表',
+                path: '/blogList',
+                props: true,
+                component: () => import('@/admin/pages/BlogList')
+            },
+            {
+                name: '主页',
+                path: '/homepage',
+                props: true,
+                component: () => import('@/admin/pages/HomePage')
             },
         ]
     },

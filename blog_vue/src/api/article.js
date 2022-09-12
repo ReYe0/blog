@@ -42,7 +42,7 @@ function getPostArticleList(pageNum, pageSize, categoryId, tagId, date) {
  * @returns promise
  */
 function getArticleDetails(id) {
-    return request.get('/article/' + id)
+    return request.get('/blog/' + id)
 }
 
 

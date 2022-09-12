@@ -3,7 +3,10 @@ package com.study.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.entity.Blog;
+import com.study.entity.dto.BlogDetailDTO;
+import com.study.entity.dto.BlogPageBackReqDTO;
 import com.study.entity.dto.BlogPageReqDTO;
+import com.study.entity.vo.BlogBackListVo;
 import com.study.entity.vo.BlogListVo;
 
 public interface BlogService extends IService<Blog> {
@@ -21,4 +24,25 @@ public interface BlogService extends IService<Blog> {
      * @return
      */
     public IPage<BlogListVo> getBlogList(BlogPageReqDTO blogPageReqDTO);
+
+    /**
+     * 获取后台文章信息分页
+     * @param blogPageBackReqDTO
+     * @return
+     */
+    public IPage<BlogBackListVo> getBlogBackList(BlogPageBackReqDTO blogPageBackReqDTO);
+
+    /**
+     * 获取文章详情
+     * @author 二爷
+     * @E-mail 1299461580@qq.com
+     * @date 2022/9/7 16:30
+     * @param  id
+     * @return com.study.entity.Blog
+     */
+    public BlogDetailDTO getBlogDetail(Long id);
+
+    public Integer changeStatus(Long id);
+
+    public Integer changeIsTop(Long id);
 }
