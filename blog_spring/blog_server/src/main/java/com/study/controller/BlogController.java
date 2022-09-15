@@ -16,6 +16,9 @@ public interface BlogController {
     @PostMapping(value = "/saveOrUpdate",name = "blog保存和修改接口",produces="application/json")
     public CommonResult saveOrUpdate(@RequestBody BlogEditReqDTO blogEditReqDTO);
 
+    @GetMapping(value = "/getBlogEdit/{id}",name = "blog编辑获取信息接口",produces="application/json")
+    public CommonResult getBlogEdit(@PathVariable("id") Long id);
+
     @GetMapping(value = "/blogList",name = "blog分页查询接口",produces="application/json")
     public CommonResult<BlogPageResDTO> getBlogList(@Valid BlogPageReqDTO blogPageReqDTO);
 

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,20 @@ public class BlogControllerImpl implements BlogController {
         }else{
             return CommonResult.error();
         }
+    }
+
+    @Override
+    public CommonResult getBlogEdit(Long id) {
+        BlogEditResDTO blogEdit = blogService.getBlogEdit(id);
+        QueryWrapper<BlogTag> wrapper = new QueryWrapper<>();
+        wrapper.eq("blog_id",blogEdit.getId());
+        List<BlogTag> blogTags = blogTagMapper.selectList(wrapper);
+        List<Long> tags = new ArrayList<>();
+        for (int i = 0; i < blogTags.size(); i++) {
+            tags.add(blogTags.get(i).getTagId());
+        }
+        blogEdit.setTags(tags);
+        return CommonResult.success(blogEdit);
     }
 
     @Override

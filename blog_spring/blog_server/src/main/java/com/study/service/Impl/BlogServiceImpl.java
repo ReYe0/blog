@@ -8,6 +8,7 @@ import com.study.common.BeanCopyUtils;
 import com.study.common.SystemConstants;
 import com.study.entity.Blog;
 import com.study.entity.dto.BlogDetailDTO;
+import com.study.entity.dto.BlogEditResDTO;
 import com.study.entity.dto.BlogPageBackReqDTO;
 import com.study.entity.dto.BlogPageReqDTO;
 import com.study.entity.vo.BlogBackListVo;
@@ -75,5 +76,11 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         Blog blog = blogMapper.selectById(id);
         blog.setIsTop(!blog.getIsTop());
         return blogMapper.updateById(blog);
+    }
+
+    @Override
+    public BlogEditResDTO getBlogEdit(Long id) {
+        Blog blog = blogMapper.selectById(id);
+        return BeanCopyUtils.copyBean(blog, BlogEditResDTO.class);
     }
 }

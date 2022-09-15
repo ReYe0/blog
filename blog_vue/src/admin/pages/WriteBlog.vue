@@ -184,6 +184,7 @@ export default {
     this.getBlogTypeList();//加载类型
     this.getTagList();//加载标签
     this.getCategoryList();//加载分类列表
+    this.getBlogEdit();
     var height = document.documentElement.clientHeight - 120 - 250;
     if(height < 300){
       height = 300
@@ -206,6 +207,13 @@ export default {
     });
   },
   methods: {
+    getBlogEdit(){
+      let id = this.blogId;
+      this.$http.get("blog/getBlogEdit/"+id).then(res =>{
+        this.blog = res.data.data
+          // this.blogTypeList = res.data.data;
+      })
+    },
     getBlogTypeList(){
       this.$http.get("blogType/getBlogTypeList").then(res =>{
           this.blogTypeList = res.data.data;

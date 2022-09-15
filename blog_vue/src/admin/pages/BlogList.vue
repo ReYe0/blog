@@ -170,6 +170,7 @@ export default {
         },
       tableData: [],
       blogTotal: 0,
+      
       pageNum: 1,
       pageSize: 10,
       staffName: "",

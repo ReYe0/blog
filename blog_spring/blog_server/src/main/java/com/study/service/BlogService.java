@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.study.entity.Blog;
 import com.study.entity.dto.BlogDetailDTO;
+import com.study.entity.dto.BlogEditResDTO;
 import com.study.entity.dto.BlogPageBackReqDTO;
 import com.study.entity.dto.BlogPageReqDTO;
 import com.study.entity.vo.BlogBackListVo;
@@ -45,4 +46,6 @@ public interface BlogService extends IService<Blog> {
     public Integer changeStatus(Long id);
 
     public Integer changeIsTop(Long id);
+
+    public BlogEditResDTO getBlogEdit(Long id);
 }
