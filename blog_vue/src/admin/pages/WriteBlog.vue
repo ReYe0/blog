@@ -86,7 +86,7 @@
                 </el-select>
               </el-form-item>
            <el-form-item>
-            <el-button type="primary" @click="saveBlog">立即发布</el-button>
+            <el-button type="primary" @click="saveBlog">立即发布{{blogId}}</el-button>
             <el-button type="default" @click="saveDraft">保存草稿</el-button>
           </el-form-item>
         </el-form>
@@ -169,6 +169,7 @@ export default {
         status:1,
         blogTypeId:""
       },
+      blogId:this.$route.query.id,
       blogTypeList:[],
       // title:'',
       isDark: useDark(),
@@ -237,7 +238,7 @@ export default {
       }
       this.blog.status = 1;
       this.saveOrUpdate();
-      // this.$router.push("/blogList")
+      this.$router.push("/blogList")
     },
     getTagList(){
       this.$http.get("tag/tagList").then(res=>{

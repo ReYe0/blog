@@ -120,7 +120,7 @@
       </el-table-column>
       <el-table-column align="center" label="操作">
         <template  #default="scope">
-          <el-button type="success" @click="handleEdit(scope.row)"
+          <el-button type="success" @click="handleEdit(scope.row.id)"
             >编辑</el-button>
          <el-popconfirm
     confirm-button-text="Yes"
@@ -304,10 +304,8 @@ export default {
       this.form = {};
     },
     // 编辑
-    handleEdit(row) {
-      this.form = row;
-      this.dialogFormVisible = true;
-      this.load();
+    handleEdit(id) {
+      this.$router.push({path: '/WriteBlog', query: {id: id}})
     },
     // 删除
     del(id) {
