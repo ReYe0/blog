@@ -33,4 +33,7 @@ public interface BlogController {
 
     @GetMapping(value = "/changeIsTop/{id}",name = "改变文章顶置状态",produces ="application/json" )
     public CommonResult changeIsTop(@PathVariable("id") Long id);
+
+    @GetMapping(value = "/hotBlogList",name = "获取热门文章",produces ="application/json" )
+    public CommonResult getHotBlogList();
 }

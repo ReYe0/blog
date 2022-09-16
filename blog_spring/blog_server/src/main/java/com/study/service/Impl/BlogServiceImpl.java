@@ -13,10 +13,13 @@ import com.study.entity.dto.BlogPageBackReqDTO;
 import com.study.entity.dto.BlogPageReqDTO;
 import com.study.entity.vo.BlogBackListVo;
 import com.study.entity.vo.BlogListVo;
+import com.study.entity.vo.HotBlogVo;
 import com.study.mapper.BlogMapper;
 import com.study.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements BlogService {
@@ -82,5 +85,19 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
     public BlogEditResDTO getBlogEdit(Long id) {
         Blog blog = blogMapper.selectById(id);
         return BeanCopyUtils.copyBean(blog, BlogEditResDTO.class);
+    }
+
+    @Override
+    public List<HotBlogVo> getHotBlogList() {
+        LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Blog::getStatus, SystemConstants.BLOG_STATUS_NORMAL);
+        wrapper.orderByDesc(Blog::getViewCount);
+        // wrapper.last("limit 5");
+
+        Page<Blog> page = new Page<>(1, 5);
+//        this.page(page, wrapper);
+        Page<Blog> blogPage = blogMapper.selectPage(page, wrapper);
+        List<Blog> records = blogPage.getRecords();
+        return BeanCopyUtils.copyBeanList(records,HotBlogVo.class);
     }
 }

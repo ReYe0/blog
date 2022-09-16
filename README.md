@@ -25,11 +25,13 @@ jar 转镜像
 
 运行镜像：① docker run -d --name 名字 -p 80:80 名字
     ② docker run -it -p 80:80 名字
+docker exec -it 容器名/容器ID /bin/sh
 文件写法：
 ```html
 FROM openjdk: 8u191
 ADD . /eureka-config-server-4. 1. 0. RELEASE. jar /app. jar
 ENV server. port 6001
+ENV LANG C.UTF-8 # 设置字符集
 CMD exec java -server -Xms128m -Xmx128m -jar app. jar
 ```
 # docker 挂载目录

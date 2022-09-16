@@ -46,13 +46,13 @@ export default {
     setup() {
         let hotArticles = reactive([]);
 
-        getHotArticleList().then((data) => {
-            data.forEach((article) => {
-                article.createTime = article.createTime.split(" ")[0];
+        getHotArticleList().then((res) => {
+            res.data.data.forEach((article) => {
+                article.createTime = article.createTime.split("T")[0];
                 article.thumbnail = article.thumbnail || defaultThumbnail;
             });
 
-            hotArticles.push(...data);
+            hotArticles.push(...res.data.data);
         });
 
         return { hotArticles, useDefaultThumbnail };

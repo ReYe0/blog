@@ -5,7 +5,7 @@ import request from '../utils/request'
  * @returns promise
  */
 function getHotArticleList() {
-    return request.get('/article/hotArticleList')
+    return request.get('/blog/hotBlogList')
 }
 
 

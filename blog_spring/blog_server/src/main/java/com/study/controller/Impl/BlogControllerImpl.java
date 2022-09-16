@@ -104,5 +104,10 @@ public class BlogControllerImpl implements BlogController {
     public CommonResult changeIsTop(Long id) {
         return CommonResult.success(blogService.changeIsTop(id));
     }
+
+    @Override
+    public CommonResult getHotBlogList() {
+        return CommonResult.success(blogService.getHotBlogList());
+    }
 }
 
