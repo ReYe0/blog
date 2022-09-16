@@ -10,4 +10,7 @@ public interface CategoryController {
 
     @GetMapping(value = "/categoryList",name = "获取分类list接口")
     public CommonResult getCategoryList();
+
+    @GetMapping(value = "/categoryCountList",name = "获取分类和分类的数量")
+    public CommonResult getCategoryCountList();
 }

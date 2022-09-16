@@ -12,11 +12,11 @@ import java.util.Date;
 @TableName("tb_category")
 public class Category {
     @TableId(value = "id",type = IdType.AUTO)
-    private Integer id;
+    private Long id;
     @TableField("name")
     private String name;
     @TableField("pid")
-    private Integer pid;
+    private Long pid;
     @TableField("description")
     private String description;
     @TableField("status")

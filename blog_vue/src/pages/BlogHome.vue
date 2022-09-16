@@ -5,7 +5,7 @@
   <div class="container">
     <!-- 侧边栏 -->
     <div class="side-content">
-      <AuthorCard />
+      <!-- <AuthorCard /> -->
       <HotBlogCard/>
       <CategoryCard/>
       <TagCard/>

@@ -75,8 +75,8 @@ let categoryAbout = {
 	actions: {
 		getCategoryCounts(context) {
 			return new Promise((resolve) => {
-				getCategoryCountList().then(data => {
-					context.commit('updateCategoryCounts', data)
+				getCategoryCountList().then(res => {
+					context.commit('updateCategoryCounts', res.data.data)
 					resolve()
 				})
 			})
