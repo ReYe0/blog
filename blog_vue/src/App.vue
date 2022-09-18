@@ -49,6 +49,9 @@ body{
   /* background-image: url(https://img0.baidu.com/it/u=1577435851,3470223877&fm=253&fmt=auto&app=138&f=JPEG?w=547&h=500); */
 
 }
+html{
+  /* background-color: red; */
+}
 :root {
     /* --theme-color: #1892ff; */
     /* --text-color: #4c4948; */
