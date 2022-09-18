@@ -5,7 +5,7 @@ import request from "../utils/request"
  * @returns promise
  */
 function getTagCountList() {
-    return request.get("/tag/tagCountList")
+    return request.get("/tag/tagList")
 }
 
 

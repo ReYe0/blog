@@ -1,12 +1,14 @@
 package com.study.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.study.common.BeanCopyUtils;
 import com.study.common.SystemConstants;
 import com.study.entity.Blog;
+import com.study.entity.BlogTag;
 import com.study.entity.dto.BlogDetailDTO;
 import com.study.entity.dto.BlogEditResDTO;
 import com.study.entity.dto.BlogPageBackReqDTO;
@@ -14,8 +16,13 @@ import com.study.entity.dto.BlogPageReqDTO;
 import com.study.entity.vo.BlogBackListVo;
 import com.study.entity.vo.BlogListVo;
 import com.study.entity.vo.HotBlogVo;
+import com.study.entity.vo.PreviousNextBlogVo;
+import com.study.enums.AppHttpCodeEnum;
 import com.study.mapper.BlogMapper;
+import com.study.mapper.BlogTagMapper;
+import com.study.mapper.TagMapper;
 import com.study.service.BlogService;
+import com.study.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +33,8 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
 
     @Autowired
     private BlogMapper blogMapper;
-
+    @Autowired
+    private BlogTagMapper blogTagMapper;
 //    @Override
 //    public Blog saveOrUpdate(Blog blog) {
 //        blog.setSummary("hhhh");
@@ -51,7 +59,15 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
 //        LambdaQueryWrapper<BlogListVo> wrapper = new LambdaQueryWrapper<>();
 //        wrapper.eq(Blog::getStatus,1)
         Page<BlogListVo> mapPage = new Page<>(blogPageReqDTO.getPageNum(), blogPageReqDTO.getPageSize() );
-        return blogMapper.getBlogListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL);
+        if(blogPageReqDTO.getCategoryId() == null && blogPageReqDTO.getTagId() == null && blogPageReqDTO.getDate() ==null){
+            return blogMapper.getBlogListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL);
+        }else if(blogPageReqDTO.getCategoryId() != null){
+            return blogMapper.getBlogCategoryListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL,blogPageReqDTO.getCategoryId());
+        }else if(blogPageReqDTO.getTagId() != null){
+            return blogMapper.getBlogTagListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL,blogPageReqDTO.getTagId());
+        }else{
+            return blogMapper.getBlogDateListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL,blogPageReqDTO.getDate().split("/")[0],blogPageReqDTO.getDate().split("/")[1]);
+        }
     }
 
     @Override
@@ -99,5 +115,40 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         Page<Blog> blogPage = blogMapper.selectPage(page, wrapper);
         List<Blog> records = blogPage.getRecords();
         return BeanCopyUtils.copyBeanList(records,HotBlogVo.class);
+    }
+
+    @Override
+    public PreviousNextBlogVo getPreviousNextBlog(Long id) {
+        // 查询当前的文章
+        Blog blog = getById(id);
+        Assert.notNull(blog, AppHttpCodeEnum.RESOURCE_NOT_EXIST);
+        PreviousNextBlogVo previousNextArticleVo = new PreviousNextBlogVo();
+
+        // 查询上一篇文章
+        QueryWrapper<Blog> previousWrapper = new QueryWrapper<>();
+        previousWrapper.lt("create_time", blog.getCreateTime());
+        previousWrapper.orderByDesc("create_time").last("limit 1");
+        Blog previousArticle = getOne(previousWrapper);
+        if (previousArticle != null) {
+            previousNextArticleVo.setPrevious(BeanCopyUtils.copyBean(previousArticle, HotBlogVo.class));
+        }
+
+        // 查询下一篇文章
+        QueryWrapper<Blog> nextWrapper = new QueryWrapper<>();
+        nextWrapper.gt("create_time", blog.getCreateTime());
+        nextWrapper.orderByAsc("create_time").last("limit 1");
+        Blog nextArticle = getOne(nextWrapper);
+        if (nextArticle != null) {
+            previousNextArticleVo.setNext(BeanCopyUtils.copyBean(nextArticle, HotBlogVo.class));
+        }
+        return previousNextArticleVo;
+    }
+
+    @Override
+    public Long getNormalArticleCount() {
+        LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Blog::getStatus, SystemConstants.BLOG_STATUS_NORMAL);
+         return Long.valueOf(blogMapper.selectCount(wrapper));
+//        return count(wrapper);
     }
 }

@@ -49,13 +49,14 @@ let menuItems = reactive([
   //   icon: ["fas", "box-archive"],
   //   href: "/writeArticle",
   // },
+  { name: "分类", icon: ["fas", "folder"], href: "/category" },
+  { name: "标签", icon: ["fas", "tags"], href: "/tag" },
    {
     name: "nav.backstage",
     icon: ["fas", "box-archive"],
     href: "/homepage",
   },
-  { name: "分类", icon: ["fas", "folder"], href: "/category" },
-  { name: "标签", icon: ["fas", "tags"], href: "/tag" },
+
   { name: "个人中心", icon: ["fas", "user"], href: "/user/settings" },
 ]);
 

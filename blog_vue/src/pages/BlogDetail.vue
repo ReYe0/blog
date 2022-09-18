@@ -119,7 +119,7 @@
                         v-if="previousArticle.id"
                         :style="{ width: nextArticle.id ? '50%' : '100%' }"
                     >
-                        <router-link :to="`/article/${previousArticle.id}`">
+                        <router-link :to="`/blog/${previousArticle.id}`">
                             <img
                                 :src="previousArticle.thumbnail"
                                 alt="缩略图"
@@ -139,7 +139,7 @@
                         v-if="nextArticle.id"
                         :style="{ width: previousArticle.id ? '50%' : '100%' }"
                     >
-                        <router-link :to="`/article/${nextArticle.id}`">
+                        <router-link :to="`/blog/${nextArticle.id}`">
                             <img
                                 :src="nextArticle.thumbnail"
                                 alt="缩略图"
@@ -213,15 +213,15 @@ export default {
     });
 
     // updateViewCount(props.id);
-getPreviousNextArticle(props.id).then((data) => {
-            if (data.previous) {
-                Object.assign(previousArticle, data.previous);
+getPreviousNextArticle(props.id).then((res) => {
+            if (res.data.data.previous) {
+                Object.assign(previousArticle, res.data.data.previous);
                 if (!previousArticle.thumbnail) {
                     previousArticle.thumbnail = defaultThumbnail;
                 }
             }
-            if (data.next) {
-                Object.assign(nextArticle, data.next);
+            if (res.data.data.next) {
+                Object.assign(nextArticle, res.data.data.next);
                 if (!nextArticle.thumbnail) {
                     nextArticle.thumbnail = defaultThumbnail;
                 }

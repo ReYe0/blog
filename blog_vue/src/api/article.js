@@ -13,7 +13,7 @@ function getHotArticleList() {
  * 获取文章总数统计
  */
 function getArticleCount() {
-    return request.get('/article/count')
+    return request.get('/blog/count')
 }
 
 
@@ -65,7 +65,7 @@ function updateViewCount(id) {
  * @returns promise
  */
 function getPreviousNextArticle(id) {
-    return request.get("/article/previousNextArticle/" + id)
+    return request.get("/blog/previousNextBlog/" + id)
 }
 
 

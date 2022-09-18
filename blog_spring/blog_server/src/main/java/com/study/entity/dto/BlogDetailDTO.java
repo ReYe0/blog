@@ -1,6 +1,7 @@
 package com.study.entity.dto;
 
 import com.study.entity.BlogTag;
+import com.study.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,5 @@ public class BlogDetailDTO {
     private Long categoryId;
     private String categoryName;
     private Date createTime;
-    private List<BlogTag> tags;
+    private List<Tag> tags;
 }

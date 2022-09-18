@@ -17,7 +17,7 @@ let adminAbout = {
 			githubUrl: "https://github.com/zhiyiYo",
 		},
 		articleCountInfo: {
-			article: 0,
+			blog: 0,
 			category: 0,
 			tag: 0,
 		},
@@ -34,9 +34,9 @@ let adminAbout = {
 		},
 		getArticleCount(context) {
 			return new Promise((resolve) => {
-				getArticleCount().then(data => {
-					context.commit('updateArticleCountInfo', data)
-					resolve(data)
+				getArticleCount().then(res => {
+					context.commit('updateArticleCountInfo', res.data.data)
+					resolve(res.data.data)
 				})
 			})
 		},
@@ -98,8 +98,8 @@ let tagAbout = {
 	actions: {
 		getTagCounts(context) {
 			return new Promise((resolve) => {
-				getTagCountList().then(data => {
-					context.commit('updateTagCounts', data)
+				getTagCountList().then(res => {
+					context.commit('updateTagCounts', res.data.data)
 					resolve()
 				})
 			})

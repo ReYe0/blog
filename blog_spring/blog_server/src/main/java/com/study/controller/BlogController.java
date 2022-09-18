@@ -36,4 +36,11 @@ public interface BlogController {
 
     @GetMapping(value = "/hotBlogList",name = "获取热门文章",produces ="application/json" )
     public CommonResult getHotBlogList();
+
+
+    @GetMapping(value = "/previousNextBlog/{id}",name = "上一篇博客和下一篇博客",produces ="application/json" )
+    public CommonResult getPreviousNextBlog(@PathVariable Long id);
+
+    @GetMapping(value = "/count",name = "获取blog总数",produces ="application/json" )
+    public CommonResult getCount();
 }

@@ -8,15 +8,21 @@ import com.study.common.CommonResult;
 import com.study.controller.BlogController;
 import com.study.entity.Blog;
 import com.study.entity.BlogTag;
+import com.study.entity.Tag;
 import com.study.entity.dto.*;
 import com.study.entity.vo.BlogBackListVo;
+import com.study.entity.vo.BlogCountVo;
 import com.study.entity.vo.BlogListVo;
 import com.study.mapper.BlogTagMapper;
+import com.study.mapper.TagMapper;
 import com.study.service.BlogService;
+import com.study.service.CategoryService;
+import com.study.service.TagService;
 import com.study.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +35,14 @@ public class BlogControllerImpl implements BlogController {
     private BlogService blogService;
     @Autowired
     private BlogTagMapper blogTagMapper;
+
+    @Autowired
+    private TagMapper tagMapper;
+
+    @Resource
+    private TagService tagService;
+    @Resource
+    private CategoryService categoryService;
     @Override
     public CommonResult saveOrUpdate(BlogEditReqDTO blogEditReqDTO) {
         List<String> urls = StringUtils.getUrls(blogEditReqDTO.getContent());
@@ -91,7 +105,12 @@ public class BlogControllerImpl implements BlogController {
         LambdaQueryWrapper<BlogTag> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(BlogTag::getBlogId,blogDetail.getId());
         List<BlogTag> blogTags = blogTagMapper.selectList(wrapper);
-        blogDetail.setTags(blogTags);
+        ArrayList<Tag> tags = new ArrayList<>();
+        for (int i = 0; i < blogTags.size(); i++) {
+            Tag tag = tagMapper.selectById(blogTags.get(i).getTagId());
+            tags.add(tag);
+        }
+        blogDetail.setTags(tags);
         return CommonResult.success(blogDetail);
     }
 
@@ -108,6 +127,19 @@ public class BlogControllerImpl implements BlogController {
     @Override
     public CommonResult getHotBlogList() {
         return CommonResult.success(blogService.getHotBlogList());
+    }
+
+    @Override
+    public CommonResult getPreviousNextBlog(Long id) {
+        return CommonResult.success(blogService.getPreviousNextBlog(id));
+    }
+
+    @Override
+    public CommonResult getCount() {
+        Long blog = blogService.getNormalArticleCount();
+        int category = categoryService.count();
+        int tag = tagService.count();
+        return CommonResult.success(new BlogCountVo(blog,category,tag));
     }
 }
 

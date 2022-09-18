@@ -66,14 +66,14 @@ export default {
                 null,
                 null,
                 props.year + "/" + props.month
-            ).then((data) => {
-                articleCount.value = parseInt(data.total);
-                data.rows.forEach((article) => {
+            ).then((res) => {
+                articleCount.value = parseInt(res.data.data.total);
+                res.data.data.blogList.forEach((article) => {
                     article.createTime = article.createTime.split(" ")[0];
                     article.thumbnail = article.thumbnail || defaultThumbnail;
                 });
 
-                postArticles.splice(0, postArticles.length, ...data.rows);
+                postArticles.splice(0, postArticles.length, ...res.data.data.blogList);
             });
         }
 

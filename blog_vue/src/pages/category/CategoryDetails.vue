@@ -88,14 +88,13 @@ export default {
         onCurrentPageChanged(1);
 
         function onCurrentPageChanged(pageNum) {
-            getPostArticleList(pageNum, pageSize, props.id).then((data) => {
-                articleCount.value = parseInt(data.total);
-                data.rows.forEach((article) => {
-                    article.createTime = article.createTime.split(" ")[0];
+             getPostArticleList(pageNum, pageSize,props.id).then(res =>{
+                articleCount.value = parseInt(res.data.data.total);
+                 res.data.data.blogList.forEach((article) => {
+                    article.createTime = article.createTime.split("T")[0];
                     article.thumbnail = article.thumbnail || defaultThumbnail;
                 });
-
-                postArticles.splice(0, postArticles.length, ...data.rows);
+                postArticles.splice(0, postArticles.length, ...res.data.data.blogList);
             });
         }
 

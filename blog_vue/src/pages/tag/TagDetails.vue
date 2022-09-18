@@ -90,15 +90,13 @@ export default {
 
         function onCurrentPageChanged(pageNum) {
             getPostArticleList(pageNum, pageSize, null, props.id).then(
-                (data) => {
-                    articleCount.value = parseInt(data.total);
-                    data.rows.forEach((article) => {
-                        article.createTime = article.createTime.split(" ")[0];
-                        article.thumbnail =
-                            article.thumbnail || defaultThumbnail;
-                    });
-
-                    postArticles.splice(0, postArticles.length, ...data.rows);
+                (res) => {
+                    articleCount.value = parseInt(res.data.data.total);
+                    res.data.data.blogList.forEach((article) => {
+                    article.createTime = article.createTime.split("T")[0];
+                    article.thumbnail = article.thumbnail || defaultThumbnail;
+                });
+                postArticles.splice(0, postArticles.length, ...res.data.data.blogList);
                 }
             );
         }

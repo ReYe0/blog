@@ -10,6 +10,7 @@ import com.study.entity.dto.BlogPageReqDTO;
 import com.study.entity.vo.BlogBackListVo;
 import com.study.entity.vo.BlogListVo;
 import com.study.entity.vo.HotBlogVo;
+import com.study.entity.vo.PreviousNextBlogVo;
 
 import java.util.List;
 
@@ -53,4 +54,8 @@ public interface BlogService extends IService<Blog> {
     public BlogEditResDTO getBlogEdit(Long id);
 
     public List<HotBlogVo> getHotBlogList();
+
+    public PreviousNextBlogVo getPreviousNextBlog(Long id);
+
+    public Long getNormalArticleCount();
 }

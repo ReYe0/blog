@@ -44,8 +44,8 @@ export default {
     setup() {
         let archiveCounts = reactive([]);
 
-        getArchiveCountList(1, 8).then((data) => {
-            archiveCounts.push(...data.rows);
+        getArchiveCountList(1, 8).then((res) => {
+            archiveCounts.push(...res.data.data);
         });
 
         return { archiveCounts };

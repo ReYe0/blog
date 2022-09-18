@@ -24,7 +24,7 @@ export default {
         bus.on("articlePosted", updateArticleInfo);
 
         function updateArticleInfo() {
-            // store.dispatch("adminAbout/getArticleCount");
+            store.dispatch("adminAbout/getArticleCount");
             store.dispatch("categoryAbout/getCategoryCounts");
             store.dispatch("tagAbout/getTagCounts");
         }

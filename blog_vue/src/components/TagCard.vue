@@ -19,7 +19,7 @@ import { linearColorWordCloud } from "../utils/word-cloud";
 import { computed } from "@vue/runtime-core";
 import BaseCard from '@/components/BaseCard'
 export default {
-    name: "KilaKilaTagCard",
+    name: "TagCard",
     setup() {
         let { tagCounts } = mapState("tagAbout");
         let tagClouds = computed(() => linearColorWordCloud(tagCounts.value));

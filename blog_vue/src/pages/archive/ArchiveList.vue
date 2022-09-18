@@ -28,7 +28,6 @@
                             class="root-item"
                         >
                         </el-timeline-item>
-
                         <el-timeline-item
                             v-for="archive in archives"
                             :key="archive.year"
@@ -37,12 +36,12 @@
                             placement="top"
                         >
                             <div
-                                v-for="article in archive.articles"
+                                v-for="article in archive.blogs"
                                 :key="article.id"
                                 class="article-item"
                             >
                                 <router-link
-                                    :to="`/article/${article.id}`"
+                                    :to="`/blog/${article.id}`"
                                     class="article-thumbail-link"
                                     ><img
                                         :src="article.thumbnail"
@@ -54,7 +53,7 @@
 
                                 <div class="article-info">
                                     <router-link
-                                        :to="`/article/${article.id}`"
+                                        :to="`/blog/${article.id}`"
                                         class="article-title"
                                         >{{ article.title }}
                                     </router-link>
@@ -119,21 +118,21 @@ export default {
         let archives = reactive([]);
         let { articleCountInfo } = mapState("adminAbout");
         let articleCount = computed(() =>
-            parseInt(articleCountInfo.value.article)
+            parseInt(articleCountInfo.value.blog)
         );
         onCurrentPageChanged(1);
 
         function onCurrentPageChanged(pageNum) {
-            getArchiveList(pageNum, pageSize).then((data) => {
-                data.rows.forEach((archive) => {
-                    archive.articles.forEach((article) => {
-                        article.createTime = article.createTime.split(" ")[0];
+            getArchiveList(pageNum, pageSize).then((res) => {
+                res.data.data.rows.forEach((archive) => {
+                    archive.blogs.forEach((article) => {
+                        article.createTime = article.createTime.split("T")[0];
                         article.thumbnail =
                             article.thumbnail || defaultThumbnail;
                     });
                 });
-
-                archives.splice(0, archives.length, ...data.rows);
+                // console.log(res.data.data.rows,99);
+                archives.splice(0, archives.length, ...res.data.data.rows);
 
                 // 多插入一个啥也没有的节点
                 archives.push({ year: "", articles: [] });
