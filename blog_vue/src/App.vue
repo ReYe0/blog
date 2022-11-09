@@ -20,11 +20,11 @@ export default {
   },
     setup() {
         // store.dispatch("adminAbout/getAdminInfo");
-        updateArticleInfo();
-        bus.on("articlePosted", updateArticleInfo);
+        updateBlogInfo();
+        bus.on("blogPosted", updateBlogInfo);
 
-        function updateArticleInfo() {
-            store.dispatch("adminAbout/getArticleCount");
+        function updateBlogInfo() {
+            store.dispatch("adminAbout/getBlogCount");
             store.dispatch("categoryAbout/getCategoryCounts");
             store.dispatch("tagAbout/getTagCounts");
         }

@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { getAdminInfo } from '../api/user'
-import { getArticleCount } from '../api/article'
+import { getBlogCount } from '../api/blog'
 import { getCategoryCountList } from '../api/category'
 import { getTagCountList } from '../api/tag'
 import { getUserInfo } from "../utils/storage"
@@ -16,7 +16,7 @@ let adminAbout = {
 			avatar: require("@/assets/image/avatar.jpg"),
 			githubUrl: "https://github.com/zhiyiYo",
 		},
-		articleCountInfo: {
+		blogCountInfo: {
 			blog: 0,
 			category: 0,
 			tag: 0,
@@ -32,10 +32,10 @@ let adminAbout = {
 				})
 			})
 		},
-		getArticleCount(context) {
+		getBlogCount(context) {
 			return new Promise((resolve) => {
-				getArticleCount().then(res => {
-					context.commit('updateArticleCountInfo', res.data.data)
+				getBlogCount().then(res => {
+					context.commit('updateBlogCountInfo', res.data.data)
 					resolve(res.data.data)
 				})
 			})
@@ -45,8 +45,8 @@ let adminAbout = {
 		updateAdminInfo(state, adminInfo) {
 			Object.assign(state.adminInfo, adminInfo)
 		},
-		updateArticleCountInfo(state, articleCountInfo) {
-			Object.assign(state.articleCountInfo, articleCountInfo)
+		updateBlogCountInfo(state, blogCountInfo) {
+			Object.assign(state.blogCountInfo, blogCountInfo)
 		},
 		updateIsAdmin(state) {
 			state.isAdmin = getUserInfo() ? getUserInfo().isAdmin : false

@@ -1,9 +1,6 @@
 <template>
   <div>
     <div>
-      <!-- <el-input v-model="blog .title" placeholder="Please input the title" style="width:86%;margin:10px;margin-top:0;"/>
-      <el-button type="primary" plain style="margin-top:-5px;" @click="saveOrUpdate">{{$t("md.saveDraft")}}</el-button>
-      <el-button type="success" plain style="margin-right:0;margin-top:-5px;">{{$t("md.publishArticle")}}</el-button> -->
         <el-form
           ref="ruleFormRef"
           :model="blog"

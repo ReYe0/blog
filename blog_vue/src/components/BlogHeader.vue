@@ -44,11 +44,6 @@ let drawer = ref(false);
 let menuItems = reactive([
   { name: "home.homepage", icon: ["fab", "fort-awesome"], href: "/" },
   { name: "归档", icon: ["fas", "box-archive"], href: "/archive" },
-  // {
-  //   name: "nav.backstage",
-  //   icon: ["fas", "box-archive"],
-  //   href: "/writeArticle",
-  // },
   { name: "分类", icon: ["fas", "folder"], href: "/category" },
   { name: "标签", icon: ["fas", "tags"], href: "/tag" },
    {
@@ -60,13 +55,6 @@ let menuItems = reactive([
   { name: "个人中心", icon: ["fas", "user"], href: "/user/settings" },
 ]);
 
-// if (store.state.adminAbout.isAdmin) {
-//     menuItems.splice(4, 0, {
-//         name: "新随笔",
-//         icon: ["fas", "pen"],
-//         href: "/article/add",
-//     });
-// }
 
 window.addEventListener("resize", function () {
   let scale = window.devicePixelRatio;

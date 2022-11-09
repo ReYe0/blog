@@ -11,6 +11,6 @@ export default {
     },
     md:{
       saveDraft:"保存草稿",
-      publishArticle:"发布文章"
+      publishBlog:"发布文章"
     }
   };

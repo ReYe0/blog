@@ -23,7 +23,7 @@
                     <el-timeline class="timeline">
                         <el-timeline-item
                             center
-                            :timestamp="`历史文章 - ${articleCount}`"
+                            :timestamp="`历史文章 - ${blogCount}`"
                             placement="top"
                             class="root-item"
                         >
@@ -36,41 +36,41 @@
                             placement="top"
                         >
                             <div
-                                v-for="article in archive.blogs"
-                                :key="article.id"
-                                class="article-item"
+                                v-for="blog in archive.blogs"
+                                :key="blog.id"
+                                class="blog-item"
                             >
                                 <router-link
-                                    :to="`/blog/${article.id}`"
-                                    class="article-thumbail-link"
+                                    :to="`/blog/${blog.id}`"
+                                    class="blog-thumbail-link"
                                     ><img
-                                        :src="article.thumbnail"
+                                        :src="blog.thumbnail"
                                         @error.once="useDefaultThumbnail"
                                         alt="缩略图"
-                                        class="article-thumbnail"
+                                        class="blog-thumbnail"
                                     />
                                 </router-link>
 
-                                <div class="article-info">
+                                <div class="blog-info">
                                     <router-link
-                                        :to="`/blog/${article.id}`"
-                                        class="article-title"
-                                        >{{ article.title }}
+                                        :to="`/blog/${blog.id}`"
+                                        class="blog-title"
+                                        >{{ blog.title }}
                                     </router-link>
-                                    <div class="article-meta-data">
+                                    <div class="blog-meta-data">
                                         <span
                                             ><font-awesome-icon
                                                 :icon="['fas', 'calendar-days']"
-                                                class="article-meta-data-icon"
+                                                class="blog-meta-data-icon"
                                             />发表于
-                                            {{ article.createTime }}</span
+                                            {{ blog.createTime }}</span
                                         >
                                         <span
                                             ><font-awesome-icon
                                                 :icon="['fas', 'eye']"
-                                                class="article-meta-data-icon"
+                                                class="blog-meta-data-icon"
                                             />{{
-                                                article.viewCount
+                                                blog.viewCount
                                             }}次围观</span
                                         >
                                     </div>
@@ -83,11 +83,11 @@
                 <!-- 分页 -->
                 <el-pagination
                     layout="prev, pager, next"
-                    :total="articleCount"
+                    :total="blogCount"
                     :page-size="pageSize"
                     id="pagination"
                     @current-change="onCurrentPageChanged"
-                    v-if="articleCount > 0"
+                    v-if="blogCount > 0"
                 />
             </div>
         </div>
@@ -116,31 +116,31 @@ export default {
         window.scrollTo({ top: 0 });
         let pageSize = 10;
         let archives = reactive([]);
-        let { articleCountInfo } = mapState("adminAbout");
-        let articleCount = computed(() =>
-            parseInt(articleCountInfo.value.blog)
+        let { blogCountInfo } = mapState("adminAbout");
+        let blogCount = computed(() =>
+            parseInt(blogCountInfo.value.blog)
         );
         onCurrentPageChanged(1);
 
         function onCurrentPageChanged(pageNum) {
             getArchiveList(pageNum, pageSize).then((res) => {
                 res.data.data.rows.forEach((archive) => {
-                    archive.blogs.forEach((article) => {
-                        article.createTime = article.createTime.split("T")[0];
-                        article.thumbnail =
-                            article.thumbnail || defaultThumbnail;
+                    archive.blogs.forEach((blog) => {
+                        blog.createTime = blog.createTime.split("T")[0];
+                        blog.thumbnail =
+                            blog.thumbnail || defaultThumbnail;
                     });
                 });
                 // console.log(res.data.data.rows,99);
                 archives.splice(0, archives.length, ...res.data.data.rows);
 
                 // 多插入一个啥也没有的节点
-                archives.push({ year: "", articles: [] });
+                archives.push({ year: "", blogs: [] });
             });
         }
 
         return {
-            articleCount,
+            blogCount,
             pageSize,
             archives,
             onCurrentPageChanged,
@@ -303,19 +303,19 @@ export default {
     }
 }
 
-.article-item {
+.blog-item {
     display: flex;
     justify-content: center;
     align-content: center;
     padding: 10px 0;
 
-    .article-thumbail-link {
+    .blog-thumbail-link {
         height: 80px;
         width: 80px;
         overflow: hidden;
         border-radius: 6px;
 
-        .article-thumbnail {
+        .blog-thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -323,18 +323,18 @@ export default {
         }
     }
 
-    .article-thumbnail:hover {
+    .blog-thumbnail:hover {
         transform: scale(1.1);
     }
 
-    .article-info {
+    .blog-info {
         flex: 1;
         padding-left: 16px;
         word-break: break-all;
         display: inline-block;
         align-self: center;
 
-        .article-title {
+        .blog-title {
             color: var(--text-color);
             font-size: 15px;
             text-decoration: none;
@@ -350,7 +350,7 @@ export default {
             }
         }
 
-        .article-meta-data {
+        .blog-meta-data {
             font-size: 13px;
             color: rgb(133, 133, 133);
             box-sizing: border-box;
@@ -360,7 +360,7 @@ export default {
             display: -webkit-box;
             -webkit-box-orient: vertical;
 
-            .article-meta-data-icon {
+            .blog-meta-data-icon {
                 margin-right: 5px;
             }
 

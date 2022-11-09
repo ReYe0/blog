@@ -5,30 +5,30 @@
         title="热门文章"
     >
         <div
-            v-for="article in hotArticles"
-            :key="article.id"
-            class="hot-article-item"
+            v-for="blog in hotBlogs"
+            :key="blog.id"
+            class="hot-blog-item"
         >
             <router-link
-                :to="`/article/${article.id}`"
-                class="hot-article-thumbail-link"
+                :to="`/blog/${blog.id}`"
+                class="hot-blog-thumbail-link"
                 ><img
-                    :src="article.thumbnail"
+                    :src="blog.thumbnail"
                     @error.once="useDefaultThumbnail"
                     alt="缩略图"
-                    class="hot-article-thumbnail"
+                    class="hot-blog-thumbnail"
                 />
             </router-link>
 
-            <div class="hot-article-info">
+            <div class="hot-blog-info">
                 <router-link
-                    :to="`/article/${article.id}`"
-                    class="hot-article-title"
-                    >{{ article.title }}
+                    :to="`/blog/${blog.id}`"
+                    class="hot-blog-title"
+                    >{{ blog.title }}
                 </router-link>
-                <div class="hot-article-meta-data">
-                    {{ article.createTime }}
-                    <span>{{ article.viewCount }}次围观</span>
+                <div class="hot-blog-meta-data">
+                    {{ blog.createTime }}
+                    <span>{{ blog.viewCount }}次围观</span>
                 </div>
             </div>
         </div>
@@ -37,25 +37,25 @@
 
 <script>
 import BaseCard from '@/components/BaseCard'
-import { getHotArticleList } from "../api/article";
+import { getHotBlogList } from "../api/blog";
 import { reactive } from "@vue/reactivity";
 import { defaultThumbnail, useDefaultThumbnail } from "../utils/thumbnail";
 
 export default {
     name: "HotBlogCard",
     setup() {
-        let hotArticles = reactive([]);
+        let hotBlogs = reactive([]);
 
-        getHotArticleList().then((res) => {
-            res.data.data.forEach((article) => {
-                article.createTime = article.createTime.split("T")[0];
-                article.thumbnail = article.thumbnail || defaultThumbnail;
+        getHotBlogList().then((res) => {
+            res.data.data.forEach((blog) => {
+                blog.createTime = blog.createTime.split("T")[0];
+                blog.thumbnail = blog.thumbnail || defaultThumbnail;
             });
 
-            hotArticles.push(...res.data.data);
+            hotBlogs.push(...res.data.data);
         });
 
-        return { hotArticles, useDefaultThumbnail };
+        return { hotBlogs, useDefaultThumbnail };
     },
     components:{
         BaseCard
@@ -64,31 +64,31 @@ export default {
 </script>
 
 <style scoped>
-.hot-article-item {
+.hot-blog-item {
     display: flex;
     justify-content: center;
     align-content: center;
     padding: 8px 0;
 }
 
-.hot-article-thumbail-link {
+.hot-blog-thumbail-link {
     height: 58px;
     width: 58px;
     overflow: hidden;
 }
 
-.hot-article-thumbnail {
+.hot-blog-thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: all 0.4s ease;
 }
 
-.hot-article-thumbnail:hover {
+.hot-blog-thumbnail:hover {
     transform: scale(1.1);
 }
 
-.hot-article-info {
+.hot-blog-info {
     flex: 1;
     padding-left: 10px;
     word-break: break-all;
@@ -96,7 +96,7 @@ export default {
     align-self: center;
 }
 
-.hot-article-title {
+.hot-blog-title {
     color: var(--text-color);
     font-size: 13.5px;
     text-decoration: none;
@@ -108,11 +108,11 @@ export default {
     -webkit-line-clamp: 2;
 }
 
-.hot-article-title:hover {
+.hot-blog-title:hover {
     color: var(--el-color-primary);
 }
 
-.hot-article-meta-data {
+.hot-blog-meta-data {
     font-size: 12px;
     color: rgb(133, 133, 133);
     box-sizing: border-box;
@@ -123,7 +123,7 @@ export default {
     -webkit-box-orient: vertical;
 }
 
-.hot-article-meta-data span {
+.hot-blog-meta-data span {
     margin-left: 4%;
 }
 </style>

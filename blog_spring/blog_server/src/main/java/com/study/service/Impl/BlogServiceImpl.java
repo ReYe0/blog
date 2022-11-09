@@ -122,30 +122,30 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
         // 查询当前的文章
         Blog blog = getById(id);
         Assert.notNull(blog, AppHttpCodeEnum.RESOURCE_NOT_EXIST);
-        PreviousNextBlogVo previousNextArticleVo = new PreviousNextBlogVo();
+        PreviousNextBlogVo previousNextBlogVo = new PreviousNextBlogVo();
 
         // 查询上一篇文章
         QueryWrapper<Blog> previousWrapper = new QueryWrapper<>();
         previousWrapper.lt("create_time", blog.getCreateTime());
         previousWrapper.orderByDesc("create_time").last("limit 1");
-        Blog previousArticle = getOne(previousWrapper);
-        if (previousArticle != null) {
-            previousNextArticleVo.setPrevious(BeanCopyUtils.copyBean(previousArticle, HotBlogVo.class));
+        Blog previousBlog = getOne(previousWrapper);
+        if (previousBlog!= null) {
+            previousNextBlogVo.setPrevious(BeanCopyUtils.copyBean(previousBlog, HotBlogVo.class));
         }
 
         // 查询下一篇文章
         QueryWrapper<Blog> nextWrapper = new QueryWrapper<>();
         nextWrapper.gt("create_time", blog.getCreateTime());
         nextWrapper.orderByAsc("create_time").last("limit 1");
-        Blog nextArticle = getOne(nextWrapper);
-        if (nextArticle != null) {
-            previousNextArticleVo.setNext(BeanCopyUtils.copyBean(nextArticle, HotBlogVo.class));
+        Blog nextBlog = getOne(nextWrapper);
+        if (nextBlog != null) {
+            previousNextBlogVo.setNext(BeanCopyUtils.copyBean(nextBlog, HotBlogVo.class));
         }
-        return previousNextArticleVo;
+        return previousNextBlogVo;
     }
 
     @Override
-    public Long getNormalArticleCount() {
+    public Long getNormalBlogCount() {
         LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Blog::getStatus, SystemConstants.BLOG_STATUS_NORMAL);
          return Long.valueOf(blogMapper.selectCount(wrapper));

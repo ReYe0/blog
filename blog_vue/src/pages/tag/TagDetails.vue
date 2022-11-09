@@ -21,22 +21,22 @@
             </div>
 
             <!-- 发表的文章 -->
-            <div class="post-article-list">
+            <div class="post-blog-list">
                 <BlogCard
-                    v-for="(article, index) in postArticles"
-                    :key="article.id"
-                    :article="article"
+                    v-for="(blog, index) in postBlogs"
+                    :key="blog.id"
+                    :blog="blog"
                     :reverse="index % 2 == 1"
                 />
 
                 <!-- 分页 -->
                 <el-pagination
                     layout="prev, pager, next"
-                    :total="articleCount"
+                    :total="blogCount"
                     :page-size="pageSize"
                     id="pagination"
                     @current-change="onCurrentPageChanged"
-                    v-if="articleCount > 0"
+                    v-if="blogCount > 0"
                 >
                 </el-pagination>
             </div>
@@ -58,7 +58,7 @@ import CategoryCard from '@/components/CategoryCard'
 import TagCard from '@/components/TagCard';
 import ArchiveCard from '@/components/ArchiveCard'
 import { computed, reactive, ref } from "vue";
-import { getPostArticleList } from "../../api/article";
+import { getPostBlogList } from "../../api/blog";
 import { defaultThumbnail } from "../../utils/thumbnail";
 import { mapState } from "../../store/map";
 
@@ -76,8 +76,8 @@ export default {
     },
     setup(props) {
         let pageSize = 10;
-        let postArticles = reactive([]);
-        let articleCount = ref(0);
+        let postBlogs = reactive([]);
+        let blogCount = ref(0);
         let { tagCounts } = mapState("tagAbout");
         let tagName = computed(() => {
             let map = Object.fromEntries(
@@ -89,14 +89,14 @@ export default {
         onCurrentPageChanged(1);
 
         function onCurrentPageChanged(pageNum) {
-            getPostArticleList(pageNum, pageSize, null, props.id).then(
+            getPostBlogList(pageNum, pageSize, null, props.id).then(
                 (res) => {
-                    articleCount.value = parseInt(res.data.data.total);
-                    res.data.data.blogList.forEach((article) => {
-                    article.createTime = article.createTime.split("T")[0];
-                    article.thumbnail = article.thumbnail || defaultThumbnail;
+                    blogCount.value = parseInt(res.data.data.total);
+                    res.data.data.blogList.forEach((blog) => {
+                    blog.createTime = blog.createTime.split("T")[0];
+                    blog.thumbnail = blog.thumbnail || defaultThumbnail;
                 });
-                postArticles.splice(0, postArticles.length, ...res.data.data.blogList);
+                postBlogs.splice(0, postBlogs.length, ...res.data.data.blogList);
                 }
             );
         }
@@ -105,8 +105,8 @@ export default {
 
         return {
             tagName,
-            postArticles,
-            articleCount,
+            postBlogs,
+            blogCount,
             pageSize,
             onCurrentPageChanged,
         };
@@ -155,14 +155,14 @@ export default {
     }
 }
 
-.post-article-list {
+.post-blog-list {
     width: 74%;
 
-    .post-article-card {
+    .post-blog-card {
         margin-top: 20px;
     }
 
-    .post-article-card:nth-child(1) {
+    .post-blog-card:nth-child(1) {
         margin-top: 0;
     }
 }
@@ -205,7 +205,7 @@ export default {
         display: none;
     }
 
-    .post-article-list {
+    .post-blog-list {
         width: 100%;
     }
 }

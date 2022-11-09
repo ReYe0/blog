@@ -136,7 +136,7 @@ public class BlogControllerImpl implements BlogController {
 
     @Override
     public CommonResult getCount() {
-        Long blog = blogService.getNormalArticleCount();
+        Long blog = blogService.getNormalBlogCount();
         int category = categoryService.count();
         int tag = tagService.count();
         return CommonResult.success(new BlogCountVo(blog,category,tag));

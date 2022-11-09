@@ -31,7 +31,7 @@
           <el-menu-item index="2-4-3">item three</el-menu-item>
         </el-sub-menu>
       </el-sub-menu> -->
-      <el-menu-item index="/writeArticle">{{
+      <el-menu-item index="/writeBlog">{{
         $t("nav.backstage")
       }}</el-menu-item>
       <el-button-group style="margin-top: 10px">

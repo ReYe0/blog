@@ -4,7 +4,7 @@ import request from '../utils/request'
  * 获取热门文章
  * @returns promise
  */
-function getHotArticleList() {
+function getHotBlogList() {
     return request.get('/blog/hotBlogList')
 }
 
@@ -12,7 +12,7 @@ function getHotArticleList() {
 /**
  * 获取文章总数统计
  */
-function getArticleCount() {
+function getBlogCount() {
     return request.get('/blog/count')
 }
 
@@ -26,7 +26,7 @@ function getArticleCount() {
  * @param {string} date 文章的发表日期，格式为 `yyyy/MM`，比如 `2021/1` 或 `2021/02`，可以不传
  * @returns promise
  */
-function getPostArticleList(pageNum, pageSize, categoryId, tagId, date) {
+function getPostBlogList(pageNum, pageSize, categoryId, tagId, date) {
     let params = { pageNum, pageSize, categoryId, tagId, date }
 
     return request({
@@ -41,7 +41,7 @@ function getPostArticleList(pageNum, pageSize, categoryId, tagId, date) {
  * @param {number} id 文章 id
  * @returns promise
  */
-function getArticleDetails(id) {
+function getBlogDetails(id) {
     return request.get('/blog/' + id)
 }
 
@@ -53,7 +53,7 @@ function getArticleDetails(id) {
  */
 function updateViewCount(id) {
     return request({
-        url: "/article/updateViewCount/" + id,
+        url: "/blog/updateViewCount/" + id,
         method: "put",
     })
 }
@@ -64,47 +64,47 @@ function updateViewCount(id) {
  * @param {number} id 文章 id
  * @returns promise
  */
-function getPreviousNextArticle(id) {
+function getPreviousNextBlog(id) {
     return request.get("/blog/previousNextBlog/" + id)
 }
 
 
 /**
  * 添加文章
- * @param {object} article 文章
+ * @param {object} blog 文章
  * @returns promise
  */
-function addArticle(article) {
+function addBlog(blog) {
     return request({
-        url: "/article",
+        url: "/blog",
         method: "post",
-        data: article,
+        data: blog,
         needAuthentication: true
     })
 }
 
 /**
  * 编辑文章
- * @param {object} article 文章
+ * @param {object} blog 文章
  * @returns promise
  */
-function editArticle(article) {
+function editBlog(blog) {
     return request({
-        url: "/article",
+        url: "/blog",
         method: "put",
-        data: article,
+        data: blog,
         needAuthentication: true
     })
 }
 
 
 export {
-    getHotArticleList,
-    getArticleCount,
-    getPostArticleList,
-    getArticleDetails,
+    getHotBlogList,
+    getBlogCount,
+    getPostBlogList,
+    getBlogDetails,
     updateViewCount,
-    getPreviousNextArticle,
-    addArticle,
-    editArticle
+    getPreviousNextBlog,
+    addBlog,
+    editBlog
 }

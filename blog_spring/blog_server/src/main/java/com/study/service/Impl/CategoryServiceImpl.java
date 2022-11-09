@@ -31,7 +31,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<CategoryListVo> getCategoryList() {
         QueryWrapper<Category> wrapper = new QueryWrapper<>();
-        wrapper.eq("status", SystemConstants.Category_STATUS_NORMAL);
+        wrapper.eq("status", SystemConstants.CATEGORY_STATUS_NORMAL);
         List<Category> list = categoryMapper.selectList(wrapper);
         return BeanCopyUtils.copyBeanList(list, CategoryListVo.class);
     }
@@ -46,7 +46,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         // 从数据库中查询目录
         LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(Category::getId, categoryIds);
-        queryWrapper.eq(Category::getStatus, SystemConstants.Category_STATUS_NORMAL);
+        queryWrapper.eq(Category::getStatus, SystemConstants.CATEGORY_STATUS_NORMAL);
         List<Category> categories = list(queryWrapper);
         List<CategoryCountVo> categoryVos = BeanCopyUtils.copyBeanList(categories, CategoryCountVo.class);
         // 统计每种分类的数量

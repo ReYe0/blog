@@ -18,7 +18,7 @@ export default {
     props: {
         container: {
             type: String,
-            default: ".post-body .article-content",
+            default: ".post-body .blog-content",
         },
     },
     setup(props) {
@@ -28,12 +28,12 @@ export default {
 
         function getImages() {
             let images = [];
-            let articleElement = document.querySelector(props.container);
-            if (!articleElement) return images;
+            let blogElement = document.querySelector(props.container);
+            if (!blogElement) return images;
 
             // 获取所有图片
             let imageElements = Array.from(
-                articleElement.querySelectorAll("img")
+                blogElement.querySelectorAll("img")
             );
             for (const imageElement of imageElements) {
                 let src = imageElement.src;

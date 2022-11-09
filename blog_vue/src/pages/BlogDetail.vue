@@ -1,36 +1,36 @@
 <template>
-  <div id="article-details">
+  <div id="blog-details">
     <!-- 页头 -->
     <BlogHeader/>
     <div style="opacity:0;margin-top:80px;"></div>
     <!-- <kila-kila-header /> -->
     <!-- 二次元封面 -->
     <WifeCover>
-      <!-- <div class="article-info">
-                <h1 class="article-title">
-                    {{ articleDetails.title }}
+      <!-- <div class="blog-info">
+                <h1 class="blog-title">
+                    {{ blogDetails.title }}
                     <font-awesome-icon
                         :icon="['fas', 'pen']"
                         class="edit-icon"
                         title="编辑"
                         v-if="isAdmin"
-                        @click="editArticle"
+                        @click="editBlog"
                     />
                 </h1>
-                <div class="article-meta-data-wrap">
-                    <span class="article-meta-data">
+                <div class="blog-meta-data-wrap">
+                    <span class="blog-meta-data">
                         <font-awesome-icon :icon="['fas', 'calendar-days']" />
-                        发表于 {{ articleDetails.createTime }}
+                        发表于 {{ blogDetails.createTime }}
                     </span>
-                    <span class="article-meta-data-divider">|</span>
-                    <span class="article-meta-data">
+                    <span class="blog-meta-data-divider">|</span>
+                    <span class="blog-meta-data">
                         <font-awesome-icon :icon="['fas', 'box-archive']" />
-                        分类 {{ articleDetails.categoryName }}
+                        分类 {{ blogDetails.categoryName }}
                     </span>
-                    <span class="article-meta-data-divider">|</span>
-                    <span class="article-meta-data">
+                    <span class="blog-meta-data-divider">|</span>
+                    <span class="blog-meta-data">
                         <font-awesome-icon :icon="['fas', 'eye']" />
-                        阅读量 {{ articleDetails.viewCount }}
+                        阅读量 {{ blogDetails.viewCount }}
                     </span>
                 </div>
             </div> -->
@@ -42,10 +42,10 @@
         <AuthorCard />
         <!-- <kila-kila-admin-card /> -->
         <div class="sticky-layout">
-          <!-- <kila-kila-catalog-card v-if="articleLoaded" />
-                    <kila-kila-hot-article-card /> -->
+          <!-- <kila-kila-catalog-card v-if="blogLoaded" />
+                    <kila-kila-hot-blog-card /> -->
           <!-- sdf -->
-          <BlogCatalogCard v-if="articleLoaded"/>
+          <BlogCatalogCard v-if="blogLoaded"/>
           <HotBlogCard/>
         </div>
       </div>
@@ -53,21 +53,21 @@
       <!-- 文章内容 -->
       <div class="post-body">
         <!-- <div
-                    class="article-content md-preview github-theme md-scrn"
-                    v-html="articleDetails.content"
+                    class="blog-content md-preview github-theme md-scrn"
+                    v-html="blogDetails.content"
                 ></div> -->
         <!-- {{Boolean(isDark) === true ? 'dark' : 'light'}},{{isDark}} -->
         <MdEditor
-        class="article-content"
+        class="blog-content"
           :theme="Boolean(isDark) === true ? 'dark' : 'light'"
           :language="getLang()"
           codeTheme="a11y"
-          v-model="articleDetails.content"
+          v-model="blogDetails.content"
           previewOnly
         />
 
         <!-- 版权声明 -->
-        <div class="article-signature">
+        <div class="blog-signature">
           <img :src="adminInfo.avatar" alt="头像" />
           <div class="copyright">
             <div class="copyright-item">
@@ -81,7 +81,7 @@
             <div class="copyright-item">
               <span class="copyright-title">文章链接：</span>
               <span class="copyright-content">
-                <a :href="articleUrl">{{ articleUrl }}</a>
+                <a :href="blogUrl">{{ blogUrl }}</a>
               </span>
             </div>
             <div class="copyright-item">
@@ -98,14 +98,14 @@
         </div>
 
         <!-- 标签 -->
-        <div class="article-tags" v-if="articleDetails.tags">
+        <div class="blog-tags" v-if="blogDetails.tags">
                     <span>
                         <font-awesome-icon :icon="['fas', 'tags']" />
                         标签：
                     </span>
                     <router-link
                         :to="'/tag/' + tag.id"
-                        v-for="tag in articleDetails.tags"
+                        v-for="tag in blogDetails.tags"
                         :key="tag.id"
                         class="tag-link"
                         >{{ tag.name }}</router-link
@@ -113,42 +113,42 @@
                 </div>
 
         <!-- 上一篇和下一篇 -->
-        <div class="previous-next-article">
+        <div class="previous-next-blog">
                     <div
-                        class="previous-article"
-                        v-if="previousArticle.id"
-                        :style="{ width: nextArticle.id ? '50%' : '100%' }"
+                        class="previous-blog"
+                        v-if="previousBlog.id"
+                        :style="{ width: nextBlog.id ? '50%' : '100%' }"
                     >
-                        <router-link :to="`/blog/${previousArticle.id}`">
+                        <router-link :to="`/blog/${previousBlog.id}`">
                             <img
-                                :src="previousArticle.thumbnail"
+                                :src="previousBlog.thumbnail"
                                 alt="缩略图"
                                 @error="useDefaultThumbnail"
                             />
-                            <div class="previous-article-info">
+                            <div class="previous-blog-info">
                                 <div class="label">« 上一篇</div>
                                 <div class="title">
-                                    {{ previousArticle.title }}
+                                    {{ previousBlog.title }}
                                 </div>
                             </div>
                         </router-link>
                     </div>
 
                     <div
-                        class="next-article"
-                        v-if="nextArticle.id"
-                        :style="{ width: previousArticle.id ? '50%' : '100%' }"
+                        class="next-blog"
+                        v-if="nextBlog.id"
+                        :style="{ width: previousBlog.id ? '50%' : '100%' }"
                     >
-                        <router-link :to="`/blog/${nextArticle.id}`">
+                        <router-link :to="`/blog/${nextBlog.id}`">
                             <img
-                                :src="nextArticle.thumbnail"
+                                :src="nextBlog.thumbnail"
                                 alt="缩略图"
                                 @error="useDefaultThumbnail"
                             />
-                            <div class="next-article-info">
+                            <div class="next-blog-info">
                                 <div class="label">下一篇 »</div>
                                 <div class="title">
-                                    {{ nextArticle.title }}
+                                    {{ nextBlog.title }}
                                 </div>
                             </div>
                         </router-link>
@@ -162,8 +162,8 @@
     <BackToTop/>
 
     <!-- 图片查看器 -->
-    <!-- <kila-kila-light-box ref="lightBoxRef" v-if="articleLoaded" /> -->
-      <ImgLightBox ref="lightBoxRef" v-if="articleLoaded"/>
+    <!-- <kila-kila-light-box ref="lightBoxRef" v-if="blogLoaded" /> -->
+      <ImgLightBox ref="lightBoxRef" v-if="blogLoaded"/>
     <!-- 页脚 -->
     <!-- <kila-kila-footer /> -->
   </div>
@@ -177,7 +177,7 @@ import { useDark } from "@vueuse/core";
 import MdEditor from "md-editor-v3";
 import AuthorCard from "@/components/AuthorCard";
 import BlogCatalogCard from "@/components/BlogCatalogCard";
-import { getArticleDetails,getPreviousNextArticle } from "./../api/article";
+import { getBlogDetails,getPreviousNextBlog } from "./../api/blog";
 import {useDefaultThumbnail, defaultThumbnail} from "@/utils/thumbnail";
 import { mapState } from "../store/map";
 import { reactive, nextTick, ref } from "vue";
@@ -190,54 +190,54 @@ export default {
     window.scrollTo({ top: 0 });
 
     let { adminInfo,isAdmin} = mapState("adminAbout");
-    let articleLoaded = ref(false);
-    let articleUrl = ref(window.location.href);
-    let previousArticle = reactive({});
-    let nextArticle = reactive({});
+    let blogLoaded = ref(false);
+    let blogUrl = ref(window.location.href);
+    let previousBlog = reactive({});
+    let nextBlog = reactive({});
     let lightBoxRef = ref();
 
-    let articleDetails = reactive({});
-    getArticleDetails(props.id).then((data) => {
-      Object.assign(articleDetails, data.data.data); // 将data中的数据赋值到 articleDetails
-      // articleDetails.content = markdownIt.render(data.content);
+    let blogDetails = reactive({});
+    getBlogDetails(props.id).then((data) => {
+      Object.assign(blogDetails, data.data.data); // 将data中的数据赋值到 blogDetails
+      // blogDetails.content = markdownIt.render(data.content);
 
       nextTick(() => {
       //     initMathJax({}, () => {
-      //         renderByMathjax(".article-content");
+      //         renderByMathjax(".blog-content");
       //     });
-      //     buildCodeBlock(".article-content");
-          articleLoaded.value = true;
+      //     buildCodeBlock(".blog-content");
+          blogLoaded.value = true;
       }).then(() => {
           lightBoxRef.value.addImageClickedListener();
       });
     });
 
     // updateViewCount(props.id);
-getPreviousNextArticle(props.id).then((res) => {
+getPreviousNextBlog(props.id).then((res) => {
             if (res.data.data.previous) {
-                Object.assign(previousArticle, res.data.data.previous);
-                if (!previousArticle.thumbnail) {
-                    previousArticle.thumbnail = defaultThumbnail;
+                Object.assign(previousBlog, res.data.data.previous);
+                if (!previousBlog.thumbnail) {
+                    previousBlog.thumbnail = defaultThumbnail;
                 }
             }
             if (res.data.data.next) {
-                Object.assign(nextArticle, res.data.data.next);
-                if (!nextArticle.thumbnail) {
-                    nextArticle.thumbnail = defaultThumbnail;
+                Object.assign(nextBlog, res.data.data.next);
+                if (!nextBlog.thumbnail) {
+                    nextBlog.thumbnail = defaultThumbnail;
                 }
             }
         });
     return {
       isAdmin,
-      articleDetails,
-      articleLoaded,
+      blogDetails,
+      blogLoaded,
       adminInfo,
-      articleUrl,
+      blogUrl,
       useDefaultThumbnail,
-      previousArticle,
-      nextArticle,
+      previousBlog,
+      nextBlog,
       lightBoxRef,
-      // editArticle,
+      // editBlog,
     };
   },
   props: ["id"],
@@ -310,14 +310,14 @@ getPreviousNextArticle(props.id).then((res) => {
   margin-right: 20px;
 }
 
-.article-info {
+.blog-info {
   text-align: center;
   position: absolute;
   width: 100%;
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.article-title {
+.blog-title {
   font-size: 35px;
   font-weight: normal;
   color: white;
@@ -341,12 +341,12 @@ getPreviousNextArticle(props.id).then((res) => {
   }
 }
 
-.article-meta-data-wrap {
+.blog-meta-data-wrap {
   display: flex;
   justify-content: center;
 }
 
-.article-meta-data {
+.blog-meta-data {
   font-size: 14px;
   color: white;
   box-sizing: border-box;
@@ -357,7 +357,7 @@ getPreviousNextArticle(props.id).then((res) => {
   -webkit-box-orient: vertical;
 }
 
-.article-meta-data-divider {
+.blog-meta-data-divider {
   color: white;
   margin: 3px 8px;
   font-size: 14px;
@@ -371,7 +371,7 @@ getPreviousNextArticle(props.id).then((res) => {
   padding: 30px 40px;
   box-sizing: border-box;
 
-  :deep(.article-content) {
+  :deep(.blog-content) {
     img {
       display: block;
       margin: 15px auto 15px;
@@ -601,7 +601,7 @@ getPreviousNextArticle(props.id).then((res) => {
     }
   }
 
-  .article-signature {
+  .blog-signature {
     border: 1px solid #ddd;
     position: relative;
     overflow: hidden;
@@ -660,7 +660,7 @@ getPreviousNextArticle(props.id).then((res) => {
     }
   }
 
-  .article-tags {
+  .blog-tags {
     padding-left: 3px;
     margin-top: 20px;
     color: var(--text-color);
@@ -679,7 +679,7 @@ getPreviousNextArticle(props.id).then((res) => {
     }
   }
 
-  .previous-next-article {
+  .previous-next-blog {
     width: 100%;
     margin-top: 50px;
     overflow: hidden;
@@ -687,8 +687,8 @@ getPreviousNextArticle(props.id).then((res) => {
     display: flex;
     border-radius: 9px;
 
-    .previous-article,
-    .next-article {
+    .previous-blog,
+    .next-blog {
       width: 50%;
 
       a {
@@ -711,8 +711,8 @@ getPreviousNextArticle(props.id).then((res) => {
           }
         }
 
-        .previous-article-info,
-        .next-article-info {
+        .previous-blog-info,
+        .next-blog-info {
           pointer-events: none;
           position: absolute;
           top: 50%;
@@ -738,7 +738,7 @@ getPreviousNextArticle(props.id).then((res) => {
           }
         }
 
-        .next-article-info {
+        .next-blog-info {
           text-align: right;
         }
       }

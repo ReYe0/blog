@@ -97,9 +97,9 @@ export default {
             let titles = [];
             let levels = ["h1", "h2", "h3"];
 
-            let articleElement = document.querySelector(this.container);
-            console.log(articleElement,123);
-            if (!articleElement) {
+            let blogElement = document.querySelector(this.container);
+            console.log(blogElement,123);
+            if (!blogElement) {
                 console.log("zhixingl");
                 return false;
             }

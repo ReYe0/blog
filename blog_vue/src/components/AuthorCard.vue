@@ -11,18 +11,18 @@
         </div>
 
         <!-- 发表的文章信息 -->
-        <div class="article-info-container">
-            <div class="article-info">
+        <div class="blog-info-container">
+            <div class="blog-info">
                 <p>文章</p>
-                <p>{{ articleCountInfo.article }}</p>
+                <p>{{ blogCountInfo.blog }}</p>
             </div>
-            <div class="article-info">
+            <div class="blog-info">
                 <p>分类</p>
-                <p>{{ articleCountInfo.category }}</p>
+                <p>{{ blogCountInfo.category }}</p>
             </div>
-            <div class="article-info">
+            <div class="blog-info">
                 <p>标签</p>
-                <p>{{ articleCountInfo.tag }}</p>
+                <p>{{ blogCountInfo.tag }}</p>
             </div>
         </div>
 
@@ -80,13 +80,13 @@ import { computed } from "vue";
 export default {
     name: "BlogCard",
     setup() {
-        let { adminInfo, articleCountInfo } = mapState("adminAbout");
+        let { adminInfo, blogCountInfo } = mapState("adminAbout");
 
         function gotoGithub() {
             location.href = adminInfo.value.githubUrl;
         }
 
-        return { adminInfo, articleCountInfo, gotoGithub, computed };
+        return { adminInfo, blogCountInfo, gotoGithub, computed };
     },
 };
 </script>
@@ -144,7 +144,7 @@ export default {
     -webkit-box-orient: vertical;
 }
 
-.article-info-container {
+.blog-info-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,15 +153,15 @@ export default {
     margin-top: 0;
 }
 
-.article-info {
+.blog-info {
     margin: 0 5%;
 }
 
-.article-info p:nth-child(1) {
+.blog-info p:nth-child(1) {
     margin-bottom: 0;
 }
 
-.article-info p:nth-child(2) {
+.blog-info p:nth-child(2) {
     margin-top: 5px;
 }
 

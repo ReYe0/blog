@@ -46,20 +46,13 @@ let menuItems = reactive([
   {
     name: "nav.backstage",
     icon: ["fas", "box-archive"],
-    href: "/writeArticle",
+    href: "/writeBlog",
   },
   { name: "分类", icon: ["fas", "folder"], href: "/category" },
   { name: "标签", icon: ["fas", "tags"], href: "/tag" },
   { name: "个人中心", icon: ["fas", "user"], href: "/user/settings" },
 ]);
 
-// if (store.state.adminAbout.isAdmin) {
-//     menuItems.splice(4, 0, {
-//         name: "新随笔",
-//         icon: ["fas", "pen"],
-//         href: "/article/add",
-//     });
-// }
 
 window.addEventListener("resize", function () {
   let scale = window.devicePixelRatio;

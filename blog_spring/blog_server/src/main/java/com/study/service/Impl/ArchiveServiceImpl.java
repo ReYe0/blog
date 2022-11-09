@@ -58,7 +58,7 @@ public class ArchiveServiceImpl extends ServiceImpl<ArchiveMapper,ArchiveCountVo
                 archiveVos.remove(i);
             }
         }
-        PageVo<ArchiveVo> archiveVoPageVo = new PageVo<>(blogService.getNormalArticleCount(), archiveVos);
+        PageVo<ArchiveVo> archiveVoPageVo = new PageVo<>(blogService.getNormalBlogCount(), archiveVos);
         return archiveVoPageVo;
     }
 }

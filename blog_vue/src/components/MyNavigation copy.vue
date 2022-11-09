@@ -27,7 +27,7 @@
           <el-menu-item index="2-4-3">item three</el-menu-item>
         </el-sub-menu>
       </el-sub-menu>
-      <el-menu-item index="/writeArticle">admin</el-menu-item>
+      <el-menu-item index="/writeBlog">admin</el-menu-item>
       <!--
       <el-select v-model="value" class="m-2"  size="large" :change="changeLang(value)">
         <el-option

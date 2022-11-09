@@ -3,7 +3,7 @@ export default {
     home: {
       homepage: "HOME",
       total:"total ",
-      page:" articles"
+      page:" blogs"
     },
     nav:{
       logo:"ErYe-Blog",
@@ -11,6 +11,6 @@ export default {
     },
     md:{
       saveDraft:"save",
-      publishArticle:"publish"
+      publishBlog:"publish"
     }
   };

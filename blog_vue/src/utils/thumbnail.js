@@ -2,7 +2,7 @@
  * 使用默认缩略图
  * @param {Event} event 错误事件
  */
-var defaultThumbnail = require("@/assets/image/article-thumbnail.jpg");
+var defaultThumbnail = require("@/assets/image/blog-thumbnail.jpg");
 
 function useDefaultThumbnail(event) {
     // console.log(event);

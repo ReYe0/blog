@@ -9,12 +9,12 @@ public class SystemConstants {
     /**
      * 文章是草稿状态
      */
-    public static final String ARTICLE_STATUS_Draft = "1";
+    public static final String BLOG_STATUS_Draft = "1";
 
     /**
      * 目录是正常发布状态
      */
-    public static final String Category_STATUS_NORMAL = "0";
+    public static final String CATEGORY_STATUS_NORMAL = "0";
 
     /**
      * 友链是审核通过状态

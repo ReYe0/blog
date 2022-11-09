@@ -57,5 +57,5 @@ public interface BlogService extends IService<Blog> {
 
     public PreviousNextBlogVo getPreviousNextBlog(Long id);
 
-    public Long getNormalArticleCount();
+    public Long getNormalBlogCount();
 }

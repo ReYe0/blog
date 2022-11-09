@@ -6,9 +6,9 @@ spring:
 #    url: jdbc:mysql://47.108.90.61:3306/db_blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
 #    username: root
 #    password: 123456
-    url: jdbc:mysql://localhost:3306/db_blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://47.108.90.61:9431/blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: root
+    password: bxygrXY.
   servlet:
     multipart: #设置springboot上传文件的大小
       enabled: true

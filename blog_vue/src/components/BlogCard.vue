@@ -1,43 +1,43 @@
 <template>
   <div :class="cardClass">
     <!-- 缩略图 -->
-    <router-link :to="`/blog/${article.id}`" :class="thumbailLinkClass"
+    <router-link :to="`/blog/${blog.id}`" :class="thumbailLinkClass"
       ><img
-        :src="article.thumbnail"
+        :src="blog.thumbnail"
         @error.once="useDefaultThumbnail"
         alt="缩略图"
-        class="post-article-thumbnail"
+        class="post-blog-thumbnail"
       />
     </router-link>
     <!-- 文章信息 -->
-    <div class="post-article-info">
+    <div class="post-blog-info">
       
       <!-- 文章标题 -->
-      <router-link :to="`/article/${article.id}`" class="post-article-title"
-        ><span style="color:#00BFFF;font-size:18px;" v-show="article.isTop"><el-icon><Flag /></el-icon></span>{{ article.title }}
+      <router-link :to="`/blog/${blog.id}`" class="post-blog-title"
+        ><span style="color:#00BFFF;font-size:18px;" v-show="blog.isTop"><el-icon><Flag /></el-icon></span>{{ blog.title }}
       </router-link>
 
       <!-- 其他元数据 -->
-      <div class="post-article-meta-data-wrap">
-        <span class="post-article-meta-data">
+      <div class="post-blog-meta-data-wrap">
+        <span class="post-blog-meta-data">
           <el-icon><Calendar /></el-icon>
-          发表于 {{ article.createTime }}
+          发表于 {{ blog.createTime }}
         </span>
-        <span class="post-article-meta-data-divider">|</span>
-        <span class="post-article-meta-data">
+        <span class="post-blog-meta-data-divider">|</span>
+        <span class="post-blog-meta-data">
           <el-icon><Folder /></el-icon>
-          分类 {{ article.categoryName }}
+          分类 {{ blog.categoryName }}
         </span>
-        <span class="post-article-meta-data-divider">|</span>
-        <span class="post-article-meta-data">
+        <span class="post-blog-meta-data-divider">|</span>
+        <span class="post-blog-meta-data">
           <el-icon><View /></el-icon>
-          阅读量 {{ article.viewCount }}
+          阅读量 {{ blog.viewCount }}
         </span>
       </div>
 
       <!-- 文章摘要 -->
-      <div class="post-article-summary">
-        {{ article.summary }}
+      <div class="post-blog-summary">
+        {{ blog.summary }}
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@ import { useDefaultThumbnail } from "../utils/thumbnail";
 export default {
   name: "BlogCard",
   props: {
-    article: {
+    blog: {
       typing: Object,
       require: true,
     },
@@ -60,12 +60,12 @@ export default {
     },
   },
   setup(props) {
-    let cardClass = reactive(["post-article-card"]);
-    let thumbailLinkClass = reactive(["post-article-thumbail-link"]);
+    let cardClass = reactive(["post-blog-card"]);
+    let thumbailLinkClass = reactive(["post-blog-thumbail-link"]);
 
     if (props.reverse) {
-      cardClass.push("post-article-card-reversed");
-      thumbailLinkClass.push("post-article-thumbail-link-reversed");
+      cardClass.push("post-blog-card-reversed");
+      thumbailLinkClass.push("post-blog-thumbail-link-reversed");
     }
 
     return { cardClass, thumbailLinkClass, useDefaultThumbnail };
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style scoped>
-.post-article-card {
+.post-blog-card {
   height: 252px;
   display: flex;
   justify-content: center;
@@ -88,11 +88,11 @@ export default {
   box-shadow: var(--card-box-shadow);
 }
 
-.post-article-card-reversed {
+.post-blog-card-reversed {
   flex-direction: row-reverse;
 }
 
-.post-article-thumbail-link {
+.post-blog-thumbail-link {
   width: 44%;
   height: 100%;
   overflow: hidden;
@@ -100,11 +100,11 @@ export default {
   border-radius: 8px 0 0 8px;
 }
 
-.post-article-thumbail-link-reversed {
+.post-blog-thumbail-link-reversed {
   border-radius: 0 8px 8px 0;
 }
 
-.post-article-thumbnail {
+.post-blog-thumbnail {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -113,11 +113,11 @@ export default {
   overflow: hidden;
 }
 
-.post-article-thumbnail:hover {
+.post-blog-thumbnail:hover {
   transform: scale(1.1);
 }
 
-.post-article-info {
+.post-blog-info {
   width: 57%;
   padding: 0 40px;
   overflow: hidden;
@@ -127,7 +127,7 @@ export default {
   -webkit-line-clamp: 2;
 }
 
-.post-article-title {
+.post-blog-title {
   /* color: #1f2d3d; */
   color: var(--el-menu-text-color);
   font-size: 24px;
@@ -140,16 +140,16 @@ export default {
   -webkit-line-clamp: 2;
 }
 
-.post-article-title:hover {
+.post-blog-title:hover {
   color: var(--theme-color);
 }
 
-.post-article-meta-data-wrap {
+.post-blog-meta-data-wrap {
   display: flex;
   margin: 9px 0;
 }
 
-.post-article-meta-data {
+.post-blog-meta-data {
   font-size: 12px;
   color: rgb(133, 133, 133);
   box-sizing: border-box;
@@ -160,13 +160,13 @@ export default {
   -webkit-box-orient: vertical;
 }
 
-.post-article-meta-data-divider {
+.post-blog-meta-data-divider {
   color: rgb(133, 133, 133);
   margin: 3px 8px;
   font-size: 12px;
 }
 
-.post-article-summary {
+.post-blog-summary {
   color: var(--text-color);
   font-size: 14px;
   overflow: hidden;
@@ -177,28 +177,28 @@ export default {
 }
 
 @media screen and (max-width: 650px) {
-  .post-article-card {
+  .post-blog-card {
     flex-direction: column;
     height: auto !important;
   }
-  .post-article-thumbail-link {
+  .post-blog-thumbail-link {
     border-radius: 8px 8px 0px 0px;
     width: 100%;
     height: 25vh;
     /* height: 50% !important; */
   }
-  .post-article-info {
+  .post-blog-info {
     padding: 0 !important;
     width: 100% !important;
     height: 50% !important;
     box-sizing: border-box;
   }
-  .post-article-title {
+  .post-blog-title {
     padding: 20px;
     padding-bottom: 0;
     font-size: 20px !important;
   }
-  .post-article-summary {
+  .post-blog-summary {
     padding: 0 20px;
     padding-top: 5px;
     font-size: 13.5px !important;
@@ -209,7 +209,7 @@ export default {
     -webkit-line-clamp: 2;
     margin-bottom: 20px;
   }
-  .post-article-meta-data-wrap {
+  .post-blog-meta-data-wrap {
     padding-left: 20px;
   }
 }
