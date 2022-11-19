@@ -20,6 +20,9 @@ el-menu-item 无法跳转时，在 el-menu 加入 router 就好了
 创建maven项目，创建仓库，在设置中的Version Control下的directory Mapping 中 根目录
 
 # docker 
+自己阿里云的mysql
+ docker run -d --name mysql -p 9431:3306 -e MYSQL_ROOT_PASSWORD=bxygrXY.  mysql:8.0
+
 jar 转镜像
 当前目录下：docker build -f ./dockerfile -t 生成镜像的名字 .
 
