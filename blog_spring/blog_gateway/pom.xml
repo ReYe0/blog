@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>blog_server</artifactId>
+    <artifactId>blog_gateway</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

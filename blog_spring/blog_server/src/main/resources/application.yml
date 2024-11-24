@@ -14,6 +14,8 @@ spring:
       enabled: true
       max-file-size: 20MB
       max-request-size: 20MB
+  application:
+    name: blog-server
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
