@@ -1,7 +1,7 @@
-package com.study.controller;
+package com.study.blog.controller;
 
-import com.study.common.CommonResult;
-import com.study.entity.dto.*;
+import com.study.blog.common.CommonResult;
+import com.study.blog.entity.dto.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +17,9 @@ import javax.validation.Valid;
  * @Date: 2022/8/11 10:30
  */
 public interface BlogController {
+    @GetMapping(value = "/getNormalBlogCount",name = "archive服务调用方法")
+    public Long getNormalBlogCount();
+
     @PostMapping(value = "/saveOrUpdate",name = "blog保存和修改接口",produces="application/json")
     public CommonResult saveOrUpdate(@RequestBody BlogEditReqDTO blogEditReqDTO);
 

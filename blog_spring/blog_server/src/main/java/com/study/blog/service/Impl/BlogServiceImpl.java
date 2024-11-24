@@ -1,33 +1,33 @@
-package com.study.service.Impl;
+package com.study.blog.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.study.common.BeanCopyUtils;
-import com.study.common.SystemConstants;
-import com.study.entity.Blog;
-import com.study.entity.dto.BlogDetailDTO;
-import com.study.entity.dto.BlogEditResDTO;
-import com.study.entity.dto.BlogPageBackReqDTO;
-import com.study.entity.dto.BlogPageReqDTO;
-import com.study.entity.vo.BlogBackListVo;
-import com.study.entity.vo.BlogListVo;
-import com.study.entity.vo.HotBlogVo;
-import com.study.entity.vo.PreviousNextBlogVo;
-import com.study.enums.AppHttpCodeEnum;
-import com.study.mapper.BlogMapper;
-import com.study.mapper.BlogTagMapper;
-import com.study.service.BlogService;
-import com.study.utils.Assert;
+import com.study.blog.common.BeanCopyUtils;
+import com.study.blog.common.SystemConstants;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.dto.BlogDetailDTO;
+import com.study.blog.entity.dto.BlogEditResDTO;
+import com.study.blog.entity.dto.BlogPageBackReqDTO;
+import com.study.blog.entity.dto.BlogPageReqDTO;
+import com.study.blog.entity.vo.BlogBackListVo;
+import com.study.blog.entity.vo.HotBlogVo;
+import com.study.blog.mapper.BlogTagMapper;
+import com.study.blog.utils.Assert;
+import com.study.blog.entity.vo.BlogListVo;
+import com.study.blog.entity.vo.PreviousNextBlogVo;
+import com.study.blog.enums.AppHttpCodeEnum;
+import com.study.blog.mapper.BlogMapper;
+import com.study.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements BlogService {
+public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements BlogService {
 
     @Autowired
     private BlogMapper blogMapper;
@@ -58,7 +58,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
 //        wrapper.eq(Blog::getStatus,1)
         Page<BlogListVo> mapPage = new Page<>(blogPageReqDTO.getPageNum(), blogPageReqDTO.getPageSize() );
         if(blogPageReqDTO.getCategoryId() == null && blogPageReqDTO.getTagId() == null && blogPageReqDTO.getDate() ==null){
-            return blogMapper.getBlogListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL);
+            return blogMapper.getBlogListVo(mapPage, SystemConstants.BLOG_STATUS_NORMAL);
         }else if(blogPageReqDTO.getCategoryId() != null){
             return blogMapper.getBlogCategoryListVo(mapPage,SystemConstants.BLOG_STATUS_NORMAL,blogPageReqDTO.getCategoryId());
         }else if(blogPageReqDTO.getTagId() != null){
@@ -144,9 +144,13 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper,Blog> implements Blo
 
     @Override
     public Long getNormalBlogCount() {
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         LambdaQueryWrapper<Blog> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Blog::getStatus, SystemConstants.BLOG_STATUS_NORMAL);
          return Long.valueOf(blogMapper.selectCount(wrapper));
-//        return count(wrapper);
     }
 }

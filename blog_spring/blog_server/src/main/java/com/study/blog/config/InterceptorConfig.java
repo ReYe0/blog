@@ -1,4 +1,4 @@
-package com.study.config;
+package com.study.blog.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

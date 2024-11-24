@@ -1,4 +1,4 @@
-package com.study.enums;
+package com.study.blog.enums;
 
 public enum AppHttpCodeEnum {
     SUCCESS(200, "操作成功"),

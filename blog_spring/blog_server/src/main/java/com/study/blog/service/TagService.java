@@ -1,8 +1,8 @@
-package com.study.service;
+package com.study.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.study.entity.Tag;
-import com.study.entity.vo.TagListVo;
+import com.study.blog.entity.Tag;
+import com.study.blog.entity.vo.TagListVo;
 
 import java.util.List;
 

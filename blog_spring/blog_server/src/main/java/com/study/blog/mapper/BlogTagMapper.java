@@ -1,7 +1,7 @@
-package com.study.mapper;
+package com.study.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.study.entity.BlogTag;
+import com.study.blog.entity.BlogTag;
 import org.springframework.stereotype.Repository;
 
 @Repository

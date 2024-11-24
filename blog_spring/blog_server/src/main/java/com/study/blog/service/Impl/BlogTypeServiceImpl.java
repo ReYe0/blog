@@ -1,9 +1,9 @@
-package com.study.service.Impl;
+package com.study.blog.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.study.entity.BlogType;
-import com.study.mapper.BlogTypeMapper;
-import com.study.service.BlogTypeService;
+import com.study.blog.entity.BlogType;
+import com.study.blog.mapper.BlogTypeMapper;
+import com.study.blog.service.BlogTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,31 @@
+server:
+  port: 8091
+spring:
+  application:
+    name: archive-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.108.90.61:9431/blog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: bxygrXY.
+feign:
+  hystrix:
+    enabled: true
+# hystrix断路器
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000  #熔断超时时间
+
+ribbon:
+  ReadTimeout: 60000  #请求处理的超时时间
+  ConnectTimeout: 60000 #请求连接超时时间
+  MaxAutoRetries: 0 #对当前实例的重试次数
+  MaxAutoRetriesNextServer: 1 #切换实例的重试次数 1

@@ -1,6 +1,6 @@
-package com.study.entity.dto;
+package com.study.blog.entity.dto;
 
-import com.study.entity.Tag;
+import com.study.blog.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

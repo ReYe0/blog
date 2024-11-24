@@ -1,7 +1,7 @@
-package com.study.service;
+package com.study.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.study.entity.BlogType;
+import com.study.blog.entity.BlogType;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.study.controller;
+package com.study.blog.controller;
 
-import com.study.common.CommonResult;
-import com.study.entity.vo.TagListVo;
+import com.study.blog.common.CommonResult;
+import com.study.blog.entity.vo.TagListVo;
 import org.springframework.web.bind.annotation.GetMapping;
 
 public interface TagController {

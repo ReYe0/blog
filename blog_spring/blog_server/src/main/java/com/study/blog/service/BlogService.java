@@ -1,19 +1,18 @@
-package com.study.service;
+package com.study.blog.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.study.entity.Blog;
-import com.study.entity.dto.BlogDetailDTO;
-import com.study.entity.dto.BlogEditResDTO;
-import com.study.entity.dto.BlogPageBackReqDTO;
-import com.study.entity.dto.BlogPageReqDTO;
-import com.study.entity.vo.BlogBackListVo;
-import com.study.entity.vo.BlogListVo;
-import com.study.entity.vo.HotBlogVo;
-import com.study.entity.vo.PreviousNextBlogVo;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.dto.BlogDetailDTO;
+import com.study.blog.entity.dto.BlogEditResDTO;
+import com.study.blog.entity.dto.BlogPageBackReqDTO;
+import com.study.blog.entity.dto.BlogPageReqDTO;
+import com.study.blog.entity.vo.BlogBackListVo;
+import com.study.blog.entity.vo.BlogListVo;
+import com.study.blog.entity.vo.HotBlogVo;
+import com.study.blog.entity.vo.PreviousNextBlogVo;
 
-import java.util.List;
-
+import java.util.List; // 配置要按自定义的类FeignClientConfig
 public interface BlogService extends IService<Blog> {
 
     /**

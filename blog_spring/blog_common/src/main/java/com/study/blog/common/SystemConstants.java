@@ -1,4 +1,4 @@
-package com.study.common;
+package com.study.blog.common;
 
 public class SystemConstants {
     /**

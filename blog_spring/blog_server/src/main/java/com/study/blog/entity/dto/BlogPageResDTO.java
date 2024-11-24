@@ -1,6 +1,6 @@
-package com.study.entity.dto;
+package com.study.blog.entity.dto;
 
-import com.study.entity.vo.BlogListVo;
+import com.study.blog.entity.vo.BlogListVo;
 import lombok.Data;
 
 import java.util.List;

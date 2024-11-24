@@ -1,4 +1,5 @@
 import request from '../utils/request'
+import axios from 'axios'
 
 
 /**
@@ -8,12 +9,19 @@ import request from '../utils/request'
  * @returns promise
  */
 function getArchiveCountList(pageNum, pageSize) {
-    return request({
-        url: "/archive/archiveCountList",
+    return axios({
+        method: "get",
+        url: "http://localhost:8091/archive/archiveCountList",
         params: {
             pageNum, pageSize
         }
     })
+    // return request({
+    //     url: "/archive/archiveCountList",
+    //     params: {
+    //         pageNum, pageSize
+    //     }
+    // })
 }
 
 /**
@@ -23,12 +31,18 @@ function getArchiveCountList(pageNum, pageSize) {
  * @returns promise
  */
 function getArchiveList(pageNum, pageSize) {
-    return request({
-        url: "/archive/archiveList",
+    return axios({
+        method: "get",
+        url: "http://localhost:8091/archive/archiveList",
         params: {
             pageNum, pageSize
-        }
-    })
+        }})
+    // return request({
+    //     url: "/archive/archiveList",
+    //     params: {
+    //         pageNum, pageSize
+    //     }
+    // })
 }
 
 export { getArchiveCountList, getArchiveList }

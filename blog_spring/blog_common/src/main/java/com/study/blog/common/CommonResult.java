@@ -1,4 +1,4 @@
-package com.study.common;
+package com.study.blog.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

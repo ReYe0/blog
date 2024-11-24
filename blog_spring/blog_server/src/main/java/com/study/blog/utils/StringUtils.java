@@ -1,4 +1,4 @@
-package com.study.utils;
+package com.study.blog.utils;
 
 import java.util.ArrayList;
 import java.util.List;

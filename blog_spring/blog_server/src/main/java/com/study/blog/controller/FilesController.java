@@ -1,6 +1,6 @@
-package com.study.controller;
+package com.study.blog.controller;
 
-import com.study.common.CommonResult;
+import com.study.blog.common.CommonResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;

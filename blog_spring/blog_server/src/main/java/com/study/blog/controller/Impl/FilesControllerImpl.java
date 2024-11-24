@@ -1,14 +1,14 @@
-package com.study.controller.Impl;
+package com.study.blog.controller.Impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.study.common.CommonResult;
-import com.study.controller.FilesController;
-import com.study.entity.Files;
-import com.study.mapper.FilesMapper;
+import com.study.blog.common.CommonResult;
+import com.study.blog.controller.FilesController;
+import com.study.blog.entity.Files;
+import com.study.blog.mapper.FilesMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

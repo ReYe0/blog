@@ -1,9 +1,9 @@
-package com.study.archive.service;
+package com.study.blog.archive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.study.entity.vo.ArchiveCountVo;
-import com.study.entity.vo.ArchiveVo;
-import com.study.entity.vo.PageVo;
+import com.study.blog.archive.vo.ArchiveCountVo;
+import com.study.blog.archive.vo.ArchiveVo;
+import com.study.blog.entity.vo.PageVo;
 
 import java.util.List;
 

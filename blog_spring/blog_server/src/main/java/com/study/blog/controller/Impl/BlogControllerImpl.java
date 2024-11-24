@@ -1,24 +1,25 @@
-package com.study.controller.Impl;
+package com.study.blog.controller.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.study.common.BeanCopyUtils;
-import com.study.common.CommonResult;
-import com.study.controller.BlogController;
-import com.study.entity.Blog;
-import com.study.entity.BlogTag;
-import com.study.entity.Tag;
-import com.study.entity.dto.*;
-import com.study.entity.vo.BlogBackListVo;
-import com.study.entity.vo.BlogCountVo;
-import com.study.entity.vo.BlogListVo;
-import com.study.mapper.BlogTagMapper;
-import com.study.mapper.TagMapper;
-import com.study.service.BlogService;
-import com.study.service.CategoryService;
-import com.study.service.TagService;
-import com.study.utils.StringUtils;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.study.blog.common.BeanCopyUtils;
+import com.study.blog.common.CommonResult;
+import com.study.blog.controller.BlogController;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.BlogTag;
+import com.study.blog.entity.Tag;
+import com.study.blog.entity.dto.*;
+import com.study.blog.entity.vo.BlogBackListVo;
+import com.study.blog.entity.vo.BlogCountVo;
+import com.study.blog.mapper.BlogTagMapper;
+import com.study.blog.service.CategoryService;
+import com.study.blog.utils.StringUtils;
+import com.study.blog.entity.vo.BlogListVo;
+import com.study.blog.mapper.TagMapper;
+import com.study.blog.service.BlogService;
+import com.study.blog.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,7 +35,6 @@ public class BlogControllerImpl implements BlogController {
     private BlogService blogService;
     @Autowired
     private BlogTagMapper blogTagMapper;
-
     @Autowired
     private TagMapper tagMapper;
 
@@ -42,6 +42,22 @@ public class BlogControllerImpl implements BlogController {
     private TagService tagService;
     @Resource
     private CategoryService categoryService;
+
+    @Override
+    @HystrixCommand(fallbackMethod="errorCallBack")
+    public Long getNormalBlogCount() {
+        Long normalBlogCount = blogService.getNormalBlogCount();
+//        Long normalBlogCount = null;
+        if (normalBlogCount == null){
+            throw new RuntimeException("没有博客");
+        }
+        return normalBlogCount;
+    }
+    //指定一个降级的方法
+    public Long errorCallBack(){
+        return null;
+    }
+
     @Override
     public CommonResult saveOrUpdate(BlogEditReqDTO blogEditReqDTO) {
         List<String> urls = StringUtils.getUrls(blogEditReqDTO.getContent());

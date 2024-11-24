@@ -2,96 +2,114 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<!-- 首先修改打包方式 -->
 	<packaging>pom</packaging>
-	<modules>
-		<module>blog_server</module>
-	</modules>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+	<version>1.0-SNAPSHOT</version>
 	<groupId>com.study</groupId>
 	<artifactId>blog_spring</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>blog_spring</name>
-	<description>Demo project for Spring Boot</description>
+	<description>边写blog，边学习springcloud</description>
+
+	<modules>
+		<module>nacos_server</module>
+		<module>blog_server</module>
+		<module>blog_common</module>
+		<module>blog_archive_server</module>
+        <module>blog_archive_hystrix_dashboard</module>
+		<module>blog_gateway</module>
+	</modules>
+
+
 	<properties>
-		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<mysql.version>8.0.28</mysql.version>
+		<druid.version>1.1.10</druid.version>
+		<junit.version>4.1.2</junit.version>
+		<lombok.version>1.16.10</lombok.version>
+		<log4j.vsrsion>1.2.17</log4j.vsrsion>
 	</properties>
-	<dependencies>
-		<!--      hutool-->
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
-			<version>5.7.20</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>4.1.2</version>
-		</dependency>
-		<!-- 包含有 validation 依赖-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<!-- aop 依赖 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version>
-		</dependency>
+	<!--  因为是总项目 所以用dependencyManagement来管理  因为其他的子项目就不会来管理版本了了 可以直接引用 -->
+	<dependencyManagement>
+		<dependencies>
 
-		<!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-boot-starter -->
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.4.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
+			<!-- springcloud的依赖-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Hoxton.SR9</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.alibaba.cloud</groupId>-->
+<!--				<artifactId>spring-cloud-alibaba-dependencies</artifactId>-->
+<!--				<version>2.2.6.RELEASE</version>-->
+<!--				<type>pom</type>-->
+<!--				<scope>import</scope>-->
+<!--			</dependency>-->
+			<!-- springboot的依赖-->
+			<dependency>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.3.2.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+				<version>0.2.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba.nacos</groupId>
+				<artifactId>nacos-client</artifactId>
+				<version>1.1.0</version>
+			</dependency>
+			<!--  数据库-->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+			<!-- springboot启动器-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>3.4.2</version>
+			</dependency>
+			<!--单元测试 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+			</dependency>
+			<!-- lombok-->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+			</dependency>
+
+			<!-- log4j-->
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.vsrsion}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>1.2.3</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 
 </project>

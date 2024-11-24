@@ -1,4 +1,4 @@
-package com.study.common;
+package com.study.blog.common;
 
 import org.springframework.beans.BeanUtils;
 

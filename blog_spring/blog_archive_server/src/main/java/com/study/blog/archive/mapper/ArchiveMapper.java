@@ -1,7 +1,7 @@
-package com.study.archive.mapper;
+package com.study.blog.archive.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.study.archive.vo.ArchiveCountVo;
+import com.study.blog.archive.vo.ArchiveCountVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;

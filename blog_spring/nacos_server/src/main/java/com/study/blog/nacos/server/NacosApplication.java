@@ -1,4 +1,4 @@
-package com.study.nacos.server;
+package com.study.blog.nacos.server;
 
 
 import org.springframework.boot.SpringApplication;

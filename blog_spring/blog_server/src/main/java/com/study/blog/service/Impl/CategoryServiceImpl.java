@@ -1,17 +1,17 @@
-package com.study.service.Impl;
+package com.study.blog.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.study.common.BeanCopyUtils;
-import com.study.common.SystemConstants;
-import com.study.entity.Blog;
-import com.study.entity.Category;
-import com.study.entity.vo.CategoryCountVo;
-import com.study.entity.vo.CategoryListVo;
-import com.study.mapper.BlogMapper;
-import com.study.mapper.CategoryMapper;
-import com.study.service.CategoryService;
+import com.study.blog.common.BeanCopyUtils;
+import com.study.blog.common.SystemConstants;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.Category;
+import com.study.blog.entity.vo.CategoryCountVo;
+import com.study.blog.entity.vo.CategoryListVo;
+import com.study.blog.mapper.BlogMapper;
+import com.study.blog.mapper.CategoryMapper;
+import com.study.blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService{
+public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;

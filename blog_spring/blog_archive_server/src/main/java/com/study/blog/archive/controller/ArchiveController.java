@@ -1,6 +1,6 @@
-package com.study.archive.controller;
+package com.study.blog.archive.controller;
 
-import com.study.common.CommonResult;
+import com.study.blog.common.CommonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**

@@ -1,4 +1,4 @@
-package com.study.entity.dto;
+package com.study.blog.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

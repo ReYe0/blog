@@ -1,5 +1,6 @@
-package com.study.archive.vo;
+package com.study.blog.archive.vo;
 
+import com.study.blog.entity.vo.HotBlogVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

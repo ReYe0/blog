@@ -1,4 +1,4 @@
-package com.study.config;
+package com.study.blog.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;

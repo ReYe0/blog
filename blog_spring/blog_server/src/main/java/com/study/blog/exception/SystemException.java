@@ -1,7 +1,7 @@
-package com.study.exception;
+package com.study.blog.exception;
 
 
-import com.study.enums.AppHttpCodeEnum;
+import com.study.blog.enums.AppHttpCodeEnum;
 
 public class SystemException extends RuntimeException{
     private int code;

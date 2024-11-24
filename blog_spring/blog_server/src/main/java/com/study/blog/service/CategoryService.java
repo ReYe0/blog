@@ -1,9 +1,9 @@
-package com.study.service;
+package com.study.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.study.entity.Category;
-import com.study.entity.vo.CategoryCountVo;
-import com.study.entity.vo.CategoryListVo;
+import com.study.blog.entity.Category;
+import com.study.blog.entity.vo.CategoryCountVo;
+import com.study.blog.entity.vo.CategoryListVo;
 
 import java.util.List;
 

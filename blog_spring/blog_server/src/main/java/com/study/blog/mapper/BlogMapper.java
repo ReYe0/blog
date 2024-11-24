@@ -1,11 +1,11 @@
-package com.study.mapper;
+package com.study.blog.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.study.entity.Blog;
-import com.study.entity.vo.BlogBackListVo;
-import com.study.entity.vo.BlogListVo;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.vo.BlogBackListVo;
+import com.study.blog.entity.vo.BlogListVo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -36,6 +36,6 @@ public interface BlogMapper extends BaseMapper<Blog> {
             "left join  tb_blog_tag tag on tag.blog_id = tb.id \n" +
             "where tag.tag_id like  concat('%',#{tagId},'%')  and tbt.id like  concat('%',#{blogTypeId},'%') \n" +
             "and tb.category_id like  concat('%',#{categoryId},'%') and tb.title like  concat('%',#{title},'%') order by tb.create_time desc")
-    IPage<BlogBackListVo> getBlogBackListVo(IPage<BlogBackListVo> Page, @Param("blogTypeId") String blogTypeId,@Param("categoryId") String categoryId,@Param("tagId") String tagId,@Param("title") String title);
+    IPage<BlogBackListVo> getBlogBackListVo(IPage<BlogBackListVo> Page, @Param("blogTypeId") String blogTypeId, @Param("categoryId") String categoryId, @Param("tagId") String tagId, @Param("title") String title);
 
 }

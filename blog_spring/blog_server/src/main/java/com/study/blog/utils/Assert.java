@@ -1,6 +1,6 @@
-package com.study.utils;
+package com.study.blog.utils;
 
-import com.study.enums.AppHttpCodeEnum;
+import com.study.blog.enums.AppHttpCodeEnum;
 import org.omg.CORBA.SystemException;
 import org.springframework.lang.Nullable;
 
@@ -18,7 +18,7 @@ public class Assert {
     public static void notNull(@Nullable Object object, AppHttpCodeEnum httpCodeEnum) {
         if (object == null) {
 //            throw new SystemException(httpCodeEnum);
-            throw new com.study.exception.SystemException(httpCodeEnum);
+            throw new com.study.blog.exception.SystemException(httpCodeEnum);
         }
     }
 
@@ -31,7 +31,7 @@ public class Assert {
      */
     public static void isNull(Object object, AppHttpCodeEnum httpCodeEnum) {
         if (object != null) {
-            throw new com.study.exception.SystemException(httpCodeEnum);
+            throw new com.study.blog.exception.SystemException(httpCodeEnum);
         }
     }
 }

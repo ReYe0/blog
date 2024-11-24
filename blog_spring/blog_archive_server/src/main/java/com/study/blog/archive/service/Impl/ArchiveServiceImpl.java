@@ -1,18 +1,18 @@
-package com.study.archive.service.Impl;
+package com.study.blog.archive.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.study.archive.mapper.ArchiveMapper;
-import com.study.archive.service.ArchiveService;
-import com.study.archive.vo.ArchiveCountVo;
-import com.study.common.BeanCopyUtils;
-import com.study.entity.Blog;
-import com.study.entity.vo.HotBlogVo;
-import com.study.entity.vo.PageVo;
-import com.study.mapper.ArchiveVoMapper;
-import com.study.service.BlogService;
+import com.study.blog.archive.feign.BlogClient;
+import com.study.blog.archive.mapper.ArchiveMapper;
+import com.study.blog.archive.mapper.ArchiveVoMapper;
+import com.study.blog.archive.service.ArchiveService;
+import com.study.blog.archive.vo.ArchiveCountVo;
+import com.study.blog.archive.vo.ArchiveVo;
+import com.study.blog.entity.vo.HotBlogVo;
+import com.study.blog.common.BeanCopyUtils;
+import com.study.blog.entity.Blog;
+import com.study.blog.entity.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +28,12 @@ public class ArchiveServiceImpl extends ServiceImpl<ArchiveMapper, ArchiveCountV
     @Autowired
     private ArchiveMapper archiveMapper;
     @Autowired
-    private BlogService blogService;
-    @Resource
+    private BlogClient blogClient;
+    @Autowired
     private ArchiveVoMapper archiveVoMapper;
     @Override
     public List<ArchiveCountVo> getArchiveCountList(Integer pageNum, Integer pageSize) {
-        Long total = archiveMapper.selectArchiveTotalCount();
+//        Long total = archiveMapper.selectArchiveTotalCount();
         return archiveMapper.selectArchiveCount((pageNum - 1) * pageSize, pageSize);
     }
 
@@ -55,7 +55,7 @@ public class ArchiveServiceImpl extends ServiceImpl<ArchiveMapper, ArchiveCountV
                 archiveVos.remove(i);
             }
         }
-        PageVo<ArchiveVo> archiveVoPageVo = new PageVo<>(blogService.getNormalBlogCount(), archiveVos);
+        PageVo<ArchiveVo> archiveVoPageVo = new PageVo<>(blogClient.getNormalBlogCount(), archiveVos);
         return archiveVoPageVo;
     }
 }
